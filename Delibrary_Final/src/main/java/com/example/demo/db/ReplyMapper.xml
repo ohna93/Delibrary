@@ -15,10 +15,18 @@
 	 
 	<!-- 새로운 댓글 작성 -->
 	<insert id="insert">
-		insert into reply values(#{re_no},#{p_id},#{p_no},#{re_content},#{re_writer},sysdate,,0,0,#{cust_no})
+		insert into reply values(#{re_no},#{p_id},#{p_no},#{re_content},#{re_writer},sysdate,#{cust_no})
 	</insert>
 	
-	<!--  -->
+	<!-- 댓글 수정 -->
+	<update id="update">
+		update reply set re_content=#{re_content} where re_no=#{re_no} and cust_no=#{cust_no}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="delete">
+		delete from reply where re_no=#{re_no} and cust_no=#{cust_no} 
+	</delete>
 </mapper>
 
 

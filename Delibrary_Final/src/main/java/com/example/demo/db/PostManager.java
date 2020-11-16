@@ -112,14 +112,6 @@ public class PostManager {
 		return re;
 	}
 	
-//	public static int updateStep(HashMap map) {
-//		int re =  -1;
-//		SqlSession session=sqlSessionFactory.openSession(true);
-//		re = session.update("post.updateStep", map);
-//		session.close();
-//		return re;
-//	}
-	
 }
 
 
