@@ -48,7 +48,7 @@ public class QnaController {
 	private CustomerDAO c_dao;
 	
 	
-		//전체목록
+		//목록
 		@RequestMapping("/QnaList.do")
 		public void list(Model model, @RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM, String search, String option, HttpSession session) {
 			
@@ -89,7 +89,7 @@ public class QnaController {
 
 		}
 	
-		//상세보기
+		//상세보기 + 댓글
 		@RequestMapping("/QnaDetail.do")
 		public void detail(int p_id, Model model) {
 			
@@ -98,7 +98,7 @@ public class QnaController {
 			HashMap map=new HashMap();
 		    map.put("p_id", p_id);
 			
-			model.addAttribute("a", dao.getQna(map));
+			model.addAttribute("qna", dao.getQna(map));
 			model.addAttribute("listReply",re_dao.findAll(map));
 		}
 	
@@ -139,7 +139,7 @@ public class QnaController {
 	        }
 			
 			
-		    CustomerVO c = new CustomerVO();
+			
 			String p_writer = c_dao.findByCust_No(cust_no).getNickname();
 			int p_hit=0;
 			
@@ -171,7 +171,7 @@ public class QnaController {
 		   map.put("cust_no", cust_no);
 		      
 		   model.addAttribute("c", c_dao.findByCust_No(cust_no));
-		   model.addAttribute("f", dao.getQna(map));
+		   model.addAttribute("qna", dao.getQna(map));
 	   }
 	   @RequestMapping(value="QnaUpdate.do", method = RequestMethod.POST)
 	   public ModelAndView update(HttpServletRequest request, PostVO m, MultipartFile uploadFile) {

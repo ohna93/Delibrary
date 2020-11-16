@@ -44,7 +44,7 @@ public class QnaManager {
 		session.close();
 		return re;
 	}
-	
+	//목록
 	public static List<PostVO> findAll(HashMap map){
 		List<PostVO> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
@@ -52,7 +52,7 @@ public class QnaManager {
 		session.close();
 		return list;
 	}
-	
+	//총 글의 수
 	public static int getTotalCount(HashMap map) {
 		int re =  -1;
 		SqlSession session = sqlSessionFactory.openSession();
@@ -60,8 +60,7 @@ public class QnaManager {
 		session.close();
 		return re;
 	}
-
-
+	//디테일
 	public static PostVO findById(HashMap map) {
 		// TODO Auto-generated method stub
 		PostVO p = null;
@@ -70,8 +69,7 @@ public class QnaManager {
 		session.close();
 		return p;
 	}
-
-
+	//조회수
 	public static int updateHit(int p_id) {
 		int re =  -1;
 		SqlSession session=sqlSessionFactory.openSession(true);
@@ -82,14 +80,15 @@ public class QnaManager {
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	//글쓰기
 	public static int insert(HashMap map) {
 		int re =  -1;
 		SqlSession session=sqlSessionFactory.openSession(true);
-		PostVO p = new PostVO();
 		re = session.insert("qna.insert", map);
 		session.close();
 		return re;
 	}
+	//수정
 	public static int update(PostVO p) {
 		int re = -1;
 		SqlSession session = sqlSessionFactory.openSession(true);
@@ -97,7 +96,7 @@ public class QnaManager {
 		session.close();
 		return re;
 	}
-	
+	//삭제
 	public static int delete(HashMap map) {
 		int re = -1;
 		SqlSession session = sqlSessionFactory.openSession(true);
