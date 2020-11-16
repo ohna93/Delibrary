@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,8 +53,15 @@ public class PostController {
    
 	//전체 게시글 목록
 	@RequestMapping("postList.do")
-	public void postList(Model model, int group, @RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM) {
+	public void postList(Model model, int group, @RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM, String search, String option, HttpSession session) {
 
+		System.out.println("search  :  "+search);
+		System.out.println("option  :  "+option);
+		if(search==null&&session.getAttribute("search")!=null) {
+			search=(String)session.getAttribute("search");
+			option=(String)session.getAttribute("option");
+		}
+		
 		HashMap map=new HashMap();
 		map.put("group", group);
 		
@@ -240,10 +248,6 @@ public class PostController {
 		System.out.println("DEL map :  "+ map);
 		
 		re=dao.delete(map);
-//		if(re<=0) {
-//			mav.addObject("msg", "게시글 삭제 실패");
-//			mav.setViewName("error");
-//		}
 		
 		System.out.println("DEL re:   "+re);
 		return Integer.toString(re);

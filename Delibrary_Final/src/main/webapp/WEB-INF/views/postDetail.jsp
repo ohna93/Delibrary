@@ -9,12 +9,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
 	<link rel="stylesheet" href="css/style.css">
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+  <script>
+    // Get the current year for the copyright
+    $(function(){
+    	$('#year').text(new Date().getFullYear());
+    });
+  </script>
   <title>커뮤니티 - 딜리브러리</title>
 </head>
 
@@ -151,7 +162,7 @@
                 </a>
               </div>
               <div class="col-md-2">
-                <button id="btnDel" class="btn btn-outline-danger btn-block">
+                <button id="btnDel" class="btn btn-outline-danger btn-block"  p_id="${post.p_id}" cust_no="${cust_no }" group="${group}">
                   <i class="far fa-trash-alt"></i> 삭제
                 </button>
               </div>
@@ -173,7 +184,9 @@
 			            </div>
 			            <div class="card-body">
 										<p class="card-text">${post.p_content}</p>
-										<a href="/img/${post.fname }"><img src="/img/${post.fname }" alt="${post.fname }" height="200"></a>
+										<c:if test="${not empty fname }">
+											<a href="/img/${post.fname }"><img src="/img/${post.fname }" alt="${post.fname }" height="200"></a>
+										</c:if>
 									</div>
 									<input type="hidden" name="p_id" value="${post.p_id}">
 									<input type="hidden" name="p_no" value="${post.p_no}">
@@ -182,24 +195,24 @@
 			
 									<!-- 댓글창 -->
 									<div class="card-body">
-										<form>
-											<div class="container">
-												<div class="row card-header py-2">
-													<div class="p-0">
-														<h5 class="m-0">댓글 <button id="btnInsertReply" class="btn btn-secondary btn-sm text-small">등록</button></h5>
-													</div>
-												</div>  
-											</div>
-			                <div class="form-group">
-												<textarea name="re_content" class="form-control" rows="3" placeholder="댓글을 입력하세요."></textarea>
-												
-			                </div>
-										</form>
+										<div class="container">
+											<div class="row card-header py-2">
+												<div class="p-0">
+													<h5 class="m-0">댓글 
+														<button id="btnInsertReply" class="btn btn-secondary btn-sm text-small" p_id="${post.p_id}" p_no="${post.p_no}" cust_no="${cust_no }" group="${group}">등록</button>
+													</h5>
+												</div>
+											</div>  
+										</div>
+		                <div class="form-group">
+											<textarea id="re_content" name="re_content" value="${re_content}" class="form-control" rows="3" placeholder="댓글을 입력하세요."></textarea>
+		                </div>
 										
+										<!-- 댓글목록보기 -->
 										<c:forEach var="r" items="${listReply }">
 			              <div>
-											<button id="btnDeleteReply" style="float:left" p_id="${post.p_id}" cust_no="${post.cust_no }" group="${group}">삭제</button>
-											<button id="btnUpdateReply" style="float:left" p_id="${post.p_id}" cust_no="${post.cust_no }" group="${group}">수정</button>
+											<button id="btnDeleteReply" style="float:left" re_no="${r.re_no}" cust_no="${r.cust_no }">삭제</button>
+											<button id="btnUpdateReply" style="float:left" re_no="${r.re_no}" cust_no="${post.cust_no }">수정</button>
 											<p style="font-weight: bold; background-color: #eff3f8; padding: 5px;">${r.re_writer}</p>
 											<p style="font-size: 13px; color: #aaa;"><fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value = "${r.re_regdate }" /></p>
 											<p>${r.re_content }</p>
@@ -215,79 +228,136 @@
 											</tbody>
 										</table>
 										 -->
-			
 			             </c:forEach>
-										
-									
-			
-			
 									</div>
 			          </div>
 			        </div>
 			      </div>
 			    </div>
 			  </section>
-			  </div>
-			  </div>
-			  </div>
-			  </section>
+		  </div>
+	 	 </div>
+	  </div>
+  </section>
 
-				<!-- FOOTER -->
-				<footer id="main-footer" class="text-white mt-5 p-4">
-					<div class="container">
-						<div class="row">
-							<div class="col">
-								<p class="text-center">
-									Copyright &copy;
-									<span id="year"></span>
-									Delibrary
-								</p>
-							</div>
-						</div>
-					</div>
-				</footer>
+	<!-- FOOTER -->
+	<footer id="main-footer" class="text-white mt-5 p-4">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<p class="text-center">
+						Copyright &copy;
+						<span id="year"></span>
+						Delibrary
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
 
+<script type="text/javascript">
+		$(function(){
+			//게시글 삭제 버튼 btnDel
+			$("#btnDel").click(function(){
+				const p_id=this.getAttribute("p_id");
+				const cust_no=this.getAttribute("cust_no");
+				const group=this.getAttribute("group");
 
+				var result=confirm("삭제시 복원이 불가합니다. 정말로 삭제하시겠습니까?");
+				if(result){
+					$.ajax({
+						url:'postDelete.do',
+						type:'POST',
+						data:{
+							"p_id":p_id,
+							"cust_no":cust_no,
+							"group":group
+						},
+						success:function(re){
+							if(re>0){
+								console.log(re+", 삭제 성공");
+								window.location="postList.do?group="+group;
+							}else{
+								alert("작성자 본인만 삭제할 수 있습니다.")
+							}
+						},
+						error:function(){
+							alert("게시글 삭제에 실패하였습니다.");
+						}						
+					});
+				}
+			});
 
-  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+			//댓글 등록 버튼 btnInsertReply
+			$("#btnInsertReply").click(function(){
+				const p_id=this.getAttribute("p_id");
+				const p_no=this.getAttribute("p_no");
+				const cust_no=this.getAttribute("cust_no");
+				const group=this.getAttribute("group");
+				const re_content=$("#re_content").val();
 
-  <script>
-    // Get the current year for the copyright
-    $('#year').text(new Date().getFullYear());
+				console.log("p_id  :   "+p_id)
+				console.log("p_no  :   "+p_no)
+				console.log("cust_no  :   "+cust_no)
+				console.log("group  :   "+group)
+				console.log("re_content  :   "+re_content)
 
-    // Configure Slider
-    $('.carousel').carousel({
-      interval: 6000,
-      pause: 'hover'
-    });
+				$.ajax({
+					url:'replyInsert.do',
+					type: 'POST',
+					data: {
+							"p_id": p_id,
+							"p_no": p_no,
+							"cust_no": cust_no,
+							"group": group,
+							"re_content": re_content
+						},
+					success: function(re){
+							if(re>0){
+								console.log(re);
+								window.location="postDetail.do?p_id="+p_id+"&&group="+group;
+							}else{
+								alert("댓글 등록 실패");
+							}
+						},
+					error: function(){
+							alert("댓글 등록 실패");
+						}
+				});
+			});
 
-    // Lightbox Init
-    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
-      event.preventDefault();
-      $(this).ekkoLightbox();
-    });
+			//댓글 삭제 btnDeleteReply
+			$("#btnDeleteReply").click(function(){
+				const re_no=this.getAttribute("re_no");
+				const cust_no=this.getAttribute("cust_no");
 
-    // Video Play
-    $(function () {
-      // Auto play modal video
-      $(".video").click(function () {
-        var theModal = $(this).data("target"),
-          videoSRC = $(this).attr("data-video"),
-          videoSRCauto = videoSRC + "?modestbranding=1&rel=0&controls=0&showinfo=0&html5=1&autoplay=1";
-        $(theModal + ' iframe').attr('src', videoSRCauto);
-        $(theModal + ' button.close').click(function () {
-          $(theModal + ' iframe').attr('src', videoSRC);
-        });
-      });
-    });
+				var result=confirm("삭제시 복원이 불가합니다. 정말로 삭제하시겠습니까?");
+				if(result){
+					$.ajax({
+						url:'replyDelete.do',
+						type:'POST',
+						data:{
+							"re_no":re_no,
+							"cust_no":cust_no
+						},
+						success:function(re){
+							if(re>0){
+								console.log(re+", 삭제 성공");
+								location.reload();
+							}else{
+								alert("작성자 본인만 삭제할 수 있습니다.")
+							}
+						},
+						error:function(){
+							alert("댓글 삭제에 실패하였습니다.");
+						}						
+					});
+				}
+			});
+		});
+		
+	</script>
 
-  </script>
-</body>
+</body>  
 
 </html>

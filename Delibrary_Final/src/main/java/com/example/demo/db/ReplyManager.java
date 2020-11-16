@@ -34,7 +34,7 @@ public class ReplyManager {
 		session.close();
 		return list;
 	}
-	
+	//다음댓글번호
 	public static int getNextNo() {
 		int re =  -1;
 		SqlSession session=sqlSessionFactory.openSession();
@@ -43,6 +43,7 @@ public class ReplyManager {
 		return re;
 	}
 	
+	//새로운 댓글
 	public static int insert(HashMap map) {
 		int re=-1;
 		SqlSession session=sqlSessionFactory.openSession(true);
@@ -51,7 +52,23 @@ public class ReplyManager {
 		return re;
 	}
 	
-
+	//댓글 수정
+	public static int update(HashMap map) {
+		int re=-1;
+		SqlSession session=sqlSessionFactory.openSession(true);
+		re=session.update("reply.update",map);
+		session.close();
+		return re;
+	}
+	
+	//댓글 삭제
+	public static int delete(HashMap map) {
+		int re=-1;
+		SqlSession session=sqlSessionFactory.openSession(true);
+		re=session.delete("reply.delete",map);
+		session.close();
+		return re;
+	}
 }
 
 

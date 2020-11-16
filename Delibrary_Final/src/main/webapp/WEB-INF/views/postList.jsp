@@ -131,42 +131,53 @@
 			
 			<!-- 메인내용 -->
 			<div class="col-md-9">
-				<div class="row pb-2">
-         	<div class="col">
+				<div class="row py-4">
+         	<div class="col pb-4">
          	  <a class="btn btn-info" href="postInsert.do?group=${group}&&cust_no=${cust_no}">글쓰기</a>
 					</div>
 					<div class="text-right mb-2">
-						<form class="form-inline">
-							<p class="mr-4 mb-0">총 ${totalCount}건</p>
-		                    <input type="text" class="form-control mr-2">
-		                    <button class="btn btn-outline-secondary btn-sm">검색</button>
-		                </form>
+						<form action="postList.do" method="get" class="search form-inline">
+							<div class="form-group">
+								<p class="mr-2 mb-0">총 ${totalCount}건</p>
+							</div>
+							<div class="form-group">
+	              <select name="option" size="1" class="form-control">
+				           <option value="p_title">제목</option>
+				           <option value="p_writer">작성자</option>
+				           <option value="p_content">내용</option>
+				        </select>
+	              <input type="search" name="search" class="form-control mr-2">
+							</div>
+							<div class="form-group px-2">
+	              <button class="btn btn-outline-secondary btn-sm p">검색</button>
+							</div>
+		        </form>
 					</div>
+					<table class="table table-hover ">
+						<thead class="thead-dark">
+							<tr>
+								<th>&nbsp;</th>
+								<th>제목</th>
+								<th>작성자</th>
+								<th>작성일</th>
+								<th>조회</th>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+							<c:forEach var="p" items="${list }" begin="${start }" end="${end }">
+								<tr>
+									<td scope="row">${p.p_no%10000 }</td>
+									<td>
+										<a href="postDetail.do?p_id=${p.p_id}&&group=${group}">${p.p_title }</a>
+									</td>
+									<td>${p.p_writer }</td>
+									<td><fmt:formatDate pattern = "yyyy-MM-dd" value = "${p.p_regdate }" /></td>
+									<td>${p.p_hit }</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
 				</div>
-	            <table class="table table-hover">
-		            <thead class="thead-dark">
-		                <tr>
-		                    <th>&nbsp;</th>
-		                    <th>제목</th>
-		                    <th>작성자</th>
-		                    <th>작성일</th>
-		                    <th>조회</th>
-		                </tr>
-		            </thead>
-		            <tbody id="tbody">
-								<c:forEach var="p" items="${list }" begin="${start }" end="${end }">
-									<tr>
-										<td scope="row">${p.p_no%10000 }</td>
-										<td>
-											<a href="postDetail.do?p_id=${p.p_id}&&group=${group}">${p.p_title }</a>
-										</td>
-										<td>${p.p_writer }</td>
-										<td><fmt:formatDate pattern = "yyyy-MM-dd" value = "${p.p_regdate }" /></td>
-										<td>${p.p_hit }</td>
-									</tr>
-								</c:forEach>
-		            </tbody>
-		        </table>
 				
            		<!-- PAGINATION -->
 	            <nav>
