@@ -11,19 +11,19 @@ import com.example.demo.vo.PostVO;
 
 @Repository
 public class QnaDAO {
-	//게시글목록
+	//목록
 	public List<PostVO> findAll(HashMap map){
 		return QnaManager.findAll(map);
 	}
-	//전체 게시글 수
+	//총 글의 수
 	public int getTotalCount(HashMap map) {
 		return QnaManager.getTotalCount(map);
 	}
-	//게시글 상세보기
+	//디테일
 	public PostVO getQna(HashMap map) {
 		return QnaManager.findById(map);
 	}
-	//새글 번호 불러오기
+	//새글 Id 불러오기
 	public int getNextId() {
 		return QnaManager.getNextId();
 	}
@@ -34,10 +34,10 @@ public class QnaDAO {
 	//게시글 조회수
 	public int updateHit(int p_id) {
 		return QnaManager.updateHit(p_id);
-	}
-	
+	}	
 	
 	/////////////////////////////////////////////////////
+	
 	//글쓰기
 	public int insert(HashMap map) {
 		return QnaManager.insert(map);
