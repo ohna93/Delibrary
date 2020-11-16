@@ -329,5 +329,6 @@
       <img alt="인스타그램" src="img/insta_icon.png">
       <img alt="유튜브" src="img/youtube_icon.png">
    </footer>
+   
 </body>
 </html>
