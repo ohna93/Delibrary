@@ -12,4 +12,9 @@ public class MainController {
 		model.addAttribute("query", query);
 		return "SearchResult";
 	}
+	
+	@RequestMapping("/ManagerPage.do")
+	public void ManagerPage() {
+		
+	}
 }

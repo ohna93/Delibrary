@@ -74,6 +74,11 @@
 					</li>
 				</ul>
 				<ul id="app" class="navbar-nav ml-auto">
+					<c:if test="${cust_no == 1}">
+						<li class="nav-item" v-bind:title="login">
+							<a href="ManagerPage.do" class="nav-link"><i class="fas fa-crown"></i></a>
+						</li>
+					</c:if>
 					<c:if test="${cust_no == null}">
 						<li class="nav-item" v-bind:title="login">
 							<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a>
