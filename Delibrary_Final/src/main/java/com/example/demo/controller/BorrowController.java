@@ -38,6 +38,8 @@ public class BorrowController {
 //	public void setDao(BorrowDAO dao) {
 //		this.dao = dao;
 //	}
+	
+	// 테스트1
 	@Autowired
 	private BookDAO	bookdao;
 	
