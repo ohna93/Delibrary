@@ -11,96 +11,145 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
     crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
-	crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="resource/style.css">
-  <title>딜리브러리 Delibrary - 회원가입</title>
+    crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
+	<link rel="stylesheet" href="css/yurim.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+   <!--  <script type="text/javascript" src="../resource/insertCustomer.js"></script> -->
+   <title>회원가입 - 딜리브러리</title>
 </head>
 
 <body>
-	<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
+	<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark p-0">
 		<div class="container">
-			<a href="home.do" class="navbar-brand"><img alt="딜리브러리" src="resource/img/logo_bg_dark.jpg" height="24"></a>
+			<a href="Home.do" class="navbar-brand"><img alt="딜리브러리" src="img/logo_bg_dark.jpg" height="20" class="pl-3 mb-1"></a>
 			<button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav ml-4">
-					<li class="nav-item">
-						<a href="about.html" class="nav-link">도서관소개</a>
+					<li class="nav-item dropdown">
+						<a href="about.html" class="nav-link dropdown-toggle" data-toggle="dropdown">도서관소개</a>
+							<ul class="dropdown-menu dropdown-menu-left fade-down">
+								<li><a class="dropdown-item" href="about.html"> 대출/반납/연장</a></li>
+								<li><a class="dropdown-item" href="#"> 공지사항 </a></li>
+								<li><a class="dropdown-item" href="#"> 자주묻는질문</a></li>
+								<li><a class="dropdown-item" href="#"> 묻고답하기 </a></li>
+								<li><a class="dropdown-item" href="#"> 오시는길 </a></li>
+							</ul>
 					</li>
-					<li class="nav-item">
-						<a href="books.html" class="nav-link">도서정보</a>
+					<li class="nav-item dropdown">
+						<a href="books.html" class="nav-link dropdown-toggle" data-toggle="dropdown">도서정보</a>
+							<ul class="dropdown-menu dropdown-menu-left fade-down">
+								<li><a class="dropdown-item" href="books.html">도서검색</a></li>
+								<li><a class="dropdown-item" href="#">사서추천도서</a></li>
+								<li><a class="dropdown-item" href="#">신착도서</a></li>
+								<li><a class="dropdown-item" href="#">인기도서</a></li>
+							</ul>
 					</li>
-					<li class="nav-item">
-						<a href="community.html" class="nav-link">커뮤니티</a>
+					<li class="nav-item dropdown">
+						<a href="community.html" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>
+							<ul class="dropdown-menu dropdown-menu-left fade-down">
+								<li><a class="dropdown-item" href="community.html">창작물게시판</a></li>
+								<li><a class="dropdown-item" href="#">중고장터</a></li>
+								<li><a class="dropdown-item" href="#">자유게시판</a></li>
+							</ul>
 					</li>
-					<li class="nav-item">
-						<a href="mypage.html" class="nav-link">나의도서</a>
+					<li class="nav-item dropdown">
+						<a href="mypage.html" class="nav-link dropdown-toggle" data-toggle="dropdown">나의도서</a>
+							<ul class="dropdown-menu dropdown-menu-left fade-down">
+								<li><a class="dropdown-item" href="mypage.html"> 나의도서정보</a></li>
+								<li><a class="dropdown-item" href="lentBooks.html">대출현황/이력</a></li>
+								<li><a class="dropdown-item" href="myfolder.html">내서재</a></li>
+								<li><a class="dropdown-item" href="#">개인정보수정</a></li>
+							</ul>
 					</li>
 				</ul>
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item">
-						<a href="LoginPage.do" class="nav-link"><img class="icons" alt="로그인" src="resource/img/login_bg_dark.png" height="50"></a>
+				<ul id="app" class="navbar-nav ml-auto">
+					<li class="nav-item" v-bind:title="login">
+						<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a>
 					</li>
-					<li class="nav-item">
-						<a href="insertCustomer.do" class="nav-link"><img class="icons" alt="회원가입" src="resource/img/add_user_bg_dark.png" height="50"></a>
+					<li class="nav-item" v-bind:title="signup">
+						<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a>
 					</li>
-					<li class="nav-item">
-						<a href="sitemap.html" class="nav-link"><img class="icons" alt="북카트" src="resource/img/book_bg_dark.png" height="50"></a>
+					<li class="nav-item" v-bind:title="bookcart">
+						<a href="sitemap.do" class="nav-link"><i class="fas fa-book"></i></a>
 					</li>
-					<li class="nav-item active">
-						<a href="sitemap.do" class="nav-link"><img class="icons" alt="사이트맵" src="resource/img/map_bg_dark.png" height="50"></a>
+					<li class="nav-item" v-bind:title="sitemap">
+						<a href="sitemap.do" class="nav-link"><i class="far fa-map"></i></a>
 					</li>
+					<script>
+						var app = new Vue({
+							el: '#app',	
+							data: {
+								login: '로그인',
+								signup: '회원가입',
+								bookcart: '북카트',
+								sitemap: '사이트맵',
+							}});
+					</script>
 				</ul>
 			</div>
 		</div>
 	</nav>
-
-  <!-- PAGE HEADER -->
-  <header id="page-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-7 m-auto text-center">
-		  <h1 class="display-5" style="font-weight:100;">회원가입</h1>
-		  <p class="text-muted">딜리브러리의 도서를 온라인으로 대여하세요!</p>
-        </div>
-      </div>
-    </div>
-  </header>
-
+  
+	<!-- PAGE HEADER -->
+	<header id="page-header">
+		<div class="container">
+		  <div class="row">
+			<div class="col-md-6 m-auto text-center">
+			  <h1 style="font-weight: 200;">회원가입</h1>
+			  <small style="color: Gainsboro;">딜리브러리의 도서를 온라인으로 대여하세요.</small>
+			</div>
+		  </div>
+		</div>
+	</header>
+	
   <!-- MAIN SECTION -->
 	<section id="insertCustomer">
 		<!-- 폼 시작 -->
 		<form action="insertCustomer.do" method="post" enctype="multipart/form-data">
 		
 		<!-- 이메일 INPUT START -->
-		<div class="form-group mt-4">
-			<label for="email">이메일</label> <span class="signup_required">*</span>
-			<input class="form-control" type="email" id="email" name="email" placeholder="이메일을 입력해주세요">
-			<small class="form-text text-muted">실제 사용하시는 이메일을 등록해주세요!</small>
+		<label class="mt-4" for="m_phone">이메일</label>
+		<span class="signup_required">*</span>
+		<div class="input-group mb-3">
+		<!-- 이메일 중복체크 폼 시작 -->
+			<input class="form-control" type="email" id="email" name="email" placeholder="이메일을 입력해주세요" required>
+			<div class="input-group-append">
+				<button class="btn btn-outline-info btn-Customer" type="button" data-toggle="modal" data-target="#emailCheckModal">중복체크</button>
+			</div>
+		<!-- 이메일 중복체크 폼 끝 -->
 		</div>
+		<small class="form-text text-muted email"><span class="signup_required">실제 사용하시는 이메일을</span> 입력해주세요.</small>	
 		<!-- 이메일 INPUT END -->
 
 		<!-- 비번 INPUT START -->
 		<div class="form-group mt-2">
 			<label for="pw">비밀번호</label> <span class="signup_required">*</span>
-			<input class="form-control" type="password" id="pw" name="pw" placeholder="비밀번호를 입력해주세요">
-			<small class="form-text text-muted">비밀번호는 <span class="signup_required">8~16자, 영문, 숫자, 특수문자</span>를 포함해야 합니다.</small>
+			<input class="form-control" type="password" id="pw" name="pw" placeholder="비밀번호를 입력해주세요" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+			<small class="form-text text-muted">비밀번호는 <span class="signup_required">8~16자, 영문 대문자, 소문자, 숫자 </span>를 포함해야 합니다.</small>
+			
 		</div>
 		<!-- 비번 INPUT END -->
 
 		<!-- 비번확인 INPUT START -->
-		<div class="form-group mt-2">
+		<div class="form-group mt-3">
 			<label for="pw-check">비밀번호 확인</label> <span class="signup_required">*</span>
-			<input class="form-control" type="password" id="pw_check" placeholder="비밀번호를 다시 입력해주세요">
+			<input class="form-control" type="password" id="pw_check" placeholder="비밀번호를 다시 입력해주세요" required>
+			<span class="signup_required">
+				<small class="form-text pw_message" id="pw_match">비밀번호가 일치하지 않습니다.</small>
+				<small class="form-text pw_message" id="pw_length">8~16자로 설정해주세요. </small>
+				<small class="form-text pw_message" id="pw_ok">영문 대문자, 소문자, 숫자 조합으로 해주세요.</small>
+			</span>	
 		</div>
 		<!-- 비번확인 INPUT END -->
+
 
 		<!-- 이름 INPUT START -->
 		<div class="form-group mt-2">
 			<label for="name">이름</label> <span class="signup_required">*</span>
-			<input class="form-control" type="text" id="name" name="name" placeholder="이름을 입력해주세요">
+			<input class="form-control" type="text" id="name" name="name" placeholder="이름을 입력해주세요" required>
 			<small class="form-text text-muted">반드시 <span class="signup_required">한글 실명</span>으로 기입해주세요.<br>
 			실명이 아닐 경우, 서비스 이용에 제약이 생길 수 있습니다.<br>
 			- 띄어쓰기, 특수 문자 사용 불가</small>
@@ -110,7 +159,7 @@
 		<!-- 닉네임 INPUT START -->
 		<div class="form-group my-4">
 			<label for="name">닉네임</label> <span class="signup_required">*</span>
-			<input class="form-control" type="text" id="nickname" name="nickname" placeholder="닉네임을 입력해주세요">
+			<input class="form-control" type="text" id="nickname" name="nickname" placeholder="닉네임을 입력해주세요" required>
 			<small class="form-text text-muted">딜리브러리에서 커뮤니티 활동시 사용할 닉네임을 입력해주세요.<br>
 				<span class="signup_required">한글 6자 혹은 알파벳 12자 </span>이내로 기입해주세요.<br>
 				- 띄어쓰기, 특수 문자 사용 불가<br>
@@ -132,14 +181,9 @@
 		<!-- 폰번호 INPUT START -->
 		<label class="mt-4" for="m_phone">휴대폰번호</label>
 		<span class="signup_required">*</span>
-	
-		<div class="input-group mb-3">
+		<div class="form-group mb-3">
 			<input class="form-control" type="tel" id="m_phone" name="m_phone" placeholder="휴대폰번호를 입력해주세요">
-			<div class="input-group-append">
-				<button class="btn btn-outline-info btn-Customer" type="button">인증번호 받기</button>
-			</div>
 		</div>
-		
 		<!-- 폰번호 INPUT END -->
 
 		<!-- 주소 INPUT START -->
@@ -148,7 +192,8 @@
 
 		<div id="address_postcode">
 			<div class="input-group">
-				<input class="form-control" type="text" name="addr2" id="getPostcode_input">
+				<input class="form-control" type="text" name="addr2_a" id="getPostcode_input" required>
+				<input class="form-control" type="text" name="addr2_b" id="getDetail_addr">
 				<div class="input-group-append">
 					<button class="btn btn-outline-info btn-Customer" type="button" id="getPostcode">우편번호찾기</button>
 				</div>
@@ -157,7 +202,7 @@
 		<!-- 상세주소 INPUT START -->
 		<div class="form-group mt-1">
 			<input class="form-control" type="text" id="getAddr1" name="addr1_a">
-			<input class="form-control mt-1" type="text" id="getAddr2" name="addr1_b" placeholder="상세주소를 입력해주세요.">
+			<input class="form-control mt-1" type="text" id="getAddr2" name="addr1_b" placeholder="상세주소를 입력해주세요." required>
 		</div>
 		<!-- 주소 INPUT END -->
 		
@@ -233,8 +278,34 @@
       </div>
     </div>
   </footer>
+  
+   <!----------------------  이메일 중복체크 모달창 섹션  ----------------------->
+   <div class="modal" id="emailCheckModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">이메일 중복체크</h5>
+            <button class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+			
+              <div class="form-group">
+                <label for="email">이메일을 입력해주세요.</label>
+               <form action="emailCheck.do" method="post">
+                <input type="email" placeholder="예시) hello@delibrary.com" class="form-control" name="email">
+              </div>
+          </div>
+          <div class="modal-footer">
+			<button class="btn btn-primary btn-Customer" id="btn_emailCheck" type="submit">중복체크</button>
+		 </form>	
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <!---------------------- #########자바스크립트 섹션########### ----------------------->
+
+  <!---------------------- 자바스크립트 섹션 ----------------------->
 
   <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
@@ -281,7 +352,7 @@
 							extraAddr = ' (' + extraAddr + ')';
 						}
 						// 조합된 참고항목을 해당 필드에 넣는다.
-						document.getElementById("getAddr1").value = extraAddr;
+						document.getElementById("getDetail_addr").value = extraAddr;
 
 					} else {
 						document.getElementById("getAddr1").value = '';
@@ -302,9 +373,9 @@
 	let select = 0;
 	let interestButton = ['#interest1','#interest2','#interest3','#interest4','#interest5','#interest6'];	
 	let interestCheck = ['#interest_check1','#interest_check2','#interest_check3','#interest_check4','#interest_check5','#interest_check6'];	
-	
+
 	for(let i=0; i < interestButton.length; i++){	
-		document.querySelector(interestButton[i]).addEventListener('click', function() {
+		document.querySelector(interestButton[i]).addEventListener('click', function () {
 				document.querySelector(interestButton[i]).classList.toggle('active');
 				select += 1;
 				if(select % 2 != 0) {
@@ -313,7 +384,94 @@
 					document.querySelector(interestCheck[i]).removeAttribute('checked');
 				}
 		})
-	}	
+	}
+	//////////////////////////**이메일 중복체크:제이쿼리**//////////////////////////////////
+	
+	$.ajax({
+            url: "/emailCheck.do",
+            type: "POST",
+            success: function(data){
+               
+            }
+         }); 
+     
+	$('#btn_emailCheck').click(function() {
+		if(data<0) {
+			   alert('사용 가능한 이메일 입니다');
+		   } else {
+			   alert('이미 가입 되어있는 이메일 입니다');
+		   }
+	});
+
+	
+
+	//////////////////////////**비밀번호 및 비밀번호 확인**//////////////////////////////////
+	let inputPw = document.getElementById('pw'); //패스워드 입력 
+	let inputPw_check = document.getElementById('pw_check'); //패스워드 체크 입력
+
+	let pw_length = document.getElementById('pw_length'); //패스워드 길이 메세지
+	let pw_match = document.getElementById('pw_match'); // 패스워드 매치 메세지
+	let pw_ok = document.getElementById('pw_ok'); // 패스워드 조합 메세지
+	
+	//패스워드창 클릭하면 메세지 띄우기
+	inputPw.onfocus = function () {
+		inputPw.classList.add('is-invalid');
+		pw_match.style.display = 'block';
+		pw_length.style.display = 'block';
+		pw_ok.style.display = 'block';
+	}
+
+	//패스워드창 클릭 안하면 초록/빨강 인풋 테두리 없에기
+	inputPw.onblur = function(){
+		inputPw.classList.remove('is-invalid');
+		inputPw.classList.remove('is-valid');
+	}
+
+	//패스워드창 패스워드 체크
+	inputPw.onkeyup = function(){
+		let lowerCaseLetters = /[a-z]/g;
+		let upperCaseLetters = /[A-Z]/g;
+		let numbers = /[0-9]/g;
+
+		//패스워드 8~16자, 대문자, 소문자 다 있으면 메세지 없에기
+		if(inputPw.value.match(lowerCaseLetters) && inputPw.value.match(upperCaseLetters) && inputPw.value.match(numbers)){
+			pw_ok.style.display = 'none';
+		}
+
+		//패스워드 길이 8자 이상이면 메세지 없에기
+		if(inputPw.value.length >= 8) {
+			pw_length.style.display = 'none';
+		}
+
+		//조건 다 맞으면 인풋 테두리 초록
+		if (inputPw.value.match(lowerCaseLetters) && inputPw.value.match(upperCaseLetters) && inputPw.value.match(numbers) && (inputPw.value.length >= 8)) {
+			inputPw.classList.remove('is-invalid');
+			inputPw.classList.add('is-valid');
+		}
+	}
+
+	//패스워드체크창 클릭하면 빨간테두리
+	inputPw_check.onfocus = function() {
+		inputPw_check.classList.add('is-invalid');
+	}
+
+	//패스워드체크창 나가면 테두리 빼기
+	inputPw_check.onblur = function() {
+		inputPw.classList.remove('is-invalid');
+		inputPw.classList.remove('is-valid');
+	}
+
+	inputPw_check.onkeyup = function(){
+		inputPw_val = document.getElementById('pw').value; //패스워드 입력값
+		inputPw_check_val = document.getElementById('pw_check').value; // 패스워드 체크 입력값
+
+		if(inputPw_val === inputPw_check_val) { //두개 값 같아지면 초록테두리 
+			inputPw_check.classList.remove('is-invalid');
+			inputPw_check.classList.add('is-valid');
+			pw_match.style.display = 'none'; //불일치 메세지 없에기
+		}
+	}
+	
 }
   </script>
 </body>

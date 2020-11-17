@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.CustomerDAO;
+import com.example.demo.service.UserSha256;
 import com.example.demo.vo.CustomerVO;
 
 @Controller
@@ -36,6 +37,11 @@ public class UpdateCustomerController {
 	public ModelAndView submit(HttpServletRequest request, CustomerVO c, MultipartFile uploadFile) {
 		String path = request.getRealPath("img");
 		String Email = request.getParameter("id")+"@"+request.getParameter("email");
+		
+		String password = request.getParameter("pw");
+		String encPW = UserSha256.encrypt(password);
+		System.out.println("encPW:::::::"+encPW);
+		c.setPw(encPW);
 		
 // ==== 현왕 주소 값 받아와서 DB로 넘기게끔 설정 ========================================================================================
 		String addr_ref = request.getParameter("addr_ref");
@@ -102,22 +108,4 @@ public class UpdateCustomerController {
 		}
 		return mav;
 	}
-	
-//	// 회원가입 컨트롤러
-//	@RequestMapping(value = "/user/reg", method = RequestMethod.POST)
-//	public String userRegPass(UserVO userVO, Model model, HttpServletRequest request) {
-//
-//		// 암호 확인
-//		System.out.println("첫번째:" + userVO.getUser_pw());
-//		// 비밀번호 암호화 (sha256
-//		String encryPassword = UserSha256.encrypt(userVO.getUser_pw());
-//		userVO.setUser_pw(encryPassword);
-//		System.out.println("두번째:" + userVO.getUser_pw());
-//		// 회원가입 메서드
-//		reg_service.userReg_service(userVO);
-//		// 인증 메일 보내기 메서드
-//		mailsender.mailSendWithUserKey(userVO.getUser_email(), userVO.getUser_id(), request);
-//
-//		return "redirect:/";
-//	}
 }

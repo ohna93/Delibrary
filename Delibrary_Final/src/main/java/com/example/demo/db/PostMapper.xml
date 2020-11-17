@@ -50,6 +50,21 @@
 		delete from post where p_id=#{p_id} and cust_no=#{cust_no}
 	</delete>
 
+	<!-- 용택 : 내서제 보기 상세보기 -->
+	<select id="My_list" resultType="postVO">
+		select * from post where cust_no=#{cust_no} and fol_no=#{fol_no}
+	</select>
+
+	<!-- 용택 : 책상세보기에서 포스트 추가 -->
+	<insert id="insert2">
+		insert into post values(#{p_id},#{p_no},#{p_title},#{p_writer},#{p_content},#{p_hit},sysdate,#{fname},#{cust_no},#{fol_no})
+	</insert>
+	
+	<!-- 폴더 번호에 따른 전체 파일 목록 [현왕]-->
+   <select id="selectAll_fol" resultType="postVO">
+      select * from post where fol_no=#{fol_no} and p_no like ''||#{group}||'%' order by p_no desc
+   </select>
+
 </mapper>
 
 

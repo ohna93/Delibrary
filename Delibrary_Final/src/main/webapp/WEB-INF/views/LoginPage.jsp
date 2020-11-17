@@ -12,64 +12,101 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
     crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
-	crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="resource/style.css">
-  <title>딜리브러리 Delibrary - 로그인</title>
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
+	<link rel="stylesheet" href="css/yurim.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <title>로그인 - 딜리브러리</title>
 </head>
 
 <body>
-	<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
+	<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark p-0">
 		<div class="container">
-			<a href="Home.do" class="navbar-brand"><img alt="딜리브러리" src="resource/img/logo_bg_dark.jpg" height="24"></a>
+			<a href="Home.do" class="navbar-brand"><img alt="딜리브러리" src="img/logo_bg_dark.jpg" height="20" class="pl-3 mb-1"></a>
 			<button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav ml-4">
-					<li class="nav-item">
-						<a href="about.html" class="nav-link">도서관소개</a>
+					<li class="nav-item dropdown">
+						<a href="about.html" class="nav-link dropdown-toggle" data-toggle="dropdown">도서관소개</a>
+							<ul class="dropdown-menu dropdown-menu-left fade-down">
+								<li><a class="dropdown-item" href="about.html"> 대출/반납/연장</a></li>
+								<li><a class="dropdown-item" href="#"> 공지사항 </a></li>
+								<li><a class="dropdown-item" href="#"> 자주묻는질문</a></li>
+								<li><a class="dropdown-item" href="#"> 묻고답하기 </a></li>
+								<li><a class="dropdown-item" href="#"> 오시는길 </a></li>
+							</ul>
 					</li>
-					<li class="nav-item">
-						<a href="books.html" class="nav-link">도서정보</a>
+					<li class="nav-item dropdown">
+						<a href="books.html" class="nav-link dropdown-toggle" data-toggle="dropdown">도서정보</a>
+							<ul class="dropdown-menu dropdown-menu-left fade-down">
+								<li><a class="dropdown-item" href="books.html">도서검색</a></li>
+								<li><a class="dropdown-item" href="#">사서추천도서</a></li>
+								<li><a class="dropdown-item" href="#">신착도서</a></li>
+								<li><a class="dropdown-item" href="#">인기도서</a></li>
+							</ul>
 					</li>
-					<li class="nav-item">
-						<a href="community.html" class="nav-link">커뮤니티</a>
+					<li class="nav-item dropdown">
+						<a href="community.html" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>
+							<ul class="dropdown-menu dropdown-menu-left fade-down">
+								<li><a class="dropdown-item" href="community.html">창작물게시판</a></li>
+								<li><a class="dropdown-item" href="#">중고장터</a></li>
+								<li><a class="dropdown-item" href="#">자유게시판</a></li>
+							</ul>
 					</li>
-					<li class="nav-item">
-						<a href="mypage.html" class="nav-link">나의도서</a>
+					<li class="nav-item dropdown">
+						<a href="mypage.html" class="nav-link dropdown-toggle" data-toggle="dropdown">나의도서</a>
+							<ul class="dropdown-menu dropdown-menu-left fade-down">
+								<li><a class="dropdown-item" href="mypage.html"> 나의도서정보</a></li>
+								<li><a class="dropdown-item" href="lentBooks.html">대출현황/이력</a></li>
+								<li><a class="dropdown-item" href="myfolder.html">내서재</a></li>
+								<li><a class="dropdown-item" href="#">개인정보수정</a></li>
+							</ul>
 					</li>
 				</ul>
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item">
-						<a href="LoginPage.do" class="nav-link"><img class="icons" alt="로그인" src="resource/img/login_bg_dark.png" height="50"></a>
+				<ul id="app" class="navbar-nav ml-auto">
+					<li class="nav-item" v-bind:title="login">
+						<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a>
 					</li>
-					<li class="nav-item">
-						<a href="insertCustomer.do" class="nav-link"><img class="icons" alt="회원가입" src="resource/img/add_user_bg_dark.png" height="50"></a>
+					<li class="nav-item" v-bind:title="signup">
+						<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a>
 					</li>
-					<li class="nav-item">
-						<a href="sitemap.html" class="nav-link"><img class="icons" alt="북카트" src="resource/img/book_bg_dark.png" height="50"></a>
+					<li class="nav-item" v-bind:title="bookcart">
+						<a href="siteMap.do" class="nav-link"><i class="fas fa-book"></i></a>
 					</li>
-					<li class="nav-item active">
-						<a href="sitemap.do" class="nav-link"><img class="icons" alt="사이트맵" src="resource/img/map_bg_dark.png" height="50"></a>
+					<li class="nav-item" v-bind:title="sitemap">
+						<a href="siteMap.do" class="nav-link"><i class="far fa-map"></i></a>
 					</li>
+					<script>
+						var app = new Vue({
+							el: '#app',	
+							data: {
+								login: '로그인',
+								signup: '회원가입',
+								bookcart: '북카트',
+								sitemap: '사이트맵',
+							}});
+					</script>
 				</ul>
 			</div>
 		</div>
 	</nav>
-
-  <!-- PAGE HEADER -->
-  <header id="page-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-7 m-auto text-center">
-		  <h1 class="display-5" style="font-weight:100;">회원로그인</h1>
-        </div>
-      </div>
-    </div>
-  </header>
-
+  
+	<!-- PAGE HEADER -->
+	<header id="page-header">
+	  <div class="darkOverlay">
+		<div class="container">
+		  <div class="row">
+			<div class="col-md-6 m-auto text-center">
+			  <h1>로그인</h1>
+			</div>
+		  </div>
+		</div>
+		</div>
+	</header>
+		
+	
   <!-- MAIN SECTION -->
 	<section id="loginPage">
 		<!-- 타이틀: 딜리브러리 -->	
@@ -79,8 +116,8 @@
 		<!-- 로그인 폼 시작 -->	
 		<form action="Home.do" method="post">
 		<div class="form-group mt-4">
-			<input class="form-control form-control-lg" type="email" id="email" name="email" placeholder="이메일 주소">
-			<input class="form-control form-control-lg mt-2" type="password" id="pw" name="pw" placeholder="비밀번호">
+			<input class="form-control form-control-lg loginForm" type="email" id="email" name="email" placeholder="이메일 주소">
+			<input class="form-control form-control-lg mt-2 loginForm" type="password" id="pw" name="pw" placeholder="비밀번호">
 			<input type="hidden" name="loginOk" value="ok">
 			<button class="btn btn-dark btn-lg btn-block mt-2 btn-Customer" type="submit">로그인</button>
 		</div>
@@ -107,20 +144,21 @@
 					<button class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
-					<form>
+				<!-- 폼시작 -->
+					<form action="findEmail.do" method="post">
 						<div class="form-group">
 							<label for="username">이름</label>
-							<input type="text" placeholder="이름을 입력하세요" class="form-control">
+							<input type="text" name="name" placeholder="이름을 입력하세요" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label for="password">가입 휴대전화번호</label>
-							<small class="text-muted">ex) 010-1234-5678</small>
-							<input type="tel" placeholder="휴대전화번호를 입력하세요" class="form-control">
+							<input type="tel" name="m_phone" placeholder="예시) 010-1234-5678" class="form-control" required>
 						</div>
-					</form>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-outline-info btn-Customer" data-dismiss="modal">내 이메일 찾기</button>
+					<button class="btn btn-outline-info btn-Customer" type="submit">내 이메일 찾기</button>
+					</form>
+					<!--폼 종료 -->
 				</div>
 			</div>
 		</div>
@@ -135,7 +173,7 @@
 					<button class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form action="findEmail.do" method="post">
 						<div class="form-group">
 							<label for="username">이름</label>
 							<input type="text" placeholder="이름을 입력하세요" class="form-control">
@@ -145,16 +183,17 @@
 							<small class="text-muted">ex)hello@delibrary.com</small>
 							<input type="email" placeholder="이메일을 입력하세요" class="form-control">
 						</div>
-					</form>
+					
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-outline-info btn-Customer" data-dismiss="modal">비밀번호 찾기</button>
+					<button type="submit" class="btn btn-outline-info btn-Customer" data-dismiss="modal">비밀번호 찾기</button>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	</section>
+	
   <!-- FOOTER -->	
   <footer id="main-footer" class="text-center p-4">
     <div class="container">
