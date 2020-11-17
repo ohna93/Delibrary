@@ -527,6 +527,12 @@
 	    <div id="DirectEditPreserve" class="databaseTable_UI_scrollRight databaseTable_UI_button" style="display: none;"><!-- JS shows/hides by appending the .hidden class --></div>
 	  </div>
 	</div>
+	
+	<!-- /////////////////////////////////////////////////// -->
+	<div>
+		<p>test</p>
+	</div>
+	<!-- /////////////////////////////////////////////////// -->
 
   </body>
 </html>
