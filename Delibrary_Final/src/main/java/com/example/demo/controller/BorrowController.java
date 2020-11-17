@@ -39,6 +39,7 @@ public class BorrowController {
 //		this.dao = dao;
 //	}
 	
+	//테스트11
 	//테스트22
 	@Autowired
 	private BookDAO	bookdao;
