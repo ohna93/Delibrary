@@ -35,9 +35,9 @@ public class BorrowController {
 	
 	
 	
-	public void setDao(BorrowDAO dao) {
-		this.dao = dao;
-	}
+//	public void setDao(BorrowDAO dao) {
+//		this.dao = dao;
+//	}
 	@Autowired
 	private BookDAO	bookdao;
 	
