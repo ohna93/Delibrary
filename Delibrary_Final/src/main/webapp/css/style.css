@@ -281,3 +281,36 @@ body {
   background: #000;
   color: #fff;
 }
+
+/*  ---------------------------------------------------  */
+/* 			!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!			 */
+/* 			!!!!!!!	공통부분 추가 css 입니다!!!!!!!			 */
+/* 			!!!!!!!		지우지 마세요	  !!!!!!!			 */
+/* 			!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!			 */
+/*  ---------------------------------------------------  */
+
+.sidebar {
+  border: 1px solid gainsboro;
+}
+.side-head {
+  background: url('../img/side-head.jpg');
+  padding: 40px;
+}
+.sidebar a{
+	color: #343a40;
+}
+
+.searchbar {
+  border-radius: 25px;
+  padding: 5px 25px;
+}
+
+.list-group .active{
+	background-color: #f8f9fa;
+	color: #343a40;
+	border-color: #d8d8d8;
+} 
+
+#tbody a{
+	color: #343a40;
+}

@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,6 +44,13 @@ public class ReplyController {
 		int re=-1;
 		String re_writer=c_dao.findByCust_No(cust_no).getNickname();
 		
+		//로그인된 회원번호 받아오기
+		HttpSession session=request.getSession(); 
+		session.setAttribute("cust_no", session.getAttribute("cust_no"));
+		int signed_custNo=(Integer)session.getAttribute("cust_no");
+		System.out.println("REPLY 댓글 고객 사진 |  "+c_dao.findByCust_No(signed_custNo).getFname());
+//		model.addAttribute("c", c_dao.findByCust_No(signed_custNo));
+		
 		int nextNo=re_dao.getNextNo();
 		HashMap map=new HashMap();
 		map.put("re_no", nextNo);
@@ -51,6 +59,7 @@ public class ReplyController {
 		map.put("re_writer", re_writer);
 		map.put("re_content", re_content);
 		map.put("cust_no", cust_no);
+		map.put("fname", c_dao.findByCust_No(signed_custNo).getFname());
 		System.out.println("REPLY INSERT map :  "+ map);
 		
 		re=re_dao.insert(map);
