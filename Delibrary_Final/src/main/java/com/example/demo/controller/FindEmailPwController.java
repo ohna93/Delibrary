@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 @Controller
 public class FindEmailPwController {
 	
+	//풀리퀘테스트
 	@Autowired
 	private FindEmailPwDao dao;
 
