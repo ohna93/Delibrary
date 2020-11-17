@@ -2,20 +2,11 @@ package com.example.demo.vo;
 
 public class FolderVO {
 	private int fol_no;
-	private String fol_name;
+	private	String fol_name;
 	private int ml_no;
-	private int cust_no;
 	
 	public FolderVO() {
 		super();
-	}
-
-	public FolderVO(int fol_no, String fol_name, int ml_no, int cust_no) {
-		super();
-		this.fol_no = fol_no;
-		this.fol_name = fol_name;
-		this.ml_no = ml_no;
-		this.cust_no = cust_no;
 	}
 
 	public int getFol_no() {
@@ -42,11 +33,17 @@ public class FolderVO {
 		this.ml_no = ml_no;
 	}
 
-	public int getCust_no() {
-		return cust_no;
+	public FolderVO(int fol_no, String fol_name, int ml_no) {
+		super();
+		this.fol_no = fol_no;
+		this.fol_name = fol_name;
+		this.ml_no = ml_no;
 	}
+	
+	
+	
+	
+	
 
-	public void setCust_no(int cust_no) {
-		this.cust_no = cust_no;
-	}
+	
 }

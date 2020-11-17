@@ -20,7 +20,7 @@ public static SqlSessionFactory sqlSessionFactory;
 			inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		} catch (Exception e) {
-			System.out.println("static �삁�쇅諛쒖깮: "+e.getMessage());
+			System.out.println("static 오류: "+e.getMessage());
 		}
 	}
 	
@@ -42,6 +42,7 @@ public static SqlSessionFactory sqlSessionFactory;
 		session.close();
 	}
 	
+	//로그인정보
 	public static CustomerVO getLoginInfo(HashMap map) {
 		CustomerVO c = null;
 		SqlSession session = sqlSessionFactory.openSession(true);

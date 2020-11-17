@@ -4,10 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="customer">
 
+<!-- 유림 회원가입 탈퇴 회원넘버 -->
 	<insert id="insertCustomer" parameterType="customerVO">
-		insert into customer values(#{cust_no}, #{email}, #{pw}, #{addr}, #{addr2}, #{nickname}, #{interest}, #{name}, #{m_phone}, #{fname}, #{birthday})
+		insert into customer values(#{cust_no}, #{email}, #{pw}, #{addr}, #{addr2},  #{nickname}, #{interest}, #{name}, #{m_phone}, #{birthday},  #{fname})
 	</insert>
-	
+
 	<select id="login" resultType="customerVO">
 		select * from customer where email=#{email} and pw=#{pw}
 	</select>
@@ -19,6 +20,11 @@
 	<select id="getNextNo" resultType="java.lang.Integer">
     	select nvl(max(cust_no),0)+1 from customer
   	</select>
+ 
+<!-- 유림 아이디/비번찾기   -->	
+	<select id="findEmail" resultType="customerVO">
+		select * from customer where name=#{name} and m_phone=#{m_phone}
+	</select>
  
   <!-- 회원정보 전체출력 [현왕] -->
   <select id="selectAll" resultType="customerVO">

@@ -112,6 +112,34 @@ public class PostManager {
 		return re;
 	}
 	
+/////////////////////////////////////////////////////////////////////////	
+		//내서재 추가 용택
+		public static int insert2(PostVO p) {
+			int re =  -1;
+			SqlSession session=sqlSessionFactory.openSession(true);		
+			re=session.insert("post.insert2", p);
+			session.close();
+			return re;
+		}
+		
+		//내서재 출력 용택
+		public static List<PostVO> My_list(HashMap map){
+			List<PostVO> list = null;
+			SqlSession session=sqlSessionFactory.openSession();
+			list=session.selectList("post.My_list", map);
+			session.close();
+			return list;
+		}
+/////////////////////////////////////////////////////////////////////////	
+		
+		//게시판 전체글 가져오기 현왕
+	   public static List<PostVO> findAll_fol(HashMap map){
+	      List<PostVO> list = null;
+	      SqlSession session=sqlSessionFactory.openSession();
+	      list=session.selectList("post.selectAll_fol", map);
+	      session.close();
+	      return list;
+	   }
 }
 
 

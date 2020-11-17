@@ -66,4 +66,17 @@ public class PostDAO {
 		return DBManager.getTotalCount(map);
 	}
 	
+	//포스트 추가[용택]
+	public int insert2(PostVO p) {
+		return PostManager.insert2(p);
+	}
+	//내서재 목록 출력[용택]
+	public List<PostVO> My_list(HashMap map){
+		return PostManager.My_list(map);
+	}
+	
+	// 폴더에 따른 게시판 전체글 가져오기[현왕]
+   public List<PostVO> findAll_fol(HashMap map){
+      return PostManager.findAll_fol(map);
+   }
 }

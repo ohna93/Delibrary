@@ -1,4 +1,5 @@
 package com.example.demo.vo;
+
 import java.sql.Date;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +22,7 @@ public class CustomerVO {
 	private String name;
 	private String m_phone;
 	private String fname;
-	private String birthday;
+	private Date birthday;
 	private MultipartFile uploadFile;
 }
 

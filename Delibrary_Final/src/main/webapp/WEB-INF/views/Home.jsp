@@ -19,127 +19,16 @@
 <link rel="stylesheet" href="css/style.css">
 
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"crossorigin="anonymous"></script>
 
-<!-- 이 아래로는 따로 빼야하는 CSS, JavaScript -->
-<!-- carousel -->
-<style type="text/css">
-	.carousel-indicators1 {
-	  right: 0;
-	  bottom: -30px;
-	}
-	.carousel-indicators1 li {
-	  outline: 1px solid lightgray;
-	}
-	.carousel-indicators1 .active {
-	  outline: 1px solid black;
-	}
-	
-	.img-fluid {
-	  height: 250px;
-	}
-	.card-body {
-		height: 60px;
-		padding: 0;
-		text-align: center;
-	}
-	.book-title {
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		font-size: large;
-		font-weight: bold;
-	}
-	.controls-bottom {
-		display: inline-block;
-		float: right;
-	}
-	.carousel-inner {
-		height: 340px;
-	}
-</style>
-
-<script type="text/javascript">
-	$('.carousel.carousel-multi .carousel-item').each(function () {
-		var next = $(this).next();
-		if (!next.length) {
-			next = $(this).siblings(':first');
-		}
-		next.children(':first-child').clone().attr("aria-hidden", "true").appendTo($(this));
-	
-		if (next.next().length > 0) {
-			next.next().children(':first-child').clone().attr("aria-hidden", "true").appendTo($(this));
-		}
-		else {
-			$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
-		}
-	});
-</script>
-<!-- 탭 -->
-<style type="text/css">
-	.home_post_title {
-		width: 60%;
-		text-align: left;
-		font-size: medium;
-		font-weight: normal;
-	}
-	.home_post_date {
-		width: 40%;
-		font-size: medium;
-		font-weight: lighter;
-	}
-	a {
-		color: black;
-	}
-	a:hover {
-		color: black;
-		text-decoration: none;
-	}
-}
-</style>
-
-<script type="text/javascript">
-	window.onload = function() {
-		let tabs = document.getElementsByClassName('tab');
-		let contents = document.getElementsByClassName('content');
-
-		contents[0].style.display = 'block';
-		
-		for(let i = 0; i < tabs.length; i++) {
-			tabs[i].addEventListener('click', function(e) {
-				for(let i = 0; i < tabs.length; i++) {
-					contents[i].style.display = 'none';
-				}
-				contents[i].style.display = 'block';
-			}, true);
-		};
-	}
-</script>
-
-<!-- 검색 -->
-<script type="text/javascript">
-	$(function() {
-		$('#search').click(function() {
-			location.href = "http://localhost:8088/SearchResult.do?query=" + $("#bookName").val();
-		})
-	});
-</script>
-
-<!-- 추천도서 누르면 bookDetail 페이지로 이동 -->
-<script type="text/javascript">
-$(function() {
-	$('.card').click(function() {
-		location.href = "http://localhost:8088/detailBook.do?b_no=1&query=" + $(this).find('#book-title').text();
-	})
-});
-</script>
+<!-- 외부 CSS, JS 파일 링크 -->
+<link rel="stylesheet" href="css/HomeCSS.css">
+<script type="text/javascript" src="/js/HomeJS.js"></script>
 
 </head>
 <body>
-	<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
+	<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light p-0">
 		<div class="container container-fluid">
 			<a href="Home.do" class="navbar-brand"><img alt="딜리브러리" src="img/logo_bg_dark2.jpg" height="40"></a>
 			<button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -158,7 +47,7 @@ $(function() {
 							</ul>
 					</li>
 					<li class="nav-item dropdown">
-						<a href="books.html" class="nav-link dropdown-toggle" data-toggle="dropdown"><b>도서정보</b></a>
+						<a href="SearchResult.do" class="nav-link dropdown-toggle" data-toggle="dropdown"><b>도서정보</b></a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
 								<li><a class="dropdown-item" href="SearchResult.do">도서 검색</a></li>
 								<li><a class="dropdown-item" href="#">사서추천도서</a></li>
@@ -167,16 +56,17 @@ $(function() {
 							</ul>
 					</li>
 					<li class="nav-item dropdown">
-						<a href="community.html" class="nav-link dropdown-toggle" data-toggle="dropdown"><b>커뮤니티</b></a>
+						<a href="postList.do?group=20" class="nav-link dropdown-toggle" data-toggle="dropdown"><b>커뮤니티</b></a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
 								<li><a class="dropdown-item" href="postList.do?group=20">창작물게시판</a></li>
 								<li><a class="dropdown-item" href="postList.do?group=30">중고장터</a></li>
+								<li><a class="dropdown-item" href="#">자유게시판</a></li>
 							</ul>
 					</li>
 					<li class="nav-item dropdown">
 						<a href="mypage.html" class="nav-link dropdown-toggle" data-toggle="dropdown"><b>나의도서</b></a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
-								<li><a class="dropdown-item" href="mypage.html"> 나의도서정보</a></li>
+								<li><a class="dropdown-item" href="mypage_main.do?cust_no=${cust_no }"> 나의도서정보</a></li>
 								<li><a class="dropdown-item" href="lentBooks.html">대출현황/이력</a></li>
 								<li><a class="dropdown-item" href="#">내서재</a></li>
 								<li><a class="dropdown-item" href="MyPage_Info.do?cust_no=${cust_no}">개인정보수정</a></li>
@@ -184,28 +74,25 @@ $(function() {
 					</li>
 				</ul>
 				<ul id="app" class="navbar-nav ml-auto">
+					<c:if test="${cust_no == null}">
 						<li class="nav-item" v-bind:title="login">
 							<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a>
 						</li>
 						<li class="nav-item" v-bind:title="signup">
 							<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a>
 						</li>
-						<li class="nav-item" v-bind:title="bookcart">
-							<a href="sitemap.html" class="nav-link"><i class="fas fa-book"></i></a>
+					</c:if>
+					<c:if test="${cust_no != null}">
+						<li class="nav-item" v-bind:title="logout">
+							<a href="logout.do" class="nav-link"><i class="fas fa-sign-out-alt"></i></a>
 						</li>
-						<li class="nav-item" v-bind:title="sitemap">
-							<a href="siteMap.do" class="nav-link"><i class="fas fa-map"></i></a>
-						</li>
-					<script>
-						var app2 = new Vue({
-							el: '#app',	
-							data: {
-								login: '로그인',
-								signup: '회원가입',
-								bookcart: '북카트',
-								sitemap: '사이트맵',
-							}});
-					</script>
+					</c:if>
+					<li class="nav-item" v-bind:title="bookcart">
+						<a href="sitemap.html" class="nav-link"><i class="fas fa-book"></i></a>
+					</li>
+					<li class="nav-item" v-bind:title="sitemap">
+						<a href="siteMap.do" class="nav-link"><i class="fas fa-map"></i></a>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -232,14 +119,31 @@ $(function() {
 	<!-- PHOTO GALLERY -->
 	<section id="gallery" class="py-5">
 		<div class="container">
-		  <h4 class="text-center">도서관 소식</h4>
+		  <h4 class="text-center event-title">서울시 도서관 소식</h4>
 		  <div class="row mb-4">
-				<div class="col-md-4">
-					달력
+				<div class="event-link col-md-3">
+					<a href="https://www.nl.go.kr/NL/contents/N50601000000.do?schBdcode=_normal020204&page=1">국립중앙도서관</a>
 				</div>
-
-				<div class="col-md-8">
-					이벤트 소식을 넣어보아요
+				<div class="event-link col-md-3">
+					<a href="https://www.nlcy.go.kr/menu/10110/together/40016/togetherList.do">국립어린이청소년도서관</a>
+				</div>
+				<div class="event-link col-md-3">
+					<a href="https://lib.gangseo.seoul.kr/education/list/1">강서 통합도서관</a>
+				</div>
+				<div class="event-link col-md-3">
+					<a href="https://library.gangnam.go.kr/intro/menu/10045/program/30013/lectureList.do">강남 통합도서관</a>
+				</div>
+				<div class="event-link col-md-3">
+					<a href="https://www.gblib.or.kr/gangbuk/commu/event/schedule.do">강북 문화정보도서관</a>
+				</div>
+				<div class="event-link col-md-3">
+					<a href="https://www.gdlibrary.or.kr/web/menu/10093/program/30011/lectureList.do">강동구립도서관</a>
+				</div>
+				<div class="event-link col-md-3">
+					<a href="https://lib.sen.go.kr/lib/module/teach/index.do?menu_idx=11">서울교육청 통합도서관</a>
+				</div>
+				<div class="event-link col-md-3">
+					<a href="https://lib.seoul.go.kr/libsch/list">서울도서관</a>
 				</div>
 		  </div>
 		</div>
@@ -616,11 +520,5 @@ $(function() {
 			</div>
 		</div>
 	</footer>
-
-
-
-
-
-	
 </body>
 </html>
