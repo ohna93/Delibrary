@@ -64,6 +64,7 @@ public class CustomerController {
          if (email.equals(custVO.getEmail()) && password.equals(custVO.getPw())) {
             session.setAttribute("cust_no", custVO.getCust_no());
             request.setAttribute("cust_no", custVO.getCust_no());
+
          }
       }
 

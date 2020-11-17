@@ -79,7 +79,6 @@
     /*
 Add a fold-out icon to any element, by adding a data-attribute:
 `data-css-icon` with one of the following values:
-
 - cross
 - dots
 - down
@@ -87,18 +86,13 @@ Add a fold-out icon to any element, by adding a data-attribute:
 - menu
 - plus
 - right
-
 AND a blank <i></i>-tag.
-
 _Example:_
 <span data-css-icon="cross">Title here<i></i><span>.
-
 Extra modifiers are `fill`, `outline` and `square`.
-
 _Example:_
 <span data-css-icon="square cross outline">Title here<i></i><span>.
 */
-
 [data-css-icon] {
 	--animdur: .3s;
   --loading-animdur: 0.8s;
@@ -111,7 +105,6 @@ _Example:_
   --dots-size: 0.5rem;
   --icon-size: 1rem;
 	--size: 3.0rem;
-
 	align-items: center;
   cursor: pointer;
 	display: flex;
@@ -134,7 +127,6 @@ _Example:_
   transform-origin: 50% 50%;
 	transition: all var(--animdur) var(--animtf);
 }
-
 [data-css-icon*="down"] i::after,
 [data-css-icon*="right"] i::after {
   background: transparent;
@@ -159,7 +151,6 @@ _Example:_
   top: 0;
 	transform: rotate(45deg);
 }
-
 [data-css-icon*="equals"] i::after,
 [data-css-icon*="equals"] i::before,
 [data-css-icon*="cross"] i::after,
@@ -206,7 +197,6 @@ _Example:_
 [data-css-icon*="menu"] i::before {
   top: calc(0px - var(--m));
 }
-
 [data-css-icon*="dots"] i,
 [data-css-icon*="dots"] i::after,
 [data-css-icon*="dots"] i::before {
@@ -233,7 +223,6 @@ _Example:_
   left: calc(0px - (var(--dots-size) * 1.5));
   position: absolute;
 }
-
 [data-css-icon*="spin"] i::after {
   animation: spin var(--loading-animdur) infinite linear;
   border-radius: 50%;
@@ -244,7 +233,6 @@ _Example:_
   transform: translateZ(0);
   width: var(--icon-size);
 }
-
 /* STATE */
 [open] > summary > [data-css-icon*="cross"] i::after {
 	transform: rotate(45deg);
@@ -267,14 +255,11 @@ _Example:_
 [open] > summary > [data-css-icon*="plus"] i::before {
 	transform: rotate(-0deg);
 }
-
 [open] > summary > [data-css-icon*="equals"] i::after { transform: rotate(-45deg); }
 [open] > summary > [data-css-icon*="equals"] i::before { transform: rotate(45deg); }
-
 [open] > summary > [data-css-icon*="menu"] i { background-color: transparent; }
 [open] > summary > [data-css-icon*="menu"] i::after { transform: translateY(calc(0px - var(--m))) rotate(-45deg); }
 [open] > summary > [data-css-icon*="menu"] i::before { transform: translateY(var(--m)) rotate(45deg); }
-
 /* RTL: inset-block-end fails */
 [dir="rtl"] [data-css-icon*="right"] i::after {
 	left: calc((var(--icon-size) / 4));
@@ -283,7 +268,6 @@ _Example:_
 	left: 0.5rem;
   right: auto;
 }
-
 /* MODIFIERS */
 [data-css-icon*="outline"] i {
   border: var(--bdw) solid var(--c);
@@ -295,7 +279,6 @@ _Example:_
 [data-css-icon*="square"] {
   --bdrs: 5px;
 }
-
 /* For this demo only */
 body { font-family: system-ui, sans-serif; padding: 1rem; }
 /*버튼크기 
@@ -326,7 +309,6 @@ summary {
 }
 summary::marker { display: none; }
 summary::-webkit-details-marker { display: none; }
-
 /* 4 States of summary */
 button,
 summary {
@@ -354,7 +336,6 @@ summary + * {
   line-height: 1.6;
   padding: 0.5rem;
 }
-
 @keyframes dots {
   0% {
     background-color: var(--c);
@@ -364,7 +345,6 @@ summary + * {
     background-color: var(--dots-bgc);
   }
 }
-
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -390,8 +370,6 @@ var b_writer="";
 var b_year;
 var b_price;
 var detail;
-
-
 //책소개 아코디안
   function setDetailsHeight(selector, wrapper = document) {
 	const setHeight = (detail, open = false) => {
@@ -417,7 +395,6 @@ var detail;
 		RO.observe(detail);
 	});
 }
-
 /* Run it */
 setDetailsHeight('details');
 $(function(){
@@ -475,7 +452,6 @@ $(function(){
 				}
 			});
 		}
-
 	var insertPost = function(){
 		
 		var P_TITLE="${b.b_title }";
@@ -503,9 +479,8 @@ $(function(){
 	$('#tempList').on("click","tr",function(){
 		//alert($(this).find("td:eq(0)").text());
 		FOL_NO =eval($(this).find("td:eq(0)").text());
-		//alert(FOL_NO);
+		alert(FOL_NO);
 		var result = confirm("폴더에 저장하시겠어요?");
-
 		if(result){
 			insertPost();
 		    alert("저장");
@@ -524,7 +499,6 @@ $(function(){
 	$('.card-text').mouseleave(function() {
 		$(this).removeClass("reverse",700);
 	});
-
 	//대여버튼
 	$('#borrow').click(function(){
 		if (cust_no=null){
@@ -534,6 +508,8 @@ $(function(){
 		
 		$('#dialog-borrow').dialog({
 		modal: true, 
+		height:250,
+		width:340,
 		buttons: {
 			
 			"대출하고싶어요": function() {
@@ -588,7 +564,6 @@ $(function(){
 		//var result = confirm('내서재에 추가하시겠습니까??'); 
 			//if(result){
 				//var cust_no =eval(${cust_no });
-
 			
 			
 								
@@ -611,9 +586,7 @@ $(function(){
 						
 				});
 				});
-
 });
-
   </script>
   </head>
 
@@ -675,7 +648,7 @@ $(function(){
 						<a href="sitemap.html" class="nav-link"><i class="fas fa-user-plus"></i></a>
 					</li>
 					<li class="nav-item" v-bind:title="bookcart">
-						<a href="sitemap.html" class="nav-link"><i class="fas fa-book"></i></a>
+						<a href="BookCart.do" class="nav-link"><i class="fas fa-book"></i></a>
 					</li>
 					<li class="nav-item" v-bind:title="sitemap">
 						<a href="sitemap.html" class="nav-link"><i class="far fa-map"></i></a>
@@ -813,6 +786,9 @@ $(function(){
 					<c:forEach var="g" items="${f }">
 					<tr>
 						<td>${g.fol_no }</td>
+						<!-- <td>${g.fol_no }</td> -->
+						<td><img width="50px" height="60px" alt="book image"
+					src="img/folder.png"></td>
 						<td  id ="test" class="folder">${g.fol_name }</td>				
 					</tr>
 					</c:forEach>						
@@ -890,7 +866,6 @@ $(function(){
   <script>
     // Get the current year for the copyright
     $('#year').text(new Date().getFullYear());
-
   </script>
 </body>
 

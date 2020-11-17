@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,7 +42,8 @@ public class MyLibraryController {
 
 	@RequestMapping("/MyLibrary.do")
 	public void list(Model model, HttpServletRequest request) {
-		int cust_no = 1;
+		HttpSession session = request.getSession(true);
+		int cust_no  =  (int) session.getAttribute("cust_no");
 		int TotalFol_number = fdao.pageByfolder(cust_no);
 		HashMap map=new HashMap();
 		int fol_no = 1;

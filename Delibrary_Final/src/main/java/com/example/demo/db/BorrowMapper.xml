@@ -19,6 +19,13 @@
 		update Borrow set B_COUNT=#{B_COUNT}-1 where B_NO=#{B_NO}
 	</update>
 	 -->
-	
+	 <select id="selectBycust_No" resultType="borrowVO">
+    SELECT * FROM borrow where cust_no = #{cust_no}
+    <where>
+    	<if test = "return_ok!=null">
+    		return_ok = #{return_ok}  	
+    	</if>
+    </where>
+  </select> 
 </mapper>
 
