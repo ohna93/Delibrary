@@ -34,6 +34,8 @@ public class CustomerController {
    }
 
    // 홈화면
+   //test11
+   //test22
    @RequestMapping("/Home.do")
    public void home(Model model, CustomerVO custVO, String loginOk, HttpServletRequest request) {
       if (request.getParameter("loginOk") != null) {
