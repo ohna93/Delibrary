@@ -1,3 +1,10 @@
+textarea{
+	border: 1px solid #e6e6e6;
+}
+
+*, ::after, ::before{
+	z-index: 1;
+}
 /*
  *  Imports
 */
@@ -44,7 +51,6 @@ a.button {
   float: right;
   margin-top: 10px;
   padding: 5px 0px 20px;
-  
   width: 100%;
   border: none;
   border-radius: 0;
@@ -163,13 +169,13 @@ a.button {
 */
 
 #grid {
-  margin-bottom: 30px; 
+  margin-bottom: 15px; 
+  padding: 0;
 }
 
 .book-item {
-  margin: 30px 20px;
-  
-  list-style-type: none; }
+	padding: 3% 10% 3% 15%;
+	list-style-type: none; }
   .book-item:after {
     content: '';
     top: 0;
@@ -266,7 +272,7 @@ a.button {
     transform: translate3d(0, 0, 20px);
     z-index: 10; }
     .bk-img .bk-front > div {
-      z-index: 1;
+      z-index: -10;
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
       -webkit-transform-style: preserve-3d;
@@ -357,13 +363,13 @@ a.button {
   .main-overlay .overlay-details {
     position: absolute;
     display: block;
-    z-index: 1;
+    z-index: 1000;
     top: 50%;
     left: 50%;
     width: 100%;
-    max-width: 800px;
-    max-height: 480px;
-    padding: 40px;
+    max-width: 840px;
+    max-height: 450px;
+    padding: 1.5% 1% 2% 2%;
     overflow: hidden;
     border-radius: 3px;
     background-color: #fff;
@@ -465,13 +471,14 @@ a.button {
     vertical-align: top;
     transition: all 500ms ease-out; }
     .main-overlay .overlay-preview.activated {
-      margin-top: -430px; }
+      margin-top: -390px;
+       }
   .main-overlay .preview-content {
     padding-right: 24px;
     padding-top: 10px;
     display: block;
     display: -webkit-box;
-    height: 360px;
+    height: 380px;
     /* Fallback for non-webkit */
     font-size: 15px;
     line-height: 1.5;

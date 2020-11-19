@@ -26,6 +26,13 @@
 <link rel="stylesheet" href="css/HomeCSS.css">
 <script type="text/javascript" src="/js/HomeJS.js"></script>
 
+<!-- 관리자 페이지 script, css -->
+<script type="text/javascript">
+	window.onload = function() {
+		
+	}
+</script>
+
 </head>
 <body>
 	<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light p-0">
@@ -515,15 +522,11 @@
 	</div>
   
 	<!-- FOOTER -->
-	<footer id="main-footer" class="text-center p-4">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<p>Copyright &copy;
-					<span id="year"></span> Glozzom</p>
-				</div>
-			</div>
-		</div>
-	</footer>
+	  <div id="page-content">
+	    나브바, 헤더 등등 생략
+	  </div>
+	  <footer id="main-footer" class="text-center p-4">
+	    생략...
+	  </footer>
 </body>
 </html>

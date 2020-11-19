@@ -47,5 +47,10 @@
 		and b.cust_no = #{cust_no}
 		order by 1
 	</select>
+	
+	<!-- 모든 도서 정보 출력 [재성] -->
+	<select id="findAll" resultType="bookVO">
+		select * from book
+	</select>
 
 </mapper>
