@@ -34,9 +34,24 @@ public class BookcartController {
 		int cust_no  =  (int) session.getAttribute("cust_no");
 		HashMap map=new HashMap();
 		map.put("cust_no", cust_no);
+		//반납완료도서
+		String return_ok = "Y";
+		if(request.getParameter("return_ok") != null) {
+			//return_ok = request.getParameter("return_ok");
+			map.put("return_ok", return_ok);
+
+		}
+		//연체도서
+		if(request.getParameter("return_date") != null) {
+			java.util.Calendar cal = java.util.Calendar.getInstance(); 
+	        java.sql.Date return_date = new java.sql.Date(cal.getTimeInMillis());		
+			map.put("return_date", return_date);
+
+		}
 		
 		model.addAttribute("b", dao.selectBycust_No(map));
 
-	}
+	}	
+	
 
 }

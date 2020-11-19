@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.BookDAO;
 import com.example.demo.dao.BookStoreDAO;
+import com.example.demo.dao.BorrowDAO;
 import com.example.demo.dao.FolderDAO;
 
 @Controller
@@ -28,12 +29,21 @@ public class DetailBookController {
 	@Autowired
 	private FolderDAO fdao;
 	
-	public void setFdao2(FolderDAO fdao) {
+	public void setFdao(FolderDAO fdao) {
 		this.fdao = fdao;
 	}
 
-
+	@Autowired
+	private BorrowDAO bdao;
 	
+	public void setBdao(BorrowDAO bdao) {
+		this.bdao = bdao;
+	}
+
+
+
+
+
 	@RequestMapping("/detailBook.do")
 	public void list(int b_no, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
@@ -51,10 +61,13 @@ public class DetailBookController {
 
 
 		}
-		
-		
-
+		//현재 재고 수량
+		int b_count = dao.calB_count(b_no);
+		//사용자가 대여한 수량
+		int b_count2 = bdao.calB_no(b_no);
+		int sumbook = b_count - b_count2;
 		model.addAttribute("b", dao.findByNo(b_no));
+		model.addAttribute("sumbook",sumbook);
 		model.addAttribute("query", request.getParameter("query"));
 		System.out.println(request.getParameter("query"));
 	}

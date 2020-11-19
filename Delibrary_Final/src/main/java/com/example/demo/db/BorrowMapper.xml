@@ -6,12 +6,12 @@
 
 	<insert id="insertBorrow" parameterType="borrowVO">
 		insert into borrow
-		values(#{BOR_NO},#{BOR_DATE},#{RETURN_DATE},#{RETURN_OK},#{CUST_NO},#{B_NO})
+		values(#{bor_no},#{bor_date},#{return_date},#{return_ok},#{cust_no},#{b_no})
 	</insert>
 	<!-- <delete id="deleteBorrow" parameterType="borrowVO"> delete borrow where 
 		BOR_NO=#{BOR_NO} </delete> -->
 	<select id="getNextNo" resultType="java.lang.Integer">
-		select nvl(max(BOR_NO),0)+1 from borrow
+		select nvl(max(bor_no),0)+1 from borrow
 	</select>
 
 	<!-- 
@@ -21,11 +21,26 @@
 	 -->
 	 <select id="selectBycust_No" resultType="borrowVO">
     SELECT * FROM borrow where cust_no = #{cust_no}
-    <where>
+    	
     	<if test = "return_ok!=null">
-    		return_ok = #{return_ok}  	
+    		AND return_ok = #{return_ok}  	
     	</if>
-    </where>
+    	
+ 	    <if test = "return_date!=null">
+    		AND return_date > sysdate and return_ok like 'N'	
+    	</if>   	 
   </select> 
+    <update id="updateBorrow">
+  	update borrow set bor_no=#{bor_no}, bor_date=#{bor_date}, return_date=#{return_date}, return_ok=#{return_ok}, cust_no=#{cust_no}, b_no=#{b_no}
+  </update>
+  <delete id="deleteBorrow">
+  	DELETE FROM BORROW WHERE bor_no=#{bor_no}
+  </delete>
+  	<!-- 사용자가 대여한 수량  -->
+    <select id="calB_no" resultType="java.lang.Integer">
+	select count(b_no) from book where b_no=#{bor_no}
+	</select>
+  
+  	
 </mapper>
 

@@ -412,10 +412,10 @@ $( function(){
                   <div class="bk-book bk-bookdefault">
                     <div class="bk-front">
                     <!-- style="background-image: url('http://interactivejoe.com/book-viewer/assets/images/bk_1-small.jpg') -->
-                      <div class="bk-cover" style="background-image: url('../img/${p.fname}'); width:100%; height:100%;"></div>
+                      <div class="bk-cover" style="background-image: url('${p.fname}'); width:100%; height:100%;"></div>
                     </div>
                     <div class="bk-back"></div>
-                    <div class="bk-left"  style="background-image: url('../img/${p.fname}');"></div>
+                    <div class="bk-left"  style="background-image: url('${p.fname}');"></div>
                   </div>
                 </div>
               </div>

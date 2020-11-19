@@ -2,72 +2,72 @@ package com.example.demo.vo;
 
 import java.sql.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 public class BorrowVO {
-	private int BOR_NO;
-	private Date BOR_DATE;
-	private Date RETURN_DATE;
-	private String RETURN_OK;
-	private int CUST_NO;
-	private int B_NO;
-	public int getBOR_NO() {
-		return BOR_NO;
+	private int bor_no;
+	@JsonFormat(pattern = "yyyy-MM-DD")
+	private Date bor_date;
+	@JsonFormat(pattern = "yyyy-MM-DD")
+	private Date return_date;
+	private String return_ok;
+	private int cust_no;
+	private int b_no;
+	
+	
+	public int getBor_no() {
+		return bor_no;
 	}
-	public void setBOR_NO(int bOR_NO) {
-		BOR_NO = bOR_NO;
+	public void setBor_no(int bor_no) {
+		this.bor_no = bor_no;
 	}
-	public Date getBOR_DATE() {
-		return BOR_DATE;
+	public Date getBor_date() {
+		return bor_date;
 	}
-	public void setBOR_DATE(Date bOR_DATE) {
-		BOR_DATE = bOR_DATE;
+	public void setBor_date(Date bor_date) {
+		this.bor_date = bor_date;
 	}
-	public Date getRETURN_DATE() {
-		return RETURN_DATE;
+	public Date getReturn_date() {
+		return return_date;
 	}
-	public void setRETURN_DATE(Date rETURN_DATE) {
-		RETURN_DATE = rETURN_DATE;
+	public void setReturn_date(Date return_date) {
+		this.return_date = return_date;
 	}
-	public String getRETURN_OK() {
-		return RETURN_OK;
+	public String getReturn_ok() {
+		return return_ok;
 	}
-	public void setRETURN_OK(String rETURN_OK) {
-		RETURN_OK = rETURN_OK;
+	public void setReturn_ok(String return_ok) {
+		this.return_ok = return_ok;
 	}
-	public int getCUST_NO() {
-		return CUST_NO;
+	public int getCust_no() {
+		return cust_no;
 	}
-	public void setCUST_NO(int cUST_NO) {
-		CUST_NO = cUST_NO;
+	public void setCust_no(int cust_no) {
+		this.cust_no = cust_no;
 	}
-	public int getB_NO() {
-		return B_NO;
+	public int getB_no() {
+		return b_no;
 	}
-	public void setB_NO(int b_NO) {
-		B_NO = b_NO;
+	public void setB_no(int b_no) {
+		this.b_no = b_no;
 	}
-	public BorrowVO(int bOR_NO, Date bOR_DATE, Date rETURN_DATE, String rETURN_OK, int cUST_NO, int b_NO) {
+	public BorrowVO(int bor_no, Date bor_date, Date return_date, String return_ok, int cust_no, int b_no) {
 		super();
-		BOR_NO = bOR_NO;
-		BOR_DATE = bOR_DATE;
-		RETURN_DATE = rETURN_DATE;
-		RETURN_OK = rETURN_OK;
-		CUST_NO = cUST_NO;
-		B_NO = b_NO;
+		this.bor_no = bor_no;
+		this.bor_date = bor_date;
+		this.return_date = return_date;
+		this.return_ok = return_ok;
+		this.cust_no = cust_no;
+		this.b_no = b_no;
 	}
 	public BorrowVO() {
 		super();
-	}
-	public BorrowVO(int bOR_NO, Date bOR_DATE, Date rETURN_DATE, String rETURN_OK, int cUST_NO) {
-		super();
-		BOR_NO = bOR_NO;
-		BOR_DATE = bOR_DATE;
-		RETURN_DATE = rETURN_DATE;
-		RETURN_OK = rETURN_OK;
-		CUST_NO = cUST_NO;
 	}
 	
 	

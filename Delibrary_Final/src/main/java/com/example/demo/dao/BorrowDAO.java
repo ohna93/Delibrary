@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.BookManager;
 import com.example.demo.db.BorrowManager;
+import com.example.demo.db.CustomerManager;
 import com.example.demo.vo.BookVO;
 import com.example.demo.vo.BorrowVO;
+import com.example.demo.vo.CustomerVO;
 
 @Repository
 public class BorrowDAO {
@@ -28,4 +30,18 @@ public class BorrowDAO {
 	}
 
 
+	public int update(BorrowVO b) {
+		// TODO Auto-generated method stub
+		return BorrowManager.update(b);
+	}
+	//
+
+
+	public int delete(int bor_no) {
+		// TODO Auto-generated method stub
+		return BorrowManager.delete(bor_no);
+	}
+	public int calB_no(int b_no) {
+		return BorrowManager.calB_no(b_no);
+	}
 }

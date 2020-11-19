@@ -24,11 +24,11 @@ public class DBManager {
 			inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		} catch (Exception e) {
-			System.out.println("static ¿¹¿Ü¹ß»ý: "+e.getMessage());
+			System.out.println("static ì˜¤ë¥˜: "+e.getMessage());
 		}
 	}
 	
-	// È¨È­¸é »ç¼­ÃßÃµµµ¼­ »Ì¾Æ¿À´Â ¸Þ¼Òµå
+	// È¨È­ï¿½ï¿½ ï¿½ç¼­ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ ï¿½Ì¾Æ¿ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 	public static List<BookVO> getStaffRecommend() {
 		List<BookVO> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
@@ -37,7 +37,7 @@ public class DBManager {
 		return list;
 	}
 	
-	// È¨È­¸é ½ÅÀÛµµ¼­ »Ì¾Æ¿À´Â ¸Þ¼Òµå
+	// È¨È­ï¿½ï¿½ ï¿½ï¿½ï¿½Ûµï¿½ï¿½ï¿½ ï¿½Ì¾Æ¿ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 	public static List<BookVO> getNewRecommend() {
 		List<BookVO> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
@@ -46,7 +46,7 @@ public class DBManager {
 		return list;
 	}
 	
-	// È¨È­¸é °Ô½Ã±Û »Ì¾Æ¿À´Â ¸Þ¼Òµå
+	// È¨È­ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½Ì¾Æ¿ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 	public static List<PostVO> getHomePost(int group) {
 		List<PostVO> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
@@ -55,7 +55,7 @@ public class DBManager {
 		return list;
 	}
 	
-	// ·Î±×ÀÎ ½Ã¿¡ È¸¿øÁ¤º¸°¡ ÀÖ´ÂÁö È®ÀÎÇÏ´Â ¸Þ¼Òµå
+	// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ã¿ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½
 	public static CustomerVO getCustInfo(CustomerVO custVO) {
 		CustomerVO vo = null;
 		SqlSession session = sqlSessionFactory.openSession();
@@ -63,7 +63,7 @@ public class DBManager {
 		return vo;
 	}
 	
-	// °Ô½ÃÆÇÀ¸·Î ÀÌµ¿
+	// ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	public static List<PostVO> getpostList(Map map) {
 		List<PostVO> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
@@ -71,7 +71,7 @@ public class DBManager {
 		return list;
 	}
 	
-	// ÆäÀÌÂ¡ Ã³¸®¸¦ À§ÇØ ¸ðµç °³½Ã¹° °³¼ö¸¦ ¹Þ¾Æ¿À´Â ¸Þ¼Òµå
+	// ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 	public static int getTotalCount(Map map) {
 		int re = -1;
 		SqlSession session = sqlSessionFactory.openSession();

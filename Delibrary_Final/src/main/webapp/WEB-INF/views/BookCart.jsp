@@ -30,16 +30,320 @@
 
   
   </style>
+  <style>
+  /*
+연 f8f9fa
+진 343a40
+*/
+
+@media all and (min-width: 992px) {
+  .navbar .nav-item .dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    margin-top: 0;
+  }
+  .navbar .dropdown-menu.fade-down {
+    top: 80%;
+    transform: rotateX(-75deg);
+    transform-origin: 0% 0%;
+  }
+  .navbar .dropdown-menu.fade-up {
+    top: 180%;
+  }
+  .navbar .nav-item:hover .dropdown-menu {
+    transition: 0.3s;
+    opacity: 1;
+    visibility: visible;
+    top: 100%;
+    transform: rotateX(0deg);
+  }
+}
+
+.sidebar {
+  border: 1px solid gainsboro;
+}
+.side-head {
+  background: url('../img/side-head.jpg');
+  padding: 40px;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.icons {
+  height: 15px;
+}
+
+.searchbar {
+  border-radius: 25px;
+  padding: 5px 25px;
+}
+
+#home-icons p {
+  font-size: 14px;
+}
+
+.btn {
+  border-radius: 25px;
+}
+
+.navbar .nav-link {
+  font-size: 14px;
+  text-transform: uppercase;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+.carousel-item {
+  height: 600px;
+}
+
+.carousel-image-1 {
+  /* background: url('../img/image1.jpg'); */
+  background-color: cadetblue;
+  background-size: cover;
+}
+
+.carousel-image-2 {
+  /* background: url('../img/image2.jpg'); */
+  background-color: darkgoldenrod;
+  background-size: cover;
+}
+
+.carousel-image-3 {
+  /* background: url('../img/image3.jpg'); */
+  background-color: darkseagreen;
+  background-size: cover;
+}
+
+#home-heading {
+  position: relative;
+  min-height: 250px;
+  /* background: url('../img/lights.jpg'); */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  text-align: center;
+  color: #fff;
+}
+
+.dark-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+#video-play {
+  position: relative;
+  min-height: 200px;
+  background: url('../img/media.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: 0 -300px;
+  text-align: center;
+  color: #fff;
+}
+
+#video-play a {
+  color: #fff;
+}
+
+#page-header {
+  height: 180px;
+  background: url('../img/image1.jpg');
+  background-position: 0 -360px;
+  background-attachment: fixed;
+  color: #fff;
+  border-bottom: 1px #eee solid;
+  padding-top: 20px;
+}
+
+.about-img {
+  margin-top: -50px;
+}
+
+#faq .card {
+  border: #444;
+}
+
+#faq a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#faq .card-body,
+#faq .card-header {
+  background: #333;
+}
+
+#main-footer {
+  background: #000;
+  color: #fff;
+  flex-shrink: none;
+}
+
+/*  ------------------------------------------- */
+/*    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      */
+/*    !!!!!!!  공통부분 추가 css 입니다  !!!!!!!      */
+/*    !!!!!!!      지우지 마세요       !!!!!!!      */
+/*    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      */
+/*  ------------------------------------------- */
+
+
+html, body{
+   height: 100%;
+}
+
+#page-content{
+   flex: 1 0 auto;
+}
+
+.sidebar {
+  border: 1px solid gainsboro;
+}
+.side-head {
+  background: url('../img/side-head.jpg');
+  padding: 40px;
+}
+.sidebar a{
+   color: #343a40;
+}
+
+.searchbar {
+  border-radius: 25px;
+  padding: 5px 25px;
+}
+
+.list-group .active{
+   background-color: #f8f9fa;
+   color: #343a40;
+   border-color: #d8d8d8;
+} 
+
+#tbody a{
+   color: #343a40;
+}
+  </style>
   
-  <script type="text/javascript"	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript"	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript"	src="../jquery-ui-1.12.1/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
+
+
+
+$(function(){
+	var updateborrow = function(){
+		
+		var data =$("form[name=test]").serialize() ;
+
+		
+		$.ajax({
+			url:"/updateborrow",
+			dataType:"Json",
+			type:"POST",
+			data:data,
+			success:function(data){
+				console.log(data);
+				}
+			});
+		}
+
+	var deleteborrow = function(){
+		
+		var bor_no = $("#bor_no").val();
+		alert(bor_no);
+		
+		var data ={"bor_no":bor_no};
+
+		
+		$.ajax({
+			url:"/deleteborrow",
+			dataType:"Json",
+			type:"POST",
+			data:data,
+			success:function(data){
+				console.log(data);
+				}
+			});
+		}
+/*	
+	$('#b').mouseleave(function() {
+	       $('#option').dialog({
+	   		modal: true,
+	   		buttons: {
+	   			"수정":function(){
+	 
+	   				updateborrow();
+	   				},
+	   			"삭제":function(){
+	   				deleteborrow();
+	   				
+	   				}}
+	              })
+	      
+	});
+*/
+
+   
+    $('.card-body').click(function(){
+ 		
+ 
+        
+        alert("관리자만 접근가능" );
+       	$('#option').dialog({
+     		modal:true,
+     		buttons :{
+     			"수정":function(){
+     				updateborrow();
+     				},
+     			"삭제":function(){
+     				deleteborrow();
+     				
+     				}
+
+     			}
+
+     		})
+         });
+         
+	///여가까지가  card-body.click
+    	
+});
+	
 </script>
   
 </head>
+<body class="d-flex flex-column">
 
-<body>
+			<!-- 수정 삭제 -->		
+						
+										
+  <div id="page-content">
+    나브바, 헤더 등등 생략
+  </div>
+  <footer id="main-footer" class="text-center p-4">
+    생략...
+  </footer>
+</body>	
+											<div id="option" title="update and delete" style='display:none'>
+											<form name="test" id ="test">
+											대여일 : <input type="date" name="bor_date" id="bor_date"><br>
+											반납일 : <input type="date" name="return_date" id="return_date"><br>
+											반납여부 : <input type="text" name="return_ok" id="return_ok"><br>
+											대여번호 : <input type="text" name="bor_no" id="bor_no"><br>
+											책번호 : <input class = "number"type="text" name="b_no" id ="b_no" ><br>
+													<input type ="hidden"name="cust_no"id="cust_no" value=3>
+											</form>								
+										</div>
+	<div id ="update" title="update" style='display:none'>
+		
+	</div>
 	<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark p-0">
 		<div class="container">
 			<a href="home.html" class="navbar-brand"><img alt="딜리브러리" src="img/logo_bg_dark.jpg" height="20" class="pl-3 mb-1"></a>
@@ -148,20 +452,23 @@
 			  <div class="p-4">
 				  <!-- CARD WITH NAV -->
 					<div class="card-header">
+										
+
+										
 							<ul class="nav nav-tabs card-header-tabs">
 							
 									<li class="nav-item">
 									
-											<a class="nav-link active" href="#">대출현황</a>
+											<a class="nav-link active" href="BookCart.do">대출현황</a>
 									</li>
 									<li class="nav-item">
 											<a class="nav-link" href="#">예약현황</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="#">연체도서</a>
+										<a class="nav-link" href="BookCart.do?return_date=sysdate">연체도서</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="#">대출/반납이력</a>
+										<a class="nav-link" href='BookCart.do?return_ok=Y'>대출/반납이력</a>
 									</li>
 							</ul>
 					</div>
@@ -177,16 +484,16 @@
 									<a href="#"><h4 class="card-title"></h4></a>
 									<img class="card-img-top img-fluid" src="img/book3.png" alt="">
 									<p class="card-text">
-										대여일 :  ${b.BOR_DATE } <br>
-										
-										<small class="text-muted">반납일 : ${b.RETURN_DATE } </small><br>
-											<small class="text-muted">반납여부 : ${b.RETURN_OK }</small>
-									</p>
-									
-							</div>
-						</div>
-						
-						
+										대여일 :  ${b.bor_date }<br>		
+										<small class="text-muted">반납일 : ${b.return_date } </small><br>
+											<small class="text-muted">반납여부 : ${b.return_ok }</small>
+										 	<!-- <small class="text-muted">대여번호 : ${b.bor_no } </small><br>
+										 	 --> 
+											<small class="text-muted">책번호 : ${b.b_no } </small><br>	
+												
+									</p>			
+										</div>
+										</div>	
 						</c:forEach>
 						
 						

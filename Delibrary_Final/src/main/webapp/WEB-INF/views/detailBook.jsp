@@ -22,9 +22,234 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	
   <title>도서정보 - 딜리브러리</title>
+	<style>
+	#main-footer {
+  background: #000;
+  color: #fff;
+  flex-shrink: none;
+}
+
+/*  ------------------------------------------ */
+/*          !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!          */
+/*          !!!!!!!   공통부분 추가 css 입니다!!!!!!!          */
+/*          !!!!!!!      지우지 마세요           !!!!!!!!          */
+/*          !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!          */
+/*  ------------------------------------------ */
+
+html, body{
+   height: 100%;
+}
+
+#page-content{
+   flex: 1 0 auto;
+}
+
+.sidebar {
+  border...
+  
+  
+  /*
+연 f8f9fa
+진 343a40
+*/
+
+@media all and (min-width: 992px) {
+  .navbar .nav-item .dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    margin-top: 0;
+  }
+  .navbar .dropdown-menu.fade-down {
+    top: 80%;
+    transform: rotateX(-75deg);
+    transform-origin: 0% 0%;
+  }
+  .navbar .dropdown-menu.fade-up {
+    top: 180%;
+  }
+  .navbar .nav-item:hover .dropdown-menu {
+    transition: 0.3s;
+    opacity: 1;
+    visibility: visible;
+    top: 100%;
+    transform: rotateX(0deg);
+  }
+}
+
+.sidebar {
+  border: 1px solid gainsboro;
+}
+.side-head {
+  background: url('../img/side-head.jpg');
+  padding: 40px;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.icons {
+  height: 15px;
+}
+
+.searchbar {
+  border-radius: 25px;
+  padding: 5px 25px;
+}
+
+#home-icons p {
+  font-size: 14px;
+}
+
+.btn {
+  border-radius: 25px;
+}
+
+.navbar .nav-link {
+  font-size: 14px;
+  text-transform: uppercase;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+.carousel-item {
+  height: 600px;
+}
+
+.carousel-image-1 {
+  /* background: url('../img/image1.jpg'); */
+  background-color: cadetblue;
+  background-size: cover;
+}
+
+.carousel-image-2 {
+  /* background: url('../img/image2.jpg'); */
+  background-color: darkgoldenrod;
+  background-size: cover;
+}
+
+.carousel-image-3 {
+  /* background: url('../img/image3.jpg'); */
+  background-color: darkseagreen;
+  background-size: cover;
+}
+
+#home-heading {
+  position: relative;
+  min-height: 250px;
+  /* background: url('../img/lights.jpg'); */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  text-align: center;
+  color: #fff;
+}
+
+.dark-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+#video-play {
+  position: relative;
+  min-height: 200px;
+  background: url('../img/media.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: 0 -300px;
+  text-align: center;
+  color: #fff;
+}
+
+#video-play a {
+  color: #fff;
+}
+
+#page-header {
+  height: 180px;
+  background: url('../img/image1.jpg');
+  background-position: 0 -360px;
+  background-attachment: fixed;
+  color: #fff;
+  border-bottom: 1px #eee solid;
+  padding-top: 20px;
+}
+
+.about-img {
+  margin-top: -50px;
+}
+
+#faq .card {
+  border: #444;
+}
+
+#faq a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#faq .card-body,
+#faq .card-header {
+  background: #333;
+}
+
+#main-footer {
+  background: #000;
+  color: #fff;
+  flex-shrink: none;
+}
+
+/*  ------------------------------------------- */
+/*    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      */
+/*    !!!!!!!  공통부분 추가 css 입니다  !!!!!!!      */
+/*    !!!!!!!      지우지 마세요       !!!!!!!      */
+/*    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      */
+/*  ------------------------------------------- */
+
+
+html, body{
+   height: 100%;
+}
+
+#page-content{
+   flex: 1 0 auto;
+}
+
+.sidebar {
+  border: 1px solid gainsboro;
+}
+.side-head {
+  background: url('../img/side-head.jpg');
+  padding: 40px;
+}
+.sidebar a{
+   color: #343a40;
+}
+
+.searchbar {
+  border-radius: 25px;
+  padding: 5px 25px;
+}
+
+.list-group .active{
+   background-color: #f8f9fa;
+   color: #343a40;
+   border-color: #d8d8d8;
+} 
+
+#tbody a{
+   color: #343a40;
+}
+	
+	</style>
 	
   <style>
-    /* 마우스 갖다대면 효과*/
+    /* 용택 - 마우스 갖다대면 효과*/
   	.reverse {
 	color: white;
 	background-color: #58ACFA;
@@ -76,7 +301,7 @@
 
 
   <style>
-    /*
+    /* 아코디안
 Add a fold-out icon to any element, by adding a data-attribute:
 `data-css-icon` with one of the following values:
 - cross
@@ -524,11 +749,13 @@ $(function(){
 							//let RETURN_DATE = BOR_DATE.setDate(BOR_DATE.getDate()+15);
 							//alert(RETURN_DATE);
 							var count = eval(${b.b_count });
+							var count2 = eval(${sumbook });
+							//alert(count2);
 							 var b_no = eval(${b.b_no });
 							 var cust_no = eval(${cust_no });
 							 alert(cust_no);
 							 var data= {"BOR_DATE" : BOR_DATE, "cust_no":cust_no, }
-							if(count <1){
+							if(count2 =0){
 								alert("대여가능한 도서가 없습니다")
 							}else{
 								
@@ -589,7 +816,14 @@ $(function(){
 });
   </script>
   </head>
-
+<body class="d-flex flex-column">
+  <div id="page-content">
+    나브바, 헤더 등등 생략
+  </div>
+  <footer id="main-footer" class="text-center p-4">
+    생략...
+  </footer>
+</body>
 <body>
 	
 	<input id="query" value="${query}" type="hidden">
@@ -765,10 +999,10 @@ $(function(){
              <!-- 도서대여 클릭시 첫화면 -->
              
 			<div id="dialog-borrow" title="도서대여" style='display: none'>
-			<img width="50px" height="60px" alt="book image"
-					src="img/${b.b_image }"><span
+			<img width="75px" height="60px" alt="book image"
+					src="img/borrow.png"><span
 					style='color: green; font-size: 15pt;'> 도서 재고 현재</span> <span
-					style='font-size: 20pt;'>${b.b_count } 개</span> <span><b><u>대출하시겠습니까??</u></b></span>
+					style='font-size: 20pt;'>${sumbook } 개</span> <span><b><u>대출하시겠습니까??</u></b></span>
 			</div>
 			<!-- 도서대여 클릭시 두번째 화면 -->
 			<div id="dialog-borrow-date" title="대출일을 선택해주세요"
@@ -794,45 +1028,7 @@ $(function(){
 					</c:forEach>						
 				</table>
 				
-			</div>
-                
-             
-                <!--
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>&nbsp;</th>
-                    <th>도서명</th>
-                    <th>대출일자</th>
-                    <th>반납예정일</th>
-                    <th>연체일수</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td><a href="#">도서제목1</a></td>
-                    <td>00/00/00</td>
-                    <td>00/00/00</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td><a href="#">도서제목2</a></td>
-                    <td>00/00/00</td>
-                    <td>00/00/00</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td><a href="#">도서제목3</a></td>
-                    <td>00/00/00</td>
-                    <td>00/00/00</td>
-                    <td>0</td>
-                  </tr>
-                </tbody>
-              </table>
-              -->
+			</div>      
             </div>
           </div>
         </div>

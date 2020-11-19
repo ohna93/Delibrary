@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.BookVO;
 import com.example.demo.vo.BorrowVO;
+import com.example.demo.vo.CustomerVO;
 
 public class BorrowManager {
 	
@@ -55,6 +56,35 @@ public static SqlSessionFactory sqlSessionFactory;
 		list=session.selectList("borrow.selectBycust_No", map);
 		session.close();
 		return list;
+	}
+
+
+	public static int update(BorrowVO b) {
+		// TODO Auto-generated method stub
+		int re = -1;
+		SqlSession session
+		= sqlSessionFactory.openSession(true);
+		re= session.update("borrow.updateBorrow", b);
+		session.close();
+		return re;
+		
+	}
+
+
+	public static int delete(int bor_no) {
+		int re = 1;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		session.delete("borrow.deleteBorrow",bor_no);
+		session.close();
+		return re; 
+	}
+	
+	public static int calB_no(int b_no) {
+		int n = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+		n = session.selectOne("borrow.calB_no",b_no);
+		session.close();
+		return n;
 	}
 	
 	
