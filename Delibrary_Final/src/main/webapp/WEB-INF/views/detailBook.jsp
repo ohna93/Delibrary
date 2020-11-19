@@ -737,7 +737,7 @@ $(function(){
 		width:340,
 		buttons: {
 			
-			"대출하고싶어요": function() {
+			"대여": function() {
 				//대여 날짜를 선택
 				$('#dialog-borrow-date').dialog({
 					modal: true, 
@@ -755,8 +755,8 @@ $(function(){
 							 var cust_no = eval(${cust_no });
 							 alert(cust_no);
 							 var data= {"BOR_DATE" : BOR_DATE, "cust_no":cust_no, }
-							if(count2 =0){
-								alert("대여가능한 도서가 없습니다")
+							if(count2 >=5){
+								alert("대여가능 도서권수를 초과하였습니다")
 							}else{
 								
 								var b_no =eval(${b.b_no });
@@ -782,7 +782,7 @@ $(function(){
 							}				
 					}										
 				});	$( this ).dialog( "close" );				
-		},"싫어요": function() { alert("취소하셨습니다.") }
+		},"취소": function() { alert("취소하셨습니다.") }
 				 },					
 	});						
 	});
@@ -999,10 +999,10 @@ $(function(){
              <!-- 도서대여 클릭시 첫화면 -->
              
 			<div id="dialog-borrow" title="도서대여" style='display: none'>
-			<img width="75px" height="60px" alt="book image"
+			<img width="85px" height="70px" alt="book image"
 					src="img/borrow.png"><span
-					style='color: green; font-size: 15pt;'> 도서 재고 현재</span> <span
-					style='font-size: 20pt;'>${sumbook } 개</span> <span><b><u>대출하시겠습니까??</u></b></span>
+					style='color: green; font-size: 15pt;'> 대출하시겠습니까? </span> <!--  <span
+					style='font-size: 20pt;'>${sumbook } 개</span> --><span><b><u></u></b></span>
 			</div>
 			<!-- 도서대여 클릭시 두번째 화면 -->
 			<div id="dialog-borrow-date" title="대출일을 선택해주세요"

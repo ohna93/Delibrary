@@ -79,10 +79,10 @@ public static SqlSessionFactory sqlSessionFactory;
 		return re; 
 	}
 	
-	public static int calB_no(int b_no) {
+	public static int calB_no(int cust_no) {
 		int n = -1;
 		SqlSession session = sqlSessionFactory.openSession();
-		n = session.selectOne("borrow.calB_no",b_no);
+		n = session.selectOne("borrow.calB_no",cust_no);
 		session.close();
 		return n;
 	}

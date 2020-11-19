@@ -57,7 +57,7 @@ public class InsertPostController {
 	public String insertPost(HttpSession session, HttpServletRequest request) {
 		int group=50;
 		int fol_no=Integer.parseInt(request.getParameter("FOL_NO"));
-		System.out.println(" 내용 가지나??"+fol_no);
+		//System.out.println(" 내용 가지나??"+fol_no);
 
 		int p_id=pdao.getNextId(group);
 		int p_no = pdao.getNextNo(group);

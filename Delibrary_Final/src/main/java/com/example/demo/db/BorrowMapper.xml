@@ -38,7 +38,7 @@
   </delete>
   	<!-- 사용자가 대여한 수량  -->
     <select id="calB_no" resultType="java.lang.Integer">
-	select count(b_no) from book where b_no=#{bor_no}
+	select count(b_no) from BORROW where cust_no=#{cust_no}
 	</select>
   
   	

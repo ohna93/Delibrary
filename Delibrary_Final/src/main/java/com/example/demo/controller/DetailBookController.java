@@ -62,12 +62,12 @@ public class DetailBookController {
 
 		}
 		//현재 재고 수량
-		int b_count = dao.calB_count(b_no);
+		//int b_count = dao.calB_count(b_no);
 		//사용자가 대여한 수량
 		int b_count2 = bdao.calB_no(b_no);
-		int sumbook = b_count - b_count2;
+		//int sumbook = b_count - b_count2;
 		model.addAttribute("b", dao.findByNo(b_no));
-		model.addAttribute("sumbook",sumbook);
+		model.addAttribute("sumbook",b_count2);
 		model.addAttribute("query", request.getParameter("query"));
 		System.out.println(request.getParameter("query"));
 	}

@@ -41,7 +41,7 @@ public class BorrowDAO {
 		// TODO Auto-generated method stub
 		return BorrowManager.delete(bor_no);
 	}
-	public int calB_no(int b_no) {
-		return BorrowManager.calB_no(b_no);
+	public int calB_no(int cust_no) {
+		return BorrowManager.calB_no(cust_no);
 	}
 }

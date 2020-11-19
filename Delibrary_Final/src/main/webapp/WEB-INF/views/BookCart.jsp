@@ -289,8 +289,42 @@ $(function(){
 	      
 	});
 */
+	//대출현황 클릭 하얀색 뛰어나오는거.
+	$('#1').click(function() {
+	$(this).addClass("nav-link active");
+	$('#2').removeClass("active");
+	$('#3').removeClass("active");
+	$('#4').removeClass("active");
+	
+		});
+		 
+	$('#2').click(function() {
+	$(this).addClass("nav-link active");
+	$('#1').removeClass("active");
+	$('#3').removeClass("active");
+	$('#4').removeClass("active");
+		}); 
 
-   
+	$('#3').click(function() {
+		$(this).addClass("nav-link active");
+		$('#1').removeClass("active");
+		$('#2').removeClass("active");
+		$('#4').removeClass("active");
+			});
+	
+	$('#4').click(function() {
+		$(this).addClass("nav-link active");
+		$('#1').removeClass("active");
+		$('#2').removeClass("active");
+		$('#3').removeClass("active");
+			});
+
+	$('#dd').click(function() {
+		var idVal=$("#dd").val();
+		
+		alert(idVal);
+			});
+	/*
     $('.card-body').click(function(){
  		
  
@@ -311,7 +345,7 @@ $(function(){
 
      		})
          });
-         
+      */   
 	///여가까지가  card-body.click
     	
 });
@@ -327,9 +361,7 @@ $(function(){
   <div id="page-content">
     나브바, 헤더 등등 생략
   </div>
-  <footer id="main-footer" class="text-center p-4">
-    생략...
-  </footer>
+ 
 </body>	
 											<div id="option" title="update and delete" style='display:none'>
 											<form name="test" id ="test">
@@ -440,7 +472,7 @@ $(function(){
 					</div>
 					<ul class="list-group list-group-flush mb-5">
 						<a href="#"><li class="list-group-item active">북카트</li></a>
-						<a href="#"><li class="list-group-item">대출현황/이력</li></a>
+						<a href="BookCart.do"><li class="list-group-item">대출현황/이력</li></a>
 						<a href="#"><li class="list-group-item">나의도서정보</li></a>						
 						<a href="#"><li class="list-group-item">개인정보수정</li></a>
 					</ul>
@@ -459,16 +491,16 @@ $(function(){
 							
 									<li class="nav-item">
 									
-											<a class="nav-link active" href="BookCart.do">대출현황</a>
+									<a class="nav-link active" id = "1" href="BookCart.do">대출현황</a>
+									</li>
+									<li class="nav-item" >
+											<a class="nav-link" id ="2" href="#">예약현황</a>
 									</li>
 									<li class="nav-item">
-											<a class="nav-link" href="#">예약현황</a>
+										<a class="nav-link" id ="3" href="BookCart.do?return_date=sysdate">연체도서</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="BookCart.do?return_date=sysdate">연체도서</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href='BookCart.do?return_ok=Y'>대출/반납이력</a>
+										<a class="nav-link" id ="4" href='BookCart.do?return_ok=Y'>대출/반납이력</a>
 									</li>
 							</ul>
 					</div>
@@ -490,6 +522,7 @@ $(function(){
 										 	<!-- <small class="text-muted">대여번호 : ${b.bor_no } </small><br>
 										 	 --> 
 											<small class="text-muted">책번호 : ${b.b_no } </small><br>	
+											<input type = "text" value="${b.b_no }" id="dd">
 												
 									</p>			
 										</div>
@@ -509,7 +542,9 @@ $(function(){
       </div>
     </div>
   </footer>
-
+ <footer id="main-footer" class="text-center p-4">
+    생략...
+  </footer>
 
   <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
