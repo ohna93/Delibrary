@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" />
 <link rel="stylesheet" href="css/style.css">
-
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"crossorigin="anonymous"></script>
@@ -74,25 +74,28 @@
 					</li>
 				</ul>
 				<ul id="app" class="navbar-nav ml-auto">
-					<c:if test="${cust_no == null}">
-						<li class="nav-item" v-bind:title="login">
-							<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a>
-						</li>
-						<li class="nav-item" v-bind:title="signup">
-							<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a>
-						</li>
-					</c:if>
-					<c:if test="${cust_no != null}">
-						<li class="nav-item" v-bind:title="logout">
-							<a href="logout.do" class="nav-link"><i class="fas fa-sign-out-alt"></i></a>
-						</li>
-					</c:if>
+					<li class="nav-item" v-bind:title="login">
+						<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a><p class="sr-only">로그인</p>
+					</li>
+					<li class="nav-item" v-bind:title="signup">
+						<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a><p class="sr-only">회원가입</p>
+					</li>
 					<li class="nav-item" v-bind:title="bookcart">
-						<a href="sitemap.html" class="nav-link"><i class="fas fa-book"></i></a>
+						<a href="#" class="nav-link"><i class="fas fa-book"></i></a><p class="sr-only">북카트</p>
 					</li>
 					<li class="nav-item" v-bind:title="sitemap">
-						<a href="siteMap.do" class="nav-link"><i class="fas fa-map"></i></a>
+						<a href="siteMap.do" class="nav-link"><i class="far fa-map"></i></a><p class="sr-only">사이트맵</p>
 					</li>
+					<script>
+						var app = new Vue({
+							el: '#app',	
+							data: {
+								login: '로그인',
+								signup: '회원가입',
+								bookcart: '북카트',
+								sitemap: '사이트맵',
+							}});
+					</script>
 				</ul>
 			</div>
 		</div>

@@ -162,7 +162,7 @@ html, body{
   padding: 40px;
 }
 .sidebar a{
-	color: #343a40;
+   color: #343a40;
 }
 
 .searchbar {
@@ -171,9 +171,9 @@ html, body{
 }
 
 .list-group .active{
-	background-color: #f8f9fa;
-	color: #343a40;
-	border-color: #d8d8d8;
+   background-color: #f8f9fa;
+   color: #343a40;
+   border-color: #d8d8d8;
 } 
 
 .btn {

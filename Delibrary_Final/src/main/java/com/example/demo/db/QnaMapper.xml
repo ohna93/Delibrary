@@ -6,6 +6,10 @@
     <!-- 전체 게시글수 -->
     <select id="selectCount" resultType="java.lang.Integer">
    		select count(*) from post where p_no like '40%'
+   		<if test="search != null and search != '' and option != null and option != ''">
+ 			and ${option} like '%'||#{search}||'%'
+ 		</if>
+ 		order by p_id desc
     </select>
     
 	<!-- 전체 게시글 목록 + 검색기능 -->
@@ -49,6 +53,9 @@
 	<!-- 게시글 삭제 -->
 	<delete id="delete">
 		delete post where p_id=#{p_id} and cust_no=#{cust_no}
+		<if test="cust_no=1">
+			delete post where p_id=#{p_id}
+		</if>
 	</delete>
 
 	
