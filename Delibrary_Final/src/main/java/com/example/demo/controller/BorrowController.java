@@ -42,13 +42,15 @@ public class BorrowController {
 			produces = "application/json;charset=utf8")
 	@ResponseBody
 	public String insertBorrow(HttpSession session, HttpServletRequest request)  {
-		
+		session = request.getSession(true);
+
 		int cust_no = Integer.parseInt(request.getParameter("cust_no"));
 		int b_no = bookdao.getNextNo2();
 		String String_BOR_DATE = request.getParameter("BOR_DATE");
 		java.sql.Date BOR_DATE = java.sql.Date.valueOf(String_BOR_DATE);
 		Calendar cal = Calendar.getInstance();
 		System.out.println(String_BOR_DATE);
+		// 포멧 형식 맞추기
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			cal.setTime(sdf.parse(String_BOR_DATE));
@@ -69,7 +71,7 @@ public class BorrowController {
 		//현재날짜꺼내기.
        // java.util.Calendar cal = java.util.Calendar.getInstance();      
         //java.util.Calendar cal2 = java.util.Calendar.getInstance();
-		//util.date �옄諛� �떆媛� �뜑�븯湲�
+		//util.date 
         //cal2.add(Calendar.DATE,15);
 		//return_date.add(Calendar.DATE,15);
 
@@ -85,7 +87,7 @@ public class BorrowController {
 		//System.out.println("ddd"+re2);
 
 		int re = dao.insertBorrow(b);
-		//梨낆옱怨좉컧�냼
+		//???
 		Gson gson = new Gson();
 		return gson.toJson(new Message(re+""));
 	}

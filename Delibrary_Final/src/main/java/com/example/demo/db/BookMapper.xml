@@ -32,22 +32,13 @@
 		select nvl(max(b_no),0) from
 		book
 	</select>
-	<!-- 내서재 목록보기 출력 삭제예정 잘못만듬-->
-	<select id="MyLibrary_list" resultType="bookVO" >
-		select
-		distinct
-		a.p_title, a.p_no,a.p_content,
-		d.b_image, d.b_detail, d.b_writer, d.b_publisher, d.b_title
-
-		from post a, customer b, borrow c, book d, folder e
-		where a.cust_no = b.cust_no
-		and b.cust_no = c.cust_no
-		and c.b_no=d.b_no
-		and a.fol_no =#{fol_no}
-		and b.cust_no = #{cust_no}
-		order by 1
+	
+	<!-- 도서재고 수량  -->
+    <select id="calB_count" resultType="java.lang.Integer">
+	select b_count from book where b_no=#{bor_no}
 	</select>
 	
+
 	<!-- 모든 도서 정보 출력 [재성] -->
 	<select id="findAll" resultType="bookVO">
 		select * from book

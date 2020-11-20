@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
@@ -8,14 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.Message;
 import com.example.demo.dao.BookDAO;
+import com.example.demo.dao.BorrowDAO;
 import com.example.demo.dao.PostDAO;
 import com.example.demo.vo.BookVO;
+import com.example.demo.vo.BorrowVO;
 import com.example.demo.vo.PostVO;
 import com.google.gson.Gson;
 
@@ -36,8 +43,13 @@ public class InsertPostController {
 	public void setBdao(BookDAO bdao) {
 		this.bdao = bdao;
 	}
+	@Autowired
+	private BorrowDAO bbdao;
+	
 
-
+	public void setBbdao(BorrowDAO bbdao) {
+		this.bbdao = bbdao;
+	}
 
 	@RequestMapping(value = "/insertPost", 
 			produces = "application/json;charset=utf8")
@@ -45,14 +57,14 @@ public class InsertPostController {
 	public String insertPost(HttpSession session, HttpServletRequest request) {
 		int group=50;
 		int fol_no=Integer.parseInt(request.getParameter("FOL_NO"));
-		
+		//System.out.println(" 내용 가지나??"+fol_no);
+
 		int p_id=pdao.getNextId(group);
 		int p_no = pdao.getNextNo(group);
 		
 		String fname = request.getParameter("fname");
 		String p_title = "내서재의"+fol_no+"글";  
 		String p_writer="알수없음";
-		System.out.println(" 내용 가지나??"+fname);
         int p_hit = 0;
 		String p_content = "내용을 입력해주세요";
 		int cust_no = Integer.parseInt(request.getParameter("cust_no"));
@@ -132,14 +144,42 @@ public class InsertPostController {
 		Gson gson = new Gson();
 		return gson.toJson(new Message(re+""));
 	}
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		binder.registerCustomEditor(java.util.Date.class, new CustomDateEditor(dateFormat, false));
+	}
 	
+	//ajax -borrow 수정
+	@RequestMapping(value = "/updateborrow", 
+			produces = "application/json;charset=utf8")
+	@ResponseBody 
+	public String updateDept(BorrowVO b, HttpSession session, HttpServletRequest request) {
+		session = request.getSession(true);
+		int bor_no = Integer.parseInt(request.getParameter("bor_no"));
+		System.out.println("수신된 데이터2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+ bor_no);
+		System.out.println("수신된 데이터"+ b);
+		
+		int re =bbdao.update(b);		
+		Gson gson = new Gson();
+		return gson.toJson(new Message(re+""));
+		//그성공여부를 제이슨으로 반환하고 싶다 인트-->스트링 변환
+	}
 	
+	@RequestMapping(value = "/deleteborrow", 
+			produces = "application/json;charset=utf8")
+	@ResponseBody
+	public String deleteDept(int bor_no) {
+		System.out.println("수신된 데이터:"+bor_no);
+		int re = bbdao.delete(bor_no);		
+		Gson gson = new Gson();
+		return gson.toJson(new Message(re+""));
+	}
+
+
 	
-	
-	
-	
-	
-	
+
+
 	
 	
 	
@@ -189,6 +229,38 @@ public class InsertPostController {
 		//System.out.println("?��?��?�� ?��?��?��:"+cust_no);	
 		return gson.toJson(dao.findByCust_No(cust_no));
 	}
+	*/
+	
+	
+
+	/*int cust_no = Integer.parseInt(request.getParameter("cust_no"));
+	int cust_no = 1;
+
+	int b_no = Integer.parseInt(request.getParameter("b_no"));
+
+	int bor_no = Integer.parseInt(request.getParameter("bor_no"));
+	String return_ok = request.getParameter("return_ok");
+	
+	String String_return_date = request.getParameter("return_date");
+
+	System.out.println("값전달@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" +String_return_date);
+
+	String String_BOR_DATE = request.getParameter("bor_date");
+	System.out.println("값전달@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" +String_BOR_DATE);
+
+	java.sql.Date BOR_DATE = java.sql.Date.valueOf(String_BOR_DATE);
+
+	
+
+	java.sql.Date return_date = java.sql.Date.valueOf(String_return_date);
+
+	BorrowVO b = new BorrowVO();
+	b.setCust_no(cust_no);
+	b.setB_no(b_no);
+	b.setBor_date(BOR_DATE);
+	b.setReturn_date(return_date);
+	b.setReturn_ok(return_ok);
+	b.setBor_no(bor_no);
 	*/
 
 }

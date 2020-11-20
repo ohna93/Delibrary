@@ -29,6 +29,10 @@ public class BookDAO {
 	public int getNextNo() {
 		return BookManager.getNextNo();
 	}
+	 //대여시 post 번호삽입
+	public int calB_count(int b_no) {
+		return BookManager.calB_count(b_no);
+	}
 	//대여시 대여 책번호 삽입
 	public int getNextNo2() {
 		return BookManager.getNextNo2();

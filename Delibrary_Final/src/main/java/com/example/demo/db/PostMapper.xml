@@ -74,18 +74,3 @@
 		select * from post
 	</select>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
