@@ -26,7 +26,7 @@ public static SqlSessionFactory sqlSessionFactory;
 		sqlSessionFactory =
 		  new SqlSessionFactoryBuilder().build(inputStream);
 		}catch (Exception e) {
-			System.out.println("ì˜ˆì™¸ë°œìƒ:"+e.getMessage());
+			System.out.println("?˜ˆ?™¸ë°œìƒ:"+e.getMessage());
 		}
 	}
 	
