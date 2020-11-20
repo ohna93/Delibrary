@@ -230,12 +230,12 @@
 			                			<div class="text-right">
 			                				<c:if test="${not empty cust_no }">
 			                					<c:if test="${r.cust_no==cust_no }">
-																	<button class="btn btn-outline-success btn-sm table-align-right block-inline" id="btnUpdateReply" re_no="${r.re_no}" cust_no="${post.cust_no }"><i class="fas fa-edit"></i></button>
-						                			<button class="btn btn-outline-danger btn-sm table-align-right block-inline" id="btnDeleteReply" re_no="${r.re_no}" cust_no="${r.cust_no }"><i class="far fa-trash-alt"></i></button>
+													<button class="btn btn-outline-success btn-sm table-align-right block-inline btnUpdateReply" id="btnUpdateReply" re_no="${r.re_no}" cust_no="${post.cust_no }"><i class="fas fa-edit"></i></button>
+						                			<button class="btn btn-outline-danger btn-sm table-align-right block-inline btnDeleteReply" id="btnDeleteReply" re_no="${r.re_no}" cust_no="${r.cust_no }"><i class="far fa-trash-alt"></i></button>
 			                					</c:if>
 			                				</c:if>
 			                			</div>
-													</td>
+									</td>
 			                	</tr>
 			                	<tr>
 			                		<td colspan="2">${r.re_content }</td>
@@ -343,7 +343,7 @@
 			});
 
 			//댓글 삭제 btnDeleteReply
-			$("#btnDeleteReply").click(function(){
+			$(".btnDeleteReply").click(function(){
 				const re_no=this.getAttribute("re_no");
 				const cust_no=this.getAttribute("cust_no");
 
