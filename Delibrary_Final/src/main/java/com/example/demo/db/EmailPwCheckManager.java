@@ -31,6 +31,27 @@ public static SqlSessionFactory sqlSessionFactory;
 		b = session.selectOne("emailPwCheck.findEmail", map);
 		return b.getEmail();
 	}
+		
+	//로그인: 비번 바꿔주는 링크 보내주는 메일
+	public static String sendPwEmail(HashMap map) {
+		SqlSession session = sqlSessionFactory.openSession();
+		CustomerVO b = null;
+		b = session.selectOne("emailPwCheck.sendPwEmail", map);
+		int re = -1;
+		if(b != null) {
+			re = 2;
+		}
+		String result = re + "";
+		return result;
+	}
+	
+	//로그인:메일로 보낸 페이지 링크에서 비밀번호 변경
+	public static int updatePw(HashMap map) {
+		int re = -1;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		re = session.update("emailPwCheck.updatePw", map);
+		return re; 
+	}
 	
 	//회원가입: 이메일 중복체크
 	public static String checkEmail(String email) {
@@ -44,6 +65,5 @@ public static SqlSessionFactory sqlSessionFactory;
 		String result = re + "";
 		return result;
 	}
-
 	
 }

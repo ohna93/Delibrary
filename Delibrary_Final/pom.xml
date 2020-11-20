@@ -125,12 +125,21 @@
       <dependency>
          <groupId>com.google.code.gson</groupId>
          <artifactId>gson</artifactId>
-
       </dependency>
-	
-      
-   </dependencies>
-
+    
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>5.2.5.RELEASE</version>
+		</dependency>
+		<!-- Java Mail API -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+	</dependencies>
+		
 	<build>
 		<plugins>
 			<plugin>

@@ -131,11 +131,11 @@
     transform: translate3d(0, -40%, 0); } }
 
 textarea{
-	border: 1px solid #e6e6e6;
+   border: 1px solid #e6e6e6;
 }
 
 *, ::after, ::before{
-	z-index: 1;
+   z-index: 1;
 }
 /*
  *  Imports
@@ -144,11 +144,11 @@ textarea{
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700);
 @import url("https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css");
 .bk-cover {
-	background-size: 100%;
+   background-size: 100%;
 }
 .bk-left {
-	background-position: right center;
-	background-size: 100000%;
+   background-position: right center;
+   background-size: 100000%;
 }
 /*
  *  Button
@@ -306,8 +306,8 @@ a.button {
 }
 
 .book-item {
-	padding: 3% 10% 3% 15%;
-	list-style-type: none; }
+   padding: 3% 10% 3% 15%;
+   list-style-type: none; }
   .book-item:after {
     content: '';
     top: 0;
@@ -340,9 +340,9 @@ a.button {
       box-shadow: 0 0 0 0 transparent;
       transition: all 250ms ease-out; }
   .book-item .item-details {
-  	width: 300%;
-  	padding-left: 100px;
-  	padding-right: 100px;
+     width: 300%;
+     padding-left: 100px;
+     padding-right: 100px;
     }
   .book-item h3 {
     white-space: nowrap;

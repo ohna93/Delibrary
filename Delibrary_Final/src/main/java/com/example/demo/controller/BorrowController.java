@@ -25,8 +25,6 @@ public class BorrowController {
 	@Autowired
 	private BorrowDAO dao;
 	
-	
-	
 	public void setDao(BorrowDAO dao) {
 		this.dao = dao;
 	}

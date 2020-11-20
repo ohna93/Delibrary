@@ -13,6 +13,16 @@
 	<select id="checkEmail" resultType="customerVO">
 		select * from customer where email=#{email}
 	</select>
+	
+<!-- 비밀번호 변경 이메일 보내기 -->	
+	<select id="sendPwEmail" resultType="customerVO">
+		select * from customer where email=#{email} and name=#{name}
+	</select>
+
+<!-- 비밀번호 변경 -->	
+	<update id="updatePw"> 
+		update customer set pw=#{pw} where email=#{email}
+	</update>
 
 </mapper>
 
