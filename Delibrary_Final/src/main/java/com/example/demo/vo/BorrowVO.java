@@ -10,9 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class BorrowVO {
 	private int bor_no;
 
@@ -77,8 +74,5 @@ public class BorrowVO {
 	}
 	
 	
-}
-
-
 }
 
