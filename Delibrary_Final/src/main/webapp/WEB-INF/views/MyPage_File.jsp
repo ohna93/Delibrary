@@ -17,7 +17,8 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
 <link rel="stylesheet" type="text/css" href="css/folder.css">
-<link rel="stylesheet" type="text/css" href="css/book.css">
+<link rel="stylesheet" type="text/css" href="css/book_detail.css">
+<link rel="stylesheet" type="text/css" href="css/wang.css">
 
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -378,9 +379,9 @@ $( function(){
 	
 		          <!-- Search -->
 		          <div class="catalog-search">
-		            <input class="shuffle-search input_field " type="search" autocomplete="off" value="" maxlength="128" id="input-search" placeholder="search book" />
+		            <input class="shuffle-search input_field " type="search" autocomplete="off" value="" maxlength="128" id="input-search" />
 		            <label class="input_label" for="input-search">
-		              <span class="input_label-content"></span>
+		              <span class="input_label-content">search library</span>
 		              <span class="input_label-search"></span>
 		            </label>
 		          </div>
@@ -412,10 +413,10 @@ $( function(){
                   <div class="bk-book bk-bookdefault">
                     <div class="bk-front">
                     <!-- style="background-image: url('http://interactivejoe.com/book-viewer/assets/images/bk_1-small.jpg') -->
-                      <div class="bk-cover" style="background-image: url('../img/${p.fname}'); width:100%; height:100%;"></div>
+                      <div class="bk-cover" style="background-image: url('${p.fname}'); width:100%; height:100%;"></div>
                     </div>
                     <div class="bk-back"></div>
-                    <div class="bk-left"  style="background-image: url('../img/${p.fname}');"></div>
+                    <div class="bk-left"  style="background-image: url('${p.fname}');"></div>
                   </div>
                 </div>
               </div>

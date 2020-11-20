@@ -33,9 +33,9 @@
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
 								<li><a class="dropdown-item" href="#"> 대출/반납/연장</a></li>
 								<li><a class="dropdown-item" href="postList.do?group=10"> 공지사항 </a></li>
-								<li><a class="dropdown-item" href="#"> 자주묻는질문</a></li>
-								<li><a class="dropdown-item" href="#"> 묻고답하기 </a></li>
-								<li><a class="dropdown-item" href="#"> 오시는길 </a></li>
+								<li><a class="dropdown-item" href="faqViewpage.do"> 자주묻는질문</a></li>
+								<li><a class="dropdown-item" href="QnaList.do"> 묻고답하기 </a></li>
+								<li><a class="dropdown-item" href="addrViewpageAPI.do"> 오시는길 </a></li>
 							</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -52,7 +52,7 @@
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
 								<li><a class="dropdown-item" href="postList.do?group=20">창작물게시판</a></li>
 								<li><a class="dropdown-item" href="postList.do?group=30">중고장터</a></li>
-								<li><a class="dropdown-item" href="#">자유게시판</a></li>
+								<li><a class="dropdown-item" href="postList.do?group=60">자유게시판</a></li>
 							</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -66,17 +66,24 @@
 					</li>
 				</ul>
 				<ul id="app" class="navbar-nav ml-auto">
-					<li class="nav-item" v-bind:title="login">
-						<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a><p class="sr-only">로그인</p>
-					</li>
-					<li class="nav-item" v-bind:title="signup">
-						<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a><p class="sr-only">회원가입</p>
-					</li>
+					<c:if test="${empty cust_no }">
+						<li class="nav-item" v-bind:title="login">
+							<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a><p class="sr-only">로그인</p>
+						</li>
+						<li class="nav-item" v-bind:title="signup">
+							<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a><p class="sr-only">회원가입</p>
+						</li>
+					</c:if>
+					<c:if test="${not empty cust_no }">
+						<li class="nav-item" v-bind:title="logout">
+							<a href="logout.do?cust_no=${cust_no }" class="nav-link"><i class="fas fa-sign-out-alt"></i></a><p class="sr-only">로그아웃</p>
+						</li>
+					</c:if>
 					<li class="nav-item" v-bind:title="bookcart">
 						<a href="#" class="nav-link"><i class="fas fa-book"></i></a><p class="sr-only">북카트</p>
 					</li>
 					<li class="nav-item" v-bind:title="sitemap">
-						<a href="siteMap.do" class="nav-link"><i class="far fa-map"></i></a><p class="sr-only">사이트맵</p>
+						<a href="siteMap.do" class="nav-link"><i class="fas fa-map"></i></a><p class="sr-only">사이트맵</p>
 					</li>
 					<script>
 						var app = new Vue({
@@ -86,6 +93,7 @@
 								signup: '회원가입',
 								bookcart: '북카트',
 								sitemap: '사이트맵',
+								logout: '로그아웃'
 							}});
 					</script>
 				</ul>
@@ -146,7 +154,7 @@
 								<span>&nbsp;</span>
 							</div>
               <div class="col-md-4">
-                <input type="submit" value="<i class="fas fa-edit"></i> 수정" class="btn btn-success btn-block">
+                <button class="btn btn-success btn-block"><i class="fas fa-edit"></i> 수정</button>
               </div>
             </div>
           </div>
@@ -198,6 +206,7 @@
                         <div>
                           <input type="file" name="uploadFile" value="${post.fname }" class="input-file">
                           <img alt="${post.fname }" src="/img/${post.fname }" height="100">
+                          ${post.cust_no }, ${c.cust_no}
                         </div>
                       </div>
                       <div class="form-group">

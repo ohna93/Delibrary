@@ -16,11 +16,6 @@
 	 	order by p_no desc
 	</select>
 	
-	<!-- 모든 게시판 글 구분 없이 가져오기[재성] -->
-	<select id="findAll" resultType="postVO">
-		select * from post
-	</select>
-	
 	<!-- 게시글 상세보기 -->
 	<select id="selectById" resultType="postVO">
 		select * from post where p_id=#{p_id} and p_no like ''||#{group}||'%'
@@ -69,20 +64,10 @@
    <select id="selectAll_fol" resultType="postVO">
       select * from post where fol_no=#{fol_no} and p_no like ''||#{group}||'%' order by p_no desc
    </select>
+  
+  <!-- 모든 게시판 글 구분 없이 가져오기[재성] -->
+	<select id="findAll" resultType="postVO">
+		select * from post
+	</select>
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
