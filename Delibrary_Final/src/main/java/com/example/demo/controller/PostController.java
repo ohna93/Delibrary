@@ -20,65 +20,79 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.dao.CustomerDAO;
 import com.example.demo.dao.PostDAO;
 import com.example.demo.dao.ReplyDAO;
-import com.example.demo.vo.CustomerVO;
 import com.example.demo.vo.PostVO;
+
+import lombok.Setter;
 
 @Controller
 public class PostController {
 
-	public static int pageSIZE =  10;
-	public static int totalCount  = 0;
-	public static int totalPage = 1;
+	public static int pageSIZE=5;
+	public static int totalCount =0;
+	public static int totalPage=1;
+	public static int pageMAX=5;
 	public static int updateHit=0;
 	public static int nextId;
 	public static int nextNo;
    
 	@Autowired
+	@Setter
 	private PostDAO dao;
-	public void setDao(PostDAO dao) {
-		this.dao = dao;
-	}
 
 	@Autowired
+	@Setter
 	private ReplyDAO re_dao;
-	public void setRe_dao(ReplyDAO re_dao) {
-		this.re_dao = re_dao;
-	}
 	
 	@Autowired
+	@Setter
 	private CustomerDAO c_dao;
-	public void setC_dao(CustomerDAO c_dao) {
-		this.c_dao = c_dao;
-	}
    
 	//전체 게시글 목록
 	@RequestMapping("postList.do")
-	public void postList(Model model, int group, @RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM, String search, String option, HttpSession session) {
+	public void postList(Model model, int group, @RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM, String search, String option, HttpSession session, HttpServletRequest request) {
 
-		System.out.println("search  :  "+search);
-		System.out.println("option  :  "+option);
 		if(search==null&&session.getAttribute("search")!=null) {
 			search=(String)session.getAttribute("search");
 			option=(String)session.getAttribute("option");
+			System.out.println("search 1111 :  "+search);
+			System.out.println("option 1111 :  "+option);
 		}
 		
 		HashMap map=new HashMap();
 		map.put("group", group);
-		
+		map.put("search", search);
+		map.put("option", option);
+				
 		totalCount = dao.getTotalCount(map);
 		totalPage = (int)Math.ceil( (double)totalCount/pageSIZE ) ;
+//		int start=(pageNUM-1)/pageMAX*pageMAX+1;
+//		//6, 7, 8, 9, 10
+//		int end=start+pageMAX-1;
+//		if(end>totalPage) {
+//			end=totalPage;
+//		}
+		
 		int start = (pageNUM-1)*pageSIZE + 1;
 		int end = start + pageSIZE-2;
 		if(end > totalCount) {
 			end = totalCount;
 		}
-      
+		
 		model.addAttribute("list", dao.findAll(map));
 		model.addAttribute("group", group);
 		model.addAttribute("start", start-1);
 		model.addAttribute("end", end);
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("totalPage", totalPage);
+		
+		//검색어 입력하면 세션에 실어준다.
+		if(search!=null && !search.equals("")) {
+			session.setAttribute("search", search);
+			session.setAttribute("option", option);
+			System.out.println("search 2 :  "+search);
+			System.out.println("option 2 :  "+option);
+			
+		}
 	}
 
 	//게시글 상세보기
@@ -102,17 +116,18 @@ public class PostController {
 		//로그인된 회원번호 받아오기
 		HttpSession session=request.getSession(); 
 		session.setAttribute("cust_no", session.getAttribute("cust_no"));
+		System.out.println("로그인된 회원번호  |  "+session.getAttribute("cust_no"));
+		
 	}
    
 	//새글 작성
 	@RequestMapping(value="postInsert.do", method = RequestMethod.GET)
-	public void insertForm(Model model, int cust_no, String nickname, int group, PostVO post) {
+	public void insertForm(Model model, int cust_no, String nickname, int group, PostVO post, HttpServletRequest request) {
 		nextId=dao.getNextId(group);
 		post.setP_id(nextId);
 		nextNo=dao.getNextNo(group);
 		post.setP_no(nextNo);
-		
-		
+				
 		System.out.println("다음 글 id : "+nextId);
 		System.out.println("다음 글 no : "+nextNo);
 		System.out.println("group : "+group);
@@ -152,6 +167,11 @@ public class PostController {
 //		pvo.setFname(fname);
 		
 		
+		//글머리 option값 받아오기
+		System.out.println(request.getParameter("p_option"));
+		String p_option=request.getParameter("p_option");
+		
+		
 //		CustomerVO c=new CustomerVO();
 		String p_writer=c_dao.findByCust_No(cust_no).getNickname();
 		int p_hit=0;
@@ -166,8 +186,9 @@ public class PostController {
 		map.put("p_content", p_content);
 		map.put("p_hit", p_hit);
 		map.put("fname", fname);
+		map.put("p_option", p_option);
 				
-		ModelAndView mav=new ModelAndView("redirect:/postList.do?group="+group);
+		ModelAndView mav=new ModelAndView("redirect:/postList.do?option=p_title&search=&group="+group);
 		int re=dao.insert(map);
 		if(re<=0) {
 			mav.addObject("msg", "게시글 작성 실패");
@@ -195,17 +216,17 @@ public class PostController {
 		model.addAttribute("post", dao.findById(map));
 	}
 	@RequestMapping(value="postUpdate.do", method = RequestMethod.POST)
-	public ModelAndView update(HttpServletRequest request, PostVO m, int group, MultipartFile uploadFile) {
+	public ModelAndView update(HttpServletRequest request, PostVO pvo, int group, MultipartFile uploadFile) {
 
 		System.out.println("group  :  "+group);
 		
 		
 		String path = request.getRealPath("img");
 		System.out.println("path: "+path);
-		String oldFname = m.getFname();
+		String oldFname = pvo.getFname();
 		String fname = uploadFile.getOriginalFilename();
 		if(fname != null && !fname.equals("")) {
-			m.setFname(fname);
+			pvo.setFname(fname);
 			try {
 				byte[] data = uploadFile.getBytes();
 				FileOutputStream fos = new FileOutputStream(path + "/" + fname);
@@ -214,19 +235,24 @@ public class PostController {
 			}catch (Exception e) {
 				System.out.println("예외발생 : " + e.getMessage());
 			}
-			m.setFname(fname);
+			pvo.setFname(fname);
         } else{
         	// oldFname set으로 추가
-           m.setFname(oldFname);
+        	pvo.setFname(oldFname);
         }
 		
-		ModelAndView mav=new ModelAndView("redirect:/postDetail.do?p_id="+m.getP_id()+"&&group="+group);
-		int re = dao.update(m);
+		//글머리 option값 받아오기
+		System.out.println("내글수정 페이지 글머리 : "+request.getParameter("p_option"));
+		String p_option=request.getParameter("p_option");
+		pvo.setP_option(p_option);
+		
+		ModelAndView mav=new ModelAndView("redirect:/postDetail.do?p_id="+pvo.getP_id()+"&&group="+group);
+		int re = dao.update(pvo);
 		if(re<=0) {
 			mav.addObject("msg", "게시글 수정 실패");
 			mav.setViewName("error");
   		}else {
-			if(fname != null && !fname.equals("") && !m.getFname().equals("")) {
+			if(fname != null && !fname.equals("") && !pvo.getFname().equals("")) {
 				File file = new File(path + "/" + oldFname);
 												// oldFname으로 변경
 				file.delete();
@@ -235,6 +261,7 @@ public class PostController {
   		return mav;
 	}
    
+	//게시글 삭제
 	@RequestMapping(value = "postDelete.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String delete(int p_id, int cust_no, int group, HttpServletRequest request) {
