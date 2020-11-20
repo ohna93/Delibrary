@@ -25,7 +25,9 @@ public class DBManager {
 			inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		} catch (Exception e) {
-			System.out.println("static ���ܹ߻�: "+e.getMessage());
+
+			System.out.println("static 오류: "+e.getMessage());
+
 		}
 	}
 	

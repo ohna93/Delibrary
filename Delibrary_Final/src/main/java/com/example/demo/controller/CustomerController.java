@@ -60,10 +60,12 @@ public class CustomerController {
          
          if (email.equals(custVO.getEmail()) && password.equals(custVO.getPw())) {
             session.setAttribute("cust_no", custVO.getCust_no());
+
 //            request.setAttribute("cust_no", custVO.getCust_no());
             session.setAttribute("cust_name", custVO.getName());
 //            System.out.println(custVO.getName());
 //            request.setAttribute("cust_name", custVO.getName());
+
          }
          
       }

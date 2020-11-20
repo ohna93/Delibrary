@@ -57,7 +57,7 @@
 
 	<!-- 용택 : 책상세보기에서 포스트 추가 -->
 	<insert id="insert2">
-		insert into post values(#{p_id},#{p_no},#{p_title},#{p_writer},#{p_content},#{p_hit},sysdate,#{fname},#{cust_no},#{fol_no})
+		insert into post(p_id,p_no,p_title,p_writer,p_content,p_hit,p_regdate,fname,cust_no,fol_no) values (#{p_id},#{p_no},#{p_title},#{p_writer},#{p_content},#{p_hit},sysdate,#{fname},#{cust_no},#{fol_no})
 	</insert>
 	
 	<!-- 폴더 번호에 따른 전체 파일 목록 [현왕]-->

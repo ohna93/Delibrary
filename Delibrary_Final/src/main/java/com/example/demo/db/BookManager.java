@@ -27,7 +27,7 @@ public static SqlSessionFactory sqlSessionFactory;
 		sqlSessionFactory =
 		  new SqlSessionFactoryBuilder().build(inputStream);
 		}catch (Exception e) {
-			System.out.println("���ܹ߻�:"+e.getMessage());
+			System.out.println("예외발생:"+e.getMessage());
 		}
 	}
 	
@@ -76,6 +76,15 @@ public static SqlSessionFactory sqlSessionFactory;
 		session.close();
 		return n;
 	}
+	public static int calB_count(int b_no) {
+		int n = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+		n = session.selectOne("book.calB_count",b_no);
+		session.close();
+		return n;
+	}
+	
+	
 	//대여시 대여 넘버 삽입
 	public static int getNextNo2() {
 		int n = -1;
@@ -93,6 +102,9 @@ public static SqlSessionFactory sqlSessionFactory;
 		return list;
 	}
 
+
+
+
 	// 모든 도서 목록 출력
 	public static List<BookVO> findAll() {
 		List<BookVO> list = null;
@@ -101,4 +113,5 @@ public static SqlSessionFactory sqlSessionFactory;
 		session.close();
 		return list;
 	}
+
 }
