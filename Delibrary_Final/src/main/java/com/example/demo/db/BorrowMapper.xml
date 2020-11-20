@@ -31,7 +31,7 @@
     	</if>   	 
   </select> 
     <update id="updateBorrow">
-  	update borrow set bor_no=#{bor_no}, bor_date=#{bor_date}, return_date=#{return_date}, return_ok=#{return_ok}, cust_no=#{cust_no}, b_no=#{b_no}
+  	update borrow set bor_date=#{bor_date}, return_date=#{return_date}, return_ok=#{return_ok}  where bor_no=#{bor_no} and b_no=#{b_no} and cust_no=#{cust_no}
   </update>
   <delete id="deleteBorrow">
   	DELETE FROM BORROW WHERE bor_no=#{bor_no}

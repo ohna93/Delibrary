@@ -817,14 +817,7 @@ $(function(){
   </script>
   </head>
 <body class="d-flex flex-column">
-  <div id="page-content">
-    나브바, 헤더 등등 생략
-  </div>
-  <footer id="main-footer" class="text-center p-4">
-    생략...
-  </footer>
-</body>
-<body>
+  
 	
 	<input id="query" value="${query}" type="hidden">
 
@@ -841,16 +834,16 @@ $(function(){
 						<a href="about.html" class="nav-link dropdown-toggle" data-toggle="dropdown">도서관소개</a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
 								<li><a class="dropdown-item" href="about.html"> 대출/반납/연장</a></li>
-								<li><a class="dropdown-item" href="#"> 공지사항 </a></li>
-								<li><a class="dropdown-item" href="#"> 자주묻는질문</a></li>
-								<li><a class="dropdown-item" href="#"> 묻고답하기 </a></li>
-								<li><a class="dropdown-item" href="#"> 오시는길 </a></li>
+								<li><a class="dropdown-item" href="postList.do?group=10"> 공지사항 </a></li>
+								<li><a class="dropdown-item" href="faqViewpage.do"> 자주묻는질문</a></li>
+								<li><a class="dropdown-item" href="QnaList.do"> 묻고답하기 </a></li>
+								<li><a class="dropdown-item" href="addrViewpageAPI.do"> 오시는길 </a></li>
 							</ul>
 					</li>
 					<li class="nav-item dropdown">
 						<a href="books.html" class="nav-link dropdown-toggle" data-toggle="dropdown">도서정보</a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
-								<li><a class="dropdown-item" href="books.html">도서검색</a></li>
+								<li><a class="dropdown-item" href="SearchResult.do">도서검색</a></li>
 								<li><a class="dropdown-item" href="#">사서추천도서</a></li>
 								<li><a class="dropdown-item" href="#">신착도서</a></li>
 								<li><a class="dropdown-item" href="#">인기도서</a></li>
@@ -859,18 +852,18 @@ $(function(){
 					<li class="nav-item dropdown">
 						<a href="community.html" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
-								<li><a class="dropdown-item" href="community.html">창작물게시판</a></li>
-								<li><a class="dropdown-item" href="#">중고장터</a></li>
+								<li><a class="dropdown-item" href="postList.do?group=20">창작물게시판</a></li>
+								<li><a class="dropdown-item" href="postList.do?group=30">중고장터</a></li>
 								<li><a class="dropdown-item" href="#">자유게시판</a></li>
 							</ul>
 					</li>
 					<li class="nav-item dropdown">
 						<a href="mypage.html" class="nav-link dropdown-toggle" data-toggle="dropdown">나의도서</a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
-								<li><a class="dropdown-item" href="mypage.html"> 나의도서정보</a></li>
+								<li><a class="dropdown-item" href="mypage_main.do?cust_no=${cust_no }"> 나의도서정보</a></li>
 								<li><a class="dropdown-item" href="lentBooks.html">대출현황/이력</a></li>
 								<li><a class="dropdown-item" href="Mylibrary.jsp">내서재</a></li>
-								<li><a class="dropdown-item" href="#">개인정보수정</a></li>
+								<li><a class="dropdown-item" href="MyPage_Info.do?cust_no=${cust_no}">개인정보수정</a></li>
 							</ul>
 					</li>
 				</ul>

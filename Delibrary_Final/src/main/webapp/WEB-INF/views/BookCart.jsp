@@ -234,22 +234,30 @@ html, body{
 <script type="text/javascript"	src="../jquery-ui-1.12.1/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
-
+//전역변수
+var bor_no = 0;
 
 
 $(function(){
 	var updateborrow = function(){
 		
-		var data =$("form[name=test]").serialize() ;
+		//var data =$("form[name=test]").serialize() ;
+		var bor_date =$('#bor_date').val()
+		var return_date =$('#return_date').val()
+		var return_ok =$('#return_ok').val()
 
+        alert(bor_date);
+        bor_date
+		var data2 ={"bor_no":bor_no }
+			
 		
 		$.ajax({
 			url:"/updateborrow",
 			dataType:"Json",
 			type:"POST",
-			data:data,
-			success:function(data){
-				console.log(data);
+			data:data,data2,
+			success:function(data,data2){
+				console.log(data,data2);
 				}
 			});
 		}
@@ -288,8 +296,14 @@ $(function(){
 	              })
 	      
 	});
+	
+	
+	
+	
 */
-	//대출현황 클릭 하얀색 뛰어나오는거.
+
+//대출현황 클릭 하얀색 뛰어나오는거.
+
 	$('#1').click(function() {
 	$(this).addClass("nav-link active");
 	$('#2').removeClass("active");
@@ -324,12 +338,14 @@ $(function(){
 		
 		alert(idVal);
 			});
-	/*
+	//클릭시 b_no 값을 가져옵니다.
     $('.card-body').click(function(){
- 		
- 
-        
+		bor_no = $(this).attr("id");
+		var getName=$(this).attr("name");
+        alert(getName );
+		
         alert("관리자만 접근가능" );
+       	
        	$('#option').dialog({
      		modal:true,
      		buttons :{
@@ -345,7 +361,7 @@ $(function(){
 
      		})
          });
-      */   
+       
 	///여가까지가  card-body.click
     	
 });
@@ -355,29 +371,20 @@ $(function(){
 </head>
 <body class="d-flex flex-column">
 
-			<!-- 수정 삭제 -->		
-						
-										
-  <div id="page-content">
-    나브바, 헤더 등등 생략
-  </div>
- 
-</body>	
+
 											<div id="option" title="update and delete" style='display:none'>
 											<form name="test" id ="test">
 											대여일 : <input type="date" name="bor_date" id="bor_date"><br>
 											반납일 : <input type="date" name="return_date" id="return_date"><br>
 											반납여부 : <input type="text" name="return_ok" id="return_ok"><br>
-											대여번호 : <input type="text" name="bor_no" id="bor_no"><br>
-											책번호 : <input class = "number"type="text" name="b_no" id ="b_no" ><br>
-													<input type ="hidden"name="cust_no"id="cust_no" value=3>
-											</form>								
+											책번호 : <input type="number" name="b_no" id="n_no"><br>
+											
+											</form>
+																			
 										</div>
-	<div id ="update" title="update" style='display:none'>
-		
-	</div>
+
 	<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark p-0">
-		<div class="container">
+		<div class="container" id="page-content">
 			<a href="home.html" class="navbar-brand"><img alt="딜리브러리" src="img/logo_bg_dark.jpg" height="20" class="pl-3 mb-1"></a>
 			<button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 				<span class="navbar-toggler-icon"></span>
@@ -512,18 +519,16 @@ $(function(){
 						<div class="card">
 							
 							
-=							<div class="card-body">
+=							<div class="card-body" id="${b.bor_no }" name="${b.b_no }">
 									<a href="#"><h4 class="card-title"></h4></a>
-									<img class="card-img-top img-fluid" src="img/book3.png" alt="">
+									<img class="card-img-top img-fluid" src="img/borrow3.png" alt="">
 									<p class="card-text">
 										대여일 :  ${b.bor_date }<br>		
 										<small class="text-muted">반납일 : ${b.return_date } </small><br>
 											<small class="text-muted">반납여부 : ${b.return_ok }</small>
 										 	<!-- <small class="text-muted">대여번호 : ${b.bor_no } </small><br>
 										 	 --> 
-											<small class="text-muted">책번호 : ${b.b_no } </small><br>	
-											<input type = "text" value="${b.b_no }" id="dd">
-												
+											<small class="text-muted">책번호 : ${b.b_no } </small><br>													
 									</p>			
 										</div>
 										</div>	
@@ -532,7 +537,7 @@ $(function(){
 						
 	</section>
   <!-- FOOTER -->
-  <footer id="main-footer" class="text-center p-4">
+  <footer  id="main-footer" class="text-center p-4">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -542,9 +547,7 @@ $(function(){
       </div>
     </div>
   </footer>
- <footer id="main-footer" class="text-center p-4">
-    생략...
-  </footer>
+
 
   <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>

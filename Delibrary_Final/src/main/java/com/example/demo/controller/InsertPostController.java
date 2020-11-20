@@ -156,6 +156,8 @@ public class InsertPostController {
 	@ResponseBody 
 	public String updateDept(BorrowVO b, HttpSession session, HttpServletRequest request) {
 		session = request.getSession(true);
+		int bor_no = Integer.parseInt(request.getParameter("bor_no"));
+		System.out.println("수신된 데이터2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+ bor_no);
 		System.out.println("수신된 데이터"+ b);
 		
 		int re =bbdao.update(b);		
