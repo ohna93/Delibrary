@@ -20,9 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.dao.CustomerDAO;
 import com.example.demo.dao.PostDAO;
 import com.example.demo.dao.ReplyDAO;
-import com.example.demo.vo.CustomerVO;
 import com.example.demo.vo.PostVO;
 
+
+//깃 돼라 좀
 @Controller
 public class PostController {
 
