@@ -30,7 +30,8 @@
   <title>커뮤니티 - 딜리브러리</title>
 </head>
 
-<body>
+<body class="d-flex flex-column">
+	<div id="page-content">
 	<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark p-0">
 		<div class="container">
 			<a href="Home.do" class="navbar-brand"><img alt="딜리브러리" src="img/logo_bg_dark.jpg" height="20" class="pl-3 mb-1"></a>
@@ -139,16 +140,34 @@
 		<div class="container">
 		  <div class="row">
 			<div class="col-md-3">
-			  <div class="sidebar">
-					<div class="side-head">
-						<h4 class="text-light">커뮤니티</h4>
-					</div>
-					<ul class="list-group list-group-flush mb-5">
-						<li class="list-group-item active text-dark"><a href="postList.do?group=20">창작물게시판</a></li>
-						<li class="list-group-item"><a href="postList.do?group=30">중고장터</a></li>
-						<li class="list-group-item"><a href="#">자유게시판</a></li>
-					</ul>
-			  </div>
+				<c:choose>
+					<c:when test="${group eq 10 || group eq 40 }">
+						<div class="sidebar">
+							<div class="side-head">
+								<h4 class="text-light">도서관소개</h4>
+							</div>
+							<ul class="list-group list-group-flush mb-5">
+								<li class="list-group-item"><a href="#">대출/반납/연장</a></li>
+								<li id="post10" class="list-group-item"><a href="postList.do?group=10">공지사항</a></li>
+								<li class="list-group-item"><a href="faqViewpage.do">자주묻는질문</a></li>
+								<li id="post40" class="list-group-item"><a href="postList.do?group=40">묻고답하기</a></li>
+								<li class="list-group-item"><a href="addrViewpageAPI.do">오시는길</a></li>
+							</ul>
+					  </div>		
+					</c:when>
+					<c:otherwise>
+						<div class="sidebar">
+							<div class="side-head">
+								<h4 class="text-light">커뮤니티</h4>
+							</div>
+							<ul class="list-group list-group-flush mb-5">
+								<li id="post20" class="list-group-item"><a href="postList.do?group=20">창작물게시판</a></li>
+								<li id="post30" class="list-group-item"><a href="postList.do?group=30">중고장터</a></li>
+								<li id="post60" class="list-group-item"><a href="postList.do?group=60">자유게시판</a></li>
+							</ul>
+					  </div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 			<!-- 메인내용 -->
@@ -158,7 +177,7 @@
           <div class="container">
             <div class="row">
               <div class="col-md-2">
-                <a href="postList.do?group=${group}" class="btn btn-light btn-block">
+                <a href="postList.do?option=p_title&search=&group=${group}" class="btn btn-light btn-block">
                   <i class="fas fa-arrow-left"></i> 목록
                 </a>
 							</div>
@@ -166,14 +185,18 @@
 								<span>&nbsp;</span>
 							</div>
 							<c:if test="${not empty cust_no }">
-								<c:if test="${post.cust_no eq cust_no }">
+								<c:if test="${post.cust_no eq cust_no}">
 		              <div class="col-md-2">
-		                <a href="postUpdate.do?p_id=${post.p_id}&&cust_no=${post.cust_no}&&group=${group}" class="btn btn-success btn-block">
+		                <a href="postUpdate.do?p_id=${post.p_id}&&cust_no=${cust_no}&&group=${group}" class="btn btn-success btn-block">
 		                  <i class="fas fa-edit"></i> 수정
 		                </a>
 		              </div>
+								</c:if>
+								<c:if test="${post.cust_no eq cust_no || cust_no==1}">
+									<c:set var="setPostCustNo" value="${post.cust_no }"></c:set> <!-- 관리자 로그인시 글쓴이 회원번호로 셋해줌 -->
+									<c:if test="${group!=10&&group!=40&&cust_no==1 }"><div class="col-md-2">&nbsp;</div></c:if>
 		              <div class="col-md-2">
-		                <button id="btnDel" class="btn btn-outline-danger btn-block"  p_id="${post.p_id}" cust_no="${cust_no }" group="${group}">
+		                <button id="btnDel" class="btn btn-outline-danger btn-block"  p_id="${post.p_id}" cust_no="${setPostCustNo }" group="${group}">
 		                  <i class="far fa-trash-alt"></i> 삭제
 		                </button>
 		              </div>
@@ -182,7 +205,6 @@
             </div>
           </div>
         </section>
-
 				<!-- 글상세 -->
 				<section id="details">
 			    <div class="container">
@@ -190,7 +212,10 @@
 			        <div class="col">
 			          <div class="card">
 			            <div class="card-header">
-			              <h4 >[말머리]${post.p_title}</h4>
+			              <h4 >
+			              	<c:if test="${group!=40 && group!=60}">[${post.p_option }]</c:if>
+			              	${post.p_title}
+			              </h4>
 										<p class="text-muted text-small pt-2 m-0">
 											게시일 <fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value = "${post.p_regdate }" /> | 작성자 ${post.p_writer} | 조회 ${post.p_hit }
 										</p>
@@ -205,7 +230,7 @@
 									<input type="hidden" name="p_no" value="${post.p_no}">
 									<input type="hidden" name="fname" value="${post.fname}">
 									<input type="hidden" name="cust_no" value="${post.cust_no}">
-			
+												
 									<!-- 댓글창 -->
 									<div class="card-body">
 										<div class="container">
@@ -229,13 +254,16 @@
 			                		<td width="20%">
 			                			<div class="text-right">
 			                				<c:if test="${not empty cust_no }">
-			                					<c:if test="${r.cust_no==cust_no }">
-													<button class="btn btn-outline-success btn-sm table-align-right block-inline btnUpdateReply" id="btnUpdateReply" re_no="${r.re_no}" cust_no="${post.cust_no }"><i class="fas fa-edit"></i></button>
-						                			<button class="btn btn-outline-danger btn-sm table-align-right block-inline btnDeleteReply" id="btnDeleteReply" re_no="${r.re_no}" cust_no="${r.cust_no }"><i class="far fa-trash-alt"></i></button>
+			                					<c:if test="${r.cust_no==cust_no}">
+																	<button class="btn btn-outline-success btn-sm table-align-right block-inline btnUpdateReply" re_no="${r.re_no}" cust_no="${r.cust_no }"><i class="fas fa-edit"></i></button>
+			                					</c:if>
+			                					<c:if test="${r.cust_no==cust_no || cust_no==1}">
+			                						<c:set var="setReplyCustNo" value="${r.cust_no }"></c:set> <!-- 관리자 로그인시 댓글쓴이 회원번호로 셋해줌 -->
+						                			<button class="btn btn-outline-danger btn-sm table-align-right block-inline btnDeleteReply" re_no="${r.re_no}" cust_no="${setReplyCustNo }"><i class="far fa-trash-alt"></i></button>
 			                					</c:if>
 			                				</c:if>
 			                			</div>
-									</td>
+													</td>
 			                	</tr>
 			                	<tr>
 			                		<td colspan="2">${r.re_content }</td>
@@ -255,9 +283,10 @@
 	 	 </div>
 	  </div>
   </section>
-
+	</div>
+	
 	<!-- FOOTER -->
-	<footer id="main-footer" class="text-white mt-5 p-4">
+	<footer id="main-footer" class="text-center p-4">
 		<div class="container">
 			<div class="row">
 				<div class="col">
@@ -337,7 +366,7 @@
 							}
 						},
 					error: function(){
-							alert("댓글 등록 실패");
+							alert("내용을 입력하세요.");
 						}
 				});
 			});
@@ -373,6 +402,13 @@
 		});
 		
 	</script>
+	
+	<!-- 사이드바 열려있는 게시판에 active 속성 붙여주기 -->
+  <script type="text/javascript">
+  	if(${group}){
+			document.getElementById('post'+${group}).classList.add('active');
+		}
+  </script>
 
 </body>  
 

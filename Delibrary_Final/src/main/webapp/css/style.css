@@ -28,14 +28,6 @@
   }
 }
 
-.sidebar {
-  border: 1px solid gainsboro;
-}
-.side-head {
-  background: url('../img/side-head.jpg');
-  padding: 40px;
-}
-
 body {
   overflow-x: hidden;
 }
@@ -44,17 +36,8 @@ body {
   height: 15px;
 }
 
-.searchbar {
-  border-radius: 25px;
-  padding: 5px 25px;
-}
-
 #home-icons p {
   font-size: 14px;
-}
-
-.btn {
-  border-radius: 25px;
 }
 
 .navbar .nav-link {
@@ -163,11 +146,11 @@ body {
 
 
 html, body{
-   height: 100%;
+	height: 100%;
 }
 
 #page-content{
-   flex: 1 0 auto;
+	flex: 1 0 auto;
 }
 
 .sidebar {
@@ -175,10 +158,11 @@ html, body{
 }
 .side-head {
   background: url('../img/side-head.jpg');
+	background: linear-gradient(to right, #85BCDE, #DE5959);
   padding: 40px;
 }
 .sidebar a{
-   color: #343a40;
+	color: #343a40;
 }
 
 .searchbar {
@@ -187,11 +171,16 @@ html, body{
 }
 
 .list-group .active{
-   background-color: #f8f9fa;
-   color: #343a40;
-   border-color: #d8d8d8;
+	background-color: #f8f9fa;
+	color: #343a40;
+	border-color: #d8d8d8;
 } 
 
+.btn {
+  border-radius: 25px;
+}
+
+
 #tbody a{
-   color: #343a40;
+	color: #343a40;
 }

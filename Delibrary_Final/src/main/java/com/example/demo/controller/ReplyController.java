@@ -40,7 +40,7 @@ public class ReplyController {
    
 	//새 댓글 작성
 	@RequestMapping(value="replyInsert.do", method = RequestMethod.POST)
-	public int insert(int cust_no, int p_id, int p_no, String re_content, HttpServletRequest request) {
+	public String insert(int cust_no, int p_id, int p_no, String re_content, HttpServletRequest request) {
 		int re=-1;
 		String re_writer=c_dao.findByCust_No(cust_no).getNickname();
 		
@@ -64,12 +64,12 @@ public class ReplyController {
 		
 		re=re_dao.insert(map);
 		System.out.println("REPLY INSERT re   :   "+re);
-		return re;
+		return Integer.toString(re);
 	}
 	
 	//댓글 수정
 	@RequestMapping(value="replyUpdate.do", method = RequestMethod.POST)
-	public int update(HttpServletRequest request,int re_no, int cust_no, String re_content) {
+	public String update(HttpServletRequest request,int re_no, int cust_no, String re_content) {
 		int re=-1;
 		System.out.println("UPDATE 받아온 re_no :  "+re_no);
 		System.out.println("UPDATE 받아온 cust_no :  "+cust_no);
@@ -81,12 +81,12 @@ public class ReplyController {
 		
 		re = re_dao.update(map);
 		System.out.println("REPLY UPDATE re  :  "+re);
-  		return re;
+  		return Integer.toString(re);
 	}
    
 	//댓글삭제
 	@RequestMapping(value = "replyDelete.do", method = RequestMethod.POST)
-	public int delete(int re_no, int cust_no, HttpServletRequest request) {
+	public String delete(int re_no, int cust_no, HttpServletRequest request) {
 		int re=-1;
 				
 		System.out.println("DEL 받아온 cust_no :  "+cust_no);
@@ -100,7 +100,7 @@ public class ReplyController {
 		re=re_dao.delete(map);
 		System.out.println("REPLY DEL re:   "+re);
 		
-		return re;
+		return Integer.toString(re);
 	}
 	
 }
