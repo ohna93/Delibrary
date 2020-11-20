@@ -16,7 +16,7 @@ import com.example.demo.dao.BorrowDAO;
 import com.example.demo.dao.FolderDAO;
 import com.example.demo.dao.PostDAO;
 
-
+//확인
 @Controller
 public class BookcartController {
 	@Autowired
