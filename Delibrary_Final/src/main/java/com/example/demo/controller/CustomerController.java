@@ -60,8 +60,12 @@ public class CustomerController {
          
          if (email.equals(custVO.getEmail()) && password.equals(custVO.getPw())) {
             session.setAttribute("cust_no", custVO.getCust_no());
-            request.setAttribute("cust_no", custVO.getCust_no());
+//            request.setAttribute("cust_no", custVO.getCust_no());
+            session.setAttribute("cust_name", custVO.getName());
+//            System.out.println(custVO.getName());
+//            request.setAttribute("cust_name", custVO.getName());
          }
+         
       }
 
       model.addAttribute("SRlist", dao2.getStaffRecommend());
@@ -70,8 +74,9 @@ public class CustomerController {
       model.addAttribute("HMakinglist", dao2.getHomePost(20));
       model.addAttribute("HMarketlist", dao2.getHomePost(30));
 
-      HttpSession session = request.getSession();
-      request.setAttribute("cust_no", session.getAttribute("cust_no"));
+//      HttpSession session = request.getSession();
+//      request.setAttribute("cust_no", session.getAttribute("cust_no"));
+//      request.setAttribute("cust_name", session.getAttribute("cust_name"));
    }
 
    
@@ -225,5 +230,4 @@ public class CustomerController {
       
       model.addAttribute("c",dao.findByCust_No(cust_no));
    }
-
 }

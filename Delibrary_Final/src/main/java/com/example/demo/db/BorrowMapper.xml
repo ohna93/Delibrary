@@ -19,6 +19,11 @@
 		update Borrow set B_COUNT=#{B_COUNT}-1 where B_NO=#{B_NO}
 	</update>
 	 -->
+	 
+	<!-- 모든 정보 가져오기[재성] -->
+	<select id="findAll" resultType="borrowVO">
+		select * from borrow
+	</select>
 	
 </mapper>
 

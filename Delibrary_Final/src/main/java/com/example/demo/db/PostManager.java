@@ -140,6 +140,15 @@ public class PostManager {
 	      session.close();
 	      return list;
 	   }
+	   
+	 //게시판 전체글 가져오기[재성]
+		public static List<PostVO> findAll_manager(){
+			List<PostVO> list = null;
+			SqlSession session=sqlSessionFactory.openSession();
+			list=session.selectList("post.findAll");
+			session.close();
+			return list;
+		}
 }
 
 

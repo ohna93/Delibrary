@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" />
 <link rel="stylesheet" href="css/style.css">
-
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"crossorigin="anonymous"></script>
@@ -25,6 +25,13 @@
 <!-- 외부 CSS, JS 파일 링크 -->
 <link rel="stylesheet" href="css/HomeCSS.css">
 <script type="text/javascript" src="/js/HomeJS.js"></script>
+
+<!-- 관리자 페이지 script, css -->
+<script type="text/javascript">
+	window.onload = function() {
+		
+	}
+</script>
 
 </head>
 <body>
@@ -74,25 +81,43 @@
 					</li>
 				</ul>
 				<ul id="app" class="navbar-nav ml-auto">
+        <ul id="app" class="navbar-nav ml-auto">
+					<c:if test="${cust_no == 1}">
+						<li class="nav-item" v-bind:title="mamagerpage">
+							<a href="ManagerPage.do" class="nav-link"><i class="fas fa-crown"></i></a><p class="sr-only">관리자페이지</p>
+						</li>
+					</c:if>
 					<c:if test="${cust_no == null}">
 						<li class="nav-item" v-bind:title="login">
-							<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a>
+							<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a><p class="sr-only">로그인</p>
 						</li>
 						<li class="nav-item" v-bind:title="signup">
-							<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a>
+							<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a><p class="sr-only">회원가입</p>
 						</li>
 					</c:if>
 					<c:if test="${cust_no != null}">
 						<li class="nav-item" v-bind:title="logout">
-							<a href="logout.do" class="nav-link"><i class="fas fa-sign-out-alt"></i></a>
+							<a href="logout.do" class="nav-link"><i class="fas fa-sign-out-alt"></i></a><p class="sr-only">로그아웃</p>
 						</li>
 					</c:if>
 					<li class="nav-item" v-bind:title="bookcart">
-						<a href="sitemap.html" class="nav-link"><i class="fas fa-book"></i></a>
+						<a href="sitemap.html" class="nav-link"><i class="fas fa-book"></i></a><p class="sr-only">북카트</p>
 					</li>
 					<li class="nav-item" v-bind:title="sitemap">
-						<a href="siteMap.do" class="nav-link"><i class="fas fa-map"></i></a>
+						<a href="siteMap.do" class="nav-link"><i class="fas fa-map"></i></a><p class="sr-only">사이트맵</p>
 					</li>
+					<script>
+						var app = new Vue({
+							el: '#app',	
+							data: {
+								login: '로그인',
+								signup: '회원가입',
+								bookcart: '북카트',
+								sitemap: '사이트맵',
+								logout: '로그아웃',
+								mamagerpage: '관리자페이지'
+							}});
+					</script>
 				</ul>
 			</div>
 		</div>
@@ -510,15 +535,11 @@
 	</div>
   
 	<!-- FOOTER -->
-	<footer id="main-footer" class="text-center p-4">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<p>Copyright &copy;
-					<span id="year"></span> Glozzom</p>
-				</div>
-			</div>
-		</div>
-	</footer>
+	  <div id="page-content">
+	    나브바, 헤더 등등 생략
+	  </div>
+	  <footer id="main-footer" class="text-center p-4">
+	    생략...
+	  </footer>
 </body>
 </html>

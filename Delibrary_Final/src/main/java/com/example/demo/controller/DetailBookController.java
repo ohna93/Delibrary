@@ -36,7 +36,7 @@ public class DetailBookController {
 	}
 	@RequestMapping("/detailBook.do")
 	public void list(int b_no, Model model, HttpServletRequest request,HttpServletRequest session) {
-		//int cust_no = (int)session.getAttribute("cust_no");
+		//cust_no = (int)session.getAttribute("cust_no");
 		HashMap map = new HashMap();
 		int cust_no = 1;
 

@@ -20,8 +20,8 @@ public class QnaDAO {
 		return QnaManager.getTotalCount(map);
 	}
 	//디테일
-	public PostVO getQna(HashMap map) {
-		return QnaManager.findById(map);
+	public PostVO getQna(int p_id) {
+		return QnaManager.findById(p_id);
 	}
 	//새글 Id 불러오기
 	public int getNextId() {
