@@ -6,6 +6,10 @@
 	<!-- 전체 게시글수 -->
 	<select id="selectCount" resultType="java.lang.Integer">
 		select count(*) from post where p_no like ''||#{group}||'%'
+		<if test="search != null and search != '' and option != null and option != ''">
+		 		and ${option} like '%'||#{search}||'%' 
+		 	</if> 
+	 	order by p_no desc
 	</select>
 	<!-- 전체 게시글 목록 -->
 	<select id="selectAll" resultType="postVO">
@@ -37,12 +41,12 @@
 
 	<!-- 새글 작성 -->
 	<insert id="insert">
-		insert into post(p_id,p_no,p_title,p_writer,p_content,p_hit,p_regdate,fname,cust_no) values(#{p_id},#{p_no},#{p_title},#{p_writer},#{p_content},#{p_hit},sysdate,#{fname},#{cust_no})
+		insert into post(p_id,p_no,p_title,p_writer,p_content,p_hit,p_regdate,fname,cust_no,p_option) values(#{p_id},#{p_no},#{p_title},#{p_writer},#{p_content},#{p_hit},sysdate,#{fname},#{cust_no},#{p_option})
 	</insert>	
 
 	<!-- 게시글 수정 -->
 	<update id="update">
-		update post set p_title=#{p_title},p_content=#{p_content},fname=#{fname} where p_id=#{p_id} and cust_no=#{cust_no}
+		update post set p_title=#{p_title},p_content=#{p_content},fname=#{fname},p_option=#{p_option} where p_id=#{p_id} and cust_no=#{cust_no}
 	</update>
 	
 	<!-- 게시글 삭제 -->

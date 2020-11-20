@@ -19,7 +19,8 @@
   <title>커뮤니티 - 딜리브러리</title>
 </head>
 
-<body>
+<body class="d-flex flex-column">
+  <div id="page-content">
 	<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark p-0">
 		<div class="container">
 			<a href="Home.do" class="navbar-brand"><img alt="딜리브러리" src="img/logo_bg_dark.jpg" height="20" class="pl-3 mb-1"></a>
@@ -100,7 +101,7 @@
 			</div>
 		</div>
 	</nav>
-  
+	  
 	<!-- 커뮤니티 헤더 -->
 	<header id="page-header">
 		<div class="container">
@@ -121,21 +122,39 @@
 	</header>
 	
 	<!-- MAIN SECTION -->
-	<!-- 사이드바 -->
 	<section id="contact" class="py-3">
+		<!-- 사이드바 -->
 		<div class="container">
 		  <div class="row">
 			<div class="col-md-3">
-			  <div class="sidebar">
-					<div class="side-head">
-						<h4 class="text-light">커뮤니티</h4>
-					</div>
-					<ul class="list-group list-group-flush mb-5">
-						<li class="list-group-item active text-dark"><a href="postList.do?group=20">창작물게시판</a></li>
-						<li class="list-group-item"><a href="postList.do?group=30">중고장터</a></li>
-						<li class="list-group-item"><a href="postList.do?group=60">자유게시판</a></li>
-					</ul>
-			  </div>
+				<c:choose>
+					<c:when test="${group eq 10 || group eq 40 }">
+						<div class="sidebar">
+							<div class="side-head">
+								<h4 class="text-light">도서관소개</h4>
+							</div>
+							<ul class="list-group list-group-flush mb-5">
+								<li class="list-group-item"><a href="#">대출/반납/연장</a></li>
+								<li id="post10" class="list-group-item"><a href="postList.do?group=10">공지사항</a></li>
+								<li class="list-group-item"><a href="faqViewpage.do">자주묻는질문</a></li>
+								<li id="post40" class="list-group-item"><a href="postList.do?group=40">묻고답하기</a></li>
+								<li class="list-group-item"><a href="addrViewpageAPI.do">오시는길</a></li>
+							</ul>
+					  </div>		
+					</c:when>
+					<c:otherwise>
+						<div class="sidebar">
+							<div class="side-head">
+								<h4 class="text-light">커뮤니티</h4>
+							</div>
+							<ul class="list-group list-group-flush mb-5">
+								<li id="post20" class="list-group-item"><a href="postList.do?group=20">창작물게시판</a></li>
+								<li id="post30" class="list-group-item"><a href="postList.do?group=30">중고장터</a></li>
+								<li id="post60" class="list-group-item"><a href="postList.do?group=60">자유게시판</a></li>
+							</ul>
+					  </div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			
 			<!-- 메인내용 -->
@@ -178,25 +197,26 @@
                   </div>
                   <div class="card-body">
 											<div class="form-group">
-											<c:if test="${group eq 20}">
-												<label for="category">장르</label>
-	                        <select class="form-control">
-														<option value="" selected>소설</option>
-	                          <option value="">에세이</option>
-	                          <option value="">시</option>
-	                          <option value="">기타</option>
-	                        </select>
-                        </c:if>
-                        <c:if test="${group eq 30}">
-												<label for="category">지역</label>
-	                        <select class="form-control">
-														<option value="" selected>서울</option>
-	                          <option value="">경기남부</option>
-	                          <option value="">경기북부</option>
-	                          <option value="">인천</option>
-	                        </select>
-                        </c:if>
-                      </div>
+												<c:if test="${group eq 20}">
+													<label for="category">장르</label>
+													<select class="form-control" name="p_option" size="1">
+														<option value="소설">소설</option>
+														<option value="에세이">에세이</option>
+														<option value="시">시</option>
+														<option value="기타">기타</option>
+													</select>
+												</c:if>
+												<c:if test="${group eq 30}">
+													<label for="category">지역</label>
+													<select class="form-control" name="p_option" size="1">
+														<option value="서울">서울</option>
+														<option value="경기남부">경기남부</option>
+														<option value="경기북부">경기북부</option>
+														<option value="인천">인천</option>
+													</select>
+												</c:if>
+												<c:if test="${group==60||group==10||group==40}"><input type="hidden" name="p_option" value=""></c:if>
+												</div>
 											<div class="form-group">
 												<label for="title">제목</label>
 												<input type="text" class="form-control" name="p_title" value="${post.p_title }" placeholder="제목을 입력하세요.">
@@ -206,7 +226,6 @@
                         <div>
                           <input type="file" name="uploadFile" value="${post.fname }" class="input-file">
                           <img alt="${post.fname }" src="/img/${post.fname }" height="100">
-                          ${post.cust_no }, ${c.cust_no}
                         </div>
                       </div>
                       <div class="form-group">
@@ -224,6 +243,7 @@
     	</div>
   	</div>
   </section>
+  </div>
 
   <!-- FOOTER -->
   <footer id="main-footer" class="text-center p-4">
@@ -246,6 +266,13 @@
     // Get the current year for the copyright
     $('#year').text(new Date().getFullYear());
 
+  </script>
+  
+  <!-- 사이드바 열려있는 게시판에 active 속성 붙여주기 -->
+  <script type="text/javascript">
+  	if(${group}){
+			document.getElementById('post'+${group}).classList.add('active');
+		}
   </script>
 </body>
 

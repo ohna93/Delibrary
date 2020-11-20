@@ -5,7 +5,7 @@
 <mapper namespace="reply">
 	<!-- 댓글 불러오기 -->
 	<select id="selectAll" resultType="replyVO">
-		select * from reply where p_id=#{p_id}
+		select * from reply where p_id=#{p_id} order by re_no
 	</select>
 
 	<!-- 다음 댓글번호 -->

@@ -17,6 +17,7 @@ public class PostVO {
 //	private int fsize;
 	private MultipartFile uploadFile;
 	private int fol_no;
+	private String p_option;
 	
 	
 	public PostVO() {
@@ -31,7 +32,7 @@ public class PostVO {
 	}
 	
 	public PostVO(int p_id, int p_no, String p_title, String p_writer, String p_content, int p_hit, Date p_regdate,
-			int cust_no, String fname, MultipartFile uploadFile) {
+			int cust_no, String fname, MultipartFile uploadFile, String p_option) {
 		super();
 		this.p_id = p_id;
 		this.p_no = p_no;
@@ -44,6 +45,7 @@ public class PostVO {
 		this.fname = fname;
 //		this.fsize = fsize;
 		this.uploadFile = uploadFile;
+		this.p_option=p_option;
 	}
 	
 	//용택 postVO 에 생성자 추가 
@@ -61,10 +63,16 @@ public class PostVO {
 			this.fol_no = fol_no;
 			this.fname = fname;
 		}
-	
 	public void setIdAndNo(int p_id, int p_no) {
 		this.p_id=p_id;
 		this.p_no=p_no;
+	}
+	public String getP_option() {
+		return p_option;
+	}
+	
+	public void setP_option(String p_option) {
+		this.p_option = p_option;
 	}
 	public String getFname() {
 		return fname;
