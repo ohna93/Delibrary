@@ -23,6 +23,7 @@ public class CustomerVO {
 	private String m_phone;
 	private String fname;
 	private Date birthday;
+	private String manager;
 	private MultipartFile uploadFile;
 }
 

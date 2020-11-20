@@ -6,7 +6,7 @@
 
 <!-- 유림 회원가입 탈퇴 회원넘버 -->
 	<insert id="insertCustomer" parameterType="customerVO">
-		insert into customer values(#{cust_no}, #{email}, #{pw}, #{addr}, #{addr2},  #{nickname}, #{interest}, #{name}, #{m_phone}, #{birthday},  #{fname})
+		insert into customer values(#{cust_no}, #{email}, #{pw}, #{addr}, #{addr2},  #{nickname}, #{interest}, #{name}, #{m_phone}, #{birthday},  #{fname}, #{manager})
 	</insert>
 
 	<select id="login" resultType="customerVO">
