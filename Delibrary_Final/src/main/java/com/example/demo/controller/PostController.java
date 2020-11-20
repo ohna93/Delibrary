@@ -68,7 +68,7 @@ public class PostController {
 		totalCount = dao.getTotalCount(map);
 		totalPage = (int)Math.ceil( (double)totalCount/pageSIZE ) ;
 		int start = (pageNUM-1)*pageSIZE + 1;
-		int end = start + pageSIZE-1;
+		int end = start + pageSIZE-2;
 		if(end > totalCount) {
 			end = totalCount;
 		}
@@ -76,7 +76,7 @@ public class PostController {
 		model.addAttribute("list", dao.findAll(map));
 		model.addAttribute("group", group);
 		model.addAttribute("start", start-1);
-		model.addAttribute("end", end-1);
+		model.addAttribute("end", end);
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("totalPage", totalPage);
 	}
@@ -84,7 +84,7 @@ public class PostController {
 	//게시글 상세보기
 	//전체 댓글목록
 	@RequestMapping("postDetail.do")
-	public void detail(int p_id, int group, Model model) {
+	public void detail(int p_id, int group, Model model, HttpServletRequest request) {
 		updateHit=dao.updateHit(p_id);
 	      
 		HashMap map=new HashMap();
@@ -98,6 +98,10 @@ public class PostController {
 		model.addAttribute("post",dao.findById(map));
 		model.addAttribute("group", group);
 		model.addAttribute("listReply",re_dao.findAll(map));
+		
+		//로그인된 회원번호 받아오기
+		HttpSession session=request.getSession(); 
+		session.setAttribute("cust_no", session.getAttribute("cust_no"));
 	}
    
 	//새글 작성
@@ -252,6 +256,4 @@ public class PostController {
 		System.out.println("DEL re:   "+re);
 		return Integer.toString(re);
 	}
-	
-	
 }

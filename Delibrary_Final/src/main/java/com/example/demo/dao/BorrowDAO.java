@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,5 +44,10 @@ public class BorrowDAO {
 	}
 	public int calB_no(int cust_no) {
 		return BorrowManager.calB_no(cust_no);
+
+	// 모든 정보 가져오기[재성]
+	public List<BorrowVO> findAll() {
+		return BorrowManager.findAll();
+
 	}
 }

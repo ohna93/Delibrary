@@ -17,7 +17,8 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
 <link rel="stylesheet" type="text/css" href="css/folder.css">
-<link rel="stylesheet" type="text/css" href="css/book.css">
+<link rel="stylesheet" type="text/css" href="css/book_detail.css">
+<link rel="stylesheet" type="text/css" href="css/wang.css">
 
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -378,9 +379,9 @@ $( function(){
 	
 		          <!-- Search -->
 		          <div class="catalog-search">
-		            <input class="shuffle-search input_field " type="search" autocomplete="off" value="" maxlength="128" id="input-search" placeholder="search book" />
+		            <input class="shuffle-search input_field " type="search" autocomplete="off" value="" maxlength="128" id="input-search" />
 		            <label class="input_label" for="input-search">
-		              <span class="input_label-content"></span>
+		              <span class="input_label-content">search library</span>
 		              <span class="input_label-search"></span>
 		            </label>
 		          </div>

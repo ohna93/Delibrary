@@ -1,69 +1,61 @@
-@charset "EUC-KR";
+/*
+ì—° f8f9fa
+ì§„ 343a40
+*/
 
-/* À¯¸²Ãß°¡ */
-
-/* 1. È¸¿ø°¡ÀÔÆäÀÌÁö */
-.btn-Customer {
-  border-radius: 3px;
+@media all and (min-width: 992px) {
+  .navbar .nav-item .dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    margin-top: 0;
+  }
+  .navbar .dropdown-menu.fade-down {
+    top: 80%;
+    transform: rotateX(-75deg);
+    transform-origin: 0% 0%;
+  }
+  .navbar .dropdown-menu.fade-up {
+    top: 180%;
+  }
+  .navbar .nav-item:hover .dropdown-menu {
+    transition: 0.3s;
+    opacity: 1;
+    visibility: visible;
+    top: 100%;
+    transform: rotateX(0deg);
+  }
 }
 
-.email {
-  margin: -12px 0 15px 0;
+.sidebar {
+  border: 1px solid gainsboro;
+}
+.side-head {
+  background: url('../img/side-head.jpg');
+  padding: 40px;
 }
 
-#insertCustomer {
-  width: 500px;
-  margin: auto;
+body {
+  overflow-x: hidden;
 }
 
-.signup_required {
-  color: coral;
+.icons {
+  height: 15px;
 }
 
-.pw_message {
-  color: red;
-  margin-top: -1px;
+.searchbar {
+  border-radius: 25px;
+  padding: 5px 25px;
 }
 
-#pw_match,
-#pw_length,
-#pw_ok {
-  display: none;
+#home-icons p {
+  font-size: 14px;
 }
 
-/* 2. ·Î±×ÀÎ */
-#loginPage {
-  width: 500px;
-  margin: auto;
+.btn {
+  border-radius: 25px;
 }
-
-.heroTitle {
-  font-family: "Merriweather", serif;
-  font-weight: 100;
-  margin: 70px 0 10px 0;
-  text-align: center;
-}
-
-.heroTitle_dot {
-  color: cornflowerblue;
-  font-family: "Noto San Serif KR", serif;
-  font-weight: 600;
-}
-
-
-.heroTitle_kor {
-  font-family: "Noto Serif KR";
-  font-weight: 300;
-}
-
-#loginInfo {
-  margin-bottom: 200px;
-}
-
-.heroLine {
-  border: 1px solid midnightblue;
-}
-/* À¯¸²Ãß°¡ ³¡ */
 
 .navbar .nav-link {
   font-size: 14px;
@@ -159,31 +151,23 @@
 #main-footer {
   background: #000;
   color: #fff;
+  flex-shrink: none;
 }
 
-@media all and (min-width: 992px) {
-  .navbar .nav-item .dropdown-menu {
-    display: block;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s;
-    margin-top: 0;
-  }
-  .navbar .dropdown-menu.fade-down {
-    top: 80%;
-    transform: rotateX(-75deg);
-    transform-origin: 0% 0%;
-  }
-  .navbar .dropdown-menu.fade-up {
-    top: 180%;
-  }
-  .navbar .nav-item:hover .dropdown-menu {
-    transition: 0.3s;
-    opacity: 1;
-    visibility: visible;
-    top: 100%;
-    transform: rotateX(0deg);
-  }
+/*  ------------------------------------------- */
+/*    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      */
+/*    !!!!!!!  ê³µí†µë¶€ë¶„ ì¶”ê°€ css ì…ë‹ˆë‹¤  !!!!!!!      */
+/*    !!!!!!!      ì§€ìš°ì§€ ë§ˆì„¸ìš”       !!!!!!!      */
+/*    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      */
+/*  ------------------------------------------- */
+
+
+html, body{
+   height: 100%;
+}
+
+#page-content{
+   flex: 1 0 auto;
 }
 
 .sidebar {
@@ -193,13 +177,8 @@
   background: url('../img/side-head.jpg');
   padding: 40px;
 }
-
-body {
-  overflow-x: hidden;
-}
-
-.icons {
-  height: 15px;
+.sidebar a{
+   color: #343a40;
 }
 
 .searchbar {
@@ -207,7 +186,112 @@ body {
   padding: 5px 25px;
 }
 
-#home-icons p {
-  font-size: 14px;
+.list-group .active{
+   background-color: #f8f9fa;
+   color: #343a40;
+   border-color: #d8d8d8;
+} 
+
+#tbody a{
+   color: #343a40;
 }
 
+/* ìœ ë¦¼ì¶”ê°€ */
+
+/* 1. íšŒì›ê°€ì…í˜ì´ì§€ */
+.btn-Customer {
+  border-radius: 3px;
+}
+
+.email {
+  margin: -12px 0 15px 0;
+}
+
+#insertCustomer {
+  width: 500px;
+  margin: auto;
+}
+
+.signup_required {
+  color: coral;
+}
+
+.pw_message {
+  color: red;
+  margin-top: -1px;
+}
+
+#pw_match,
+#pw_length,
+#pw_ok {
+  display: none;
+}
+
+#email_ok_ok,
+#email_ok {
+  margin-top: -12px;
+  display: none;
+}
+
+/* íšŒì›ê°€ì… ok */
+
+#insertCustomerOk {
+  width: 800px;
+  margin: auto;
+  align-items: center;
+}
+
+.jumbotron {
+  margin-bottom: 175px;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+}
+
+.insertCustomerImg {
+  margin-top: -40px;
+  align-items: center;
+}
+
+/* 2. ë¡œê·¸ì¸ */
+#loginPage {
+  width: 500px;
+  margin: auto;
+}
+
+.heroTitle {
+  font-family: "Merriweather", serif;
+  font-weight: 100;
+  margin: 70px 0 10px 0;
+  text-align: center;
+}
+
+.heroTitle_dot {
+  color: cornflowerblue;
+  font-family: "Noto San Serif KR", serif;
+  font-weight: 600;
+}
+
+.heroTitle_kor {
+  font-family: "Noto Serif KR";
+  font-weight: 300;
+}
+
+#loginInfo {
+  margin-bottom: 200px;
+}
+
+.heroLine {
+  border: 1px solid midnightblue;
+}
+
+/* íŒ¨ìŠ¤ì›Œë“œ ë³€ê²½í˜ì´ì§€ */
+#pwChangePage {
+  width: 700px;
+  margin: auto;
+}
+
+.pw-changeForm {
+  width: 500px;
+}
+
+/* ìœ ë¦¼ì¶”ê°€ ë */

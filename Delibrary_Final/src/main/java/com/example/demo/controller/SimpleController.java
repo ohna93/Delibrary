@@ -20,4 +20,9 @@ public class SimpleController {
 	public void sitemap() {
 		
 	}
+	
+	@RequestMapping("/about.do")
+	   public void about() {
+	      
+	}
 }

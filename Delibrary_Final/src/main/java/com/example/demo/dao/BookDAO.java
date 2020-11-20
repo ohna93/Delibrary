@@ -41,5 +41,10 @@ public class BookDAO {
 	public List<BookVO> MyLibrary_list(HashMap map){
 		return BookManager.MyLibrary_list(map);
 	}
+	
+	// 도서테이블 모든 정보 출력[재성]
+	public List<BookVO> findAll() {
+		return BookManager.findAll();
+	}
 }
 

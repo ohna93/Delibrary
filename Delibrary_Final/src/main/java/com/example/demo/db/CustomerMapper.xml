@@ -6,7 +6,7 @@
 
 <!-- 유림 회원가입 탈퇴 회원넘버 -->
 	<insert id="insertCustomer" parameterType="customerVO">
-		insert into customer values(#{cust_no}, #{email}, #{pw}, #{addr}, #{addr2},  #{nickname}, #{interest}, #{name}, #{m_phone}, #{birthday},  #{fname})
+		insert into customer values(#{cust_no}, #{email}, #{pw}, #{addr}, #{addr2},  #{nickname}, #{interest}, #{name}, #{m_phone}, #{birthday},  #{fname}, #{manager})
 	</insert>
 
 	<select id="login" resultType="customerVO">
@@ -26,9 +26,9 @@
 		select * from customer where name=#{name} and m_phone=#{m_phone}
 	</select>
  
-  <!-- 회원정보 전체출력 [현왕] -->
+  <!-- 회원정보 전체출력 [현왕] order by 추가 [재성] -->
   <select id="selectAll" resultType="customerVO">
-    select * from customer
+    select * from customer order by cust_no
   </select>
   
   <!-- 회원정보 갖고오기 [현왕] -->
@@ -43,7 +43,7 @@
   </update>
   
   <select id="getLoginInfo" resultType="customerVO">
-  	select cust_no, email, pw from customer where email=#{email} and pw=#{pw}
+  	select cust_no, email, pw, name from customer where email=#{email} and pw=#{pw}
   </select>
 </mapper>
 

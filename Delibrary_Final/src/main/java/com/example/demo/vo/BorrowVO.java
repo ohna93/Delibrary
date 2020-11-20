@@ -10,15 +10,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class BorrowVO {
 	private int bor_no;
-	@JsonFormat(pattern = "yyyy-MM-DD")
+
+	//@JsonFormat(pattern = "yyyy-MM-DD")
 	private Date bor_date;
-	@JsonFormat(pattern = "yyyy-MM-DD")
+	//@JsonFormat(pattern = "yyyy-MM-DD")
+
 	private Date return_date;
 	private String return_ok;
 	private int cust_no;
 	private int b_no;
+
 	
 	
 	public int getBor_no() {
@@ -71,5 +77,8 @@ public class BorrowVO {
 	}
 	
 	
+}
+
+
 }
 

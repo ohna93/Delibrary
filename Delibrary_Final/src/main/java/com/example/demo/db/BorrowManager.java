@@ -2,6 +2,7 @@ package com.example.demo.db;
 
 import java.io.InputStream;
 import java.util.HashMap;
+
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -87,5 +88,13 @@ public static SqlSessionFactory sqlSessionFactory;
 		return n;
 	}
 	
-	
+	// 모든 정보 가져오기[재성]
+	public static List<BorrowVO> findAll() {
+		List<BorrowVO> list = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		list = session.selectList("borrow.findAll");
+		System.out.println("데이터 수 : " + list.size());
+		session.close();
+		return list;
+	}
 }

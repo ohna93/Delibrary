@@ -34,8 +34,6 @@ public class CustomerController {
    }
 
    // 홈화면
-   //test11
-   //test22
    @RequestMapping("/Home.do")
    public void home(Model model, CustomerVO custVO, String loginOk, HttpServletRequest request) {
       if (request.getParameter("loginOk") != null) {
@@ -46,7 +44,6 @@ public class CustomerController {
          
          System.out.println("password 시작::::::::::"+password); 
                   
-         
        //패스워드 암호화
          
          password = UserSha256.encrypt(password);
@@ -63,9 +60,14 @@ public class CustomerController {
          
          if (email.equals(custVO.getEmail()) && password.equals(custVO.getPw())) {
             session.setAttribute("cust_no", custVO.getCust_no());
-            request.setAttribute("cust_no", custVO.getCust_no());
+
+//            request.setAttribute("cust_no", custVO.getCust_no());
+            session.setAttribute("cust_name", custVO.getName());
+//            System.out.println(custVO.getName());
+//            request.setAttribute("cust_name", custVO.getName());
 
          }
+         
       }
 
       model.addAttribute("SRlist", dao2.getStaffRecommend());
@@ -74,8 +76,9 @@ public class CustomerController {
       model.addAttribute("HMakinglist", dao2.getHomePost(20));
       model.addAttribute("HMarketlist", dao2.getHomePost(30));
 
-      HttpSession session = request.getSession();
-      request.setAttribute("cust_no", session.getAttribute("cust_no"));
+//      HttpSession session = request.getSession();
+//      request.setAttribute("cust_no", session.getAttribute("cust_no"));
+//      request.setAttribute("cust_name", session.getAttribute("cust_name"));
    }
 
    
@@ -87,8 +90,8 @@ public class CustomerController {
    
    //회원가입 ok
    @RequestMapping(value="/insertCustomer.do", method=RequestMethod.POST)
-   public ModelAndView insertCustomerOk(CustomerVO c, HttpServletRequest request, MultipartFile uploadFile) {
-      ModelAndView mav = new ModelAndView("redirect:/LoginPage.do");
+   public ModelAndView insertCustomerOk(CustomerVO c, HttpServletRequest request, MultipartFile uploadFile, HttpSession session) {
+      ModelAndView mav = new ModelAndView("redirect:/insertCustomerSuccess.do");
       
       // 파일 업로드
       String path = request.getRealPath("img");
@@ -129,6 +132,9 @@ public class CustomerController {
       //생일(있었는데요... 없었습니다)
       c.setBirthday(Date.valueOf("2020-01-01"));
       
+      //매니저
+     c.setManager("N");
+      
       //장르선택
       String[] values = request.getParameterValues("genre");
     		String interest = "";
@@ -144,16 +150,29 @@ public class CustomerController {
     		c.setInterest(interest);
       
       int re = dao.insertCustomer(c);
+      
+      session.setAttribute("email", c.getEmail());
+      
       if(re<0) {
          mav.setViewName("/error");
       }
+      
       return mav;
    }
    
+   
+	//회원가입 환영
+	@RequestMapping(value="/insertCustomerSuccess.do")
+	public void insertCustomerOk(HttpSession session){
+		String email = (String)session.getAttribute("email");
+		System.out.println(email);
+	}
+	
+
    //로그인 FORM
    @RequestMapping(value="/LoginPage.do")
    public void logInForm() {
-      
+	
    }
 
    //로그아웃
@@ -213,5 +232,4 @@ public class CustomerController {
       
       model.addAttribute("c",dao.findByCust_No(cust_no));
    }
-
 }

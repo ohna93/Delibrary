@@ -1,20 +1,14 @@
 package com.example.demo.controller;
 
 
-import java.awt.print.Book;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,9 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Message;
 import com.example.demo.dao.BookDAO;
 import com.example.demo.dao.BorrowDAO;
-import com.example.demo.dao.FolderDAO;
 import com.example.demo.vo.BorrowVO;
-import com.example.demo.vo.FolderVO;
 import com.google.gson.Gson;
 
 @RestController
@@ -33,13 +25,10 @@ public class BorrowController {
 	@Autowired
 	private BorrowDAO dao;
 	
+	public void setDao(BorrowDAO dao) {
+		this.dao = dao;
+	}
 	
-	
-//	public void setDao(BorrowDAO dao) {
-//		this.dao = dao;
-//	}
-	
-	//테스트22
 	@Autowired
 	private BookDAO	bookdao;
 	

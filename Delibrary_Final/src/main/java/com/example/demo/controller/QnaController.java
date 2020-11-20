@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,9 +29,10 @@ import lombok.Setter;
 @Controller
 public class QnaController {
 	
-	public static int pageSIZE =  5;
-	public static int totalCount  = 0;
-	public static int totalPage = 1;
+	public static int pageSIZE =  3;	//한 페이지에 보여줄 게시글의 수
+	public static int pageMAX =  5;		//페이징바에 한번에 보여줄 수
+	public static int totalCount  = 0;	
+	public static int totalPage = 0;	
 	public static int updateHit = 0;
 	public static int nextId;
 	public static int nextNo;
@@ -59,49 +61,86 @@ public class QnaController {
 				search = (String)session.getAttribute("search");
 				option = (String)session.getAttribute("option");
 			}
-
-			 HashMap map=new HashMap();
 			
-			totalCount = dao.getTotalCount(map);
-			totalPage = (int)Math.ceil( (double)totalCount/pageSIZE ) ;
-			int start = (pageNUM-1)*pageSIZE + 1;
-			int end = start + pageSIZE -1;
-			if(end > totalCount) {
-				end = totalCount;
-			}
+			HashMap map=new HashMap();
 			
-			map.put("start",start);
-			map.put("end",end);
 			map.put("search", search);
 			map.put("option", option);
 			
+			totalCount = dao.getTotalCount(map);
+			totalPage = (int)Math.ceil( (double)totalCount/pageSIZE );
+			
+			// 페이지 버튼 숫자
+			int startPage = (pageNUM-1)/pageMAX*pageMAX+1;
+			int endPage = startPage+pageMAX-1;
+			if(endPage>totalPage) {
+				endPage = totalPage;
+			}
+			
+			String pageStr="";
+			if(startPage>1) {
+				pageStr += "<a href='QnaList.do?pageNo="+(startPage-1)+"'> < </a>"+"  ";
+			}
+			for(int i=startPage;i<=endPage;i++) {
+				pageStr += "<a href='QnaList.do?pageNo="+i+"'>"+i+"</a>"+"  ";
+			}
+			if(totalPage>endPage) {
+				pageStr += "<a href='QnaList.do?pageNo="+(endPage+1)+"'> > </a>";
+			}
+			
+			// 페이지에 출력되는 레코드 번호
+			int start = (pageNUM-1)*pageSIZE+1;
+			int end = start+pageSIZE-1;
+			if(end>totalCount) {
+				end = totalCount;
+			}
+			
+			map.put("start", start);
+			map.put("end", end);
 		
 			model.addAttribute("list", dao.findAll(map));
-			model.addAttribute("start", start-1);
-			model.addAttribute("end", end-1);
+			model.addAttribute("start", start);
+			model.addAttribute("end", end);
 			model.addAttribute("totalCount", totalCount);
 			model.addAttribute("totalPage", totalPage);
+			model.addAttribute("pageStr", pageStr);
 			
 			if(search != null) {
 				session.setAttribute("search", search);
 				session.setAttribute("option", option);
 			}
-
+			
+			//nav바에 ~님 하기위한 코드
+//			model.addAttribute("cust_name",c_dao.findByCust_No((int)session.getAttribute("cust_no")).getName());
+			
 		}
+		
+	
 	
 		//상세보기 + 댓글
 		@RequestMapping("/QnaDetail.do")
-		public void detail(int p_id, Model model) {
+		public void detail(HttpServletRequest request, Model model) {
+			int p_id = 0;
+			
+			if(request.getParameter("p_id")!=null) {
+				p_id = Integer.parseInt(request.getParameter("p_id"));
+			}
+			System.out.println(p_id);
 			
 			updateHit = dao.updateHit(p_id);
 			
-			HashMap map=new HashMap();
-		    map.put("p_id", p_id);
+			HashMap map = new HashMap();
+			map.put("p_id", p_id);
 			
-			model.addAttribute("qna", dao.getQna(map));
+			model.addAttribute("qna", dao.getQna(p_id));
 			model.addAttribute("listReply",re_dao.findAll(map));
+		
+			//로그인된 회원번호 받아오기
+			HttpSession session=request.getSession(); 
+			session.setAttribute("cust_no", session.getAttribute("cust_no"));
 		}
 	
+		
 	
 	   //새글 작성
 	   @RequestMapping(value="/QnaInsert.do", method = RequestMethod.GET)
@@ -153,7 +192,7 @@ public class QnaController {
 			map.put("p_hit", p_hit);
 			map.put("fname", fname);
 	      
-			ModelAndView mav = new ModelAndView("redirect:/QnaList.do");
+			ModelAndView mav = new ModelAndView("redirect:/QnaList.do?option=p_title&search=");
 			int re=dao.insert(map);	
 		     if(re<=0) {
 		        mav.addObject("msg", "게시글 작성 실패");
@@ -171,7 +210,7 @@ public class QnaController {
 		   map.put("cust_no", cust_no);
 		      
 		   model.addAttribute("c", c_dao.findByCust_No(cust_no));
-		   model.addAttribute("qna", dao.getQna(map));
+		   model.addAttribute("qna", dao.getQna(p_id));
 	   }
 	   @RequestMapping(value="QnaUpdate.do", method = RequestMethod.POST)
 	   public ModelAndView update(HttpServletRequest request, PostVO m, MultipartFile uploadFile) {
@@ -210,27 +249,18 @@ public class QnaController {
 	      return mav;
 	   }	   
 	   
-	   //게시글 삭제
-	   @RequestMapping(value = "QnaDelete.do", method = RequestMethod.GET)
-	   public void delete(int p_id, int cust_no, Model model) {
-	      model.addAttribute("p_id", p_id);
-	      
-	   }
-	   @RequestMapping(value = "QnaDelete.do", method = RequestMethod.POST)
-	   public ModelAndView delete(HttpServletRequest request, int p_id, int cust_no) {
-	      
-	      System.out.println(p_id+", "+cust_no);
-	      
-	      HashMap map=new HashMap();
-	      map.put("p_id", p_id);
-	      map.put("cust_no", cust_no);
-	      
-	      ModelAndView mav = new ModelAndView("redirect:/QnaList.do");
-	      int re=dao.delete(map);
-	      if(re<=0) {
-	         mav.addObject("msg", "게시글 삭제 실패");
-	         mav.setViewName("error");
-	      }
-	      return mav;
-	   }
+	    //게시글 삭제
+	    @RequestMapping(value = "QnaDelete.do", method = RequestMethod.POST)
+		@ResponseBody
+		public int delete(int p_id, int cust_no, HttpServletRequest request) {
+			int re=-1;
+
+			HashMap map=new HashMap();
+			map.put("p_id",p_id);
+			map.put("cust_no",cust_no);
+			
+			re=dao.delete(map);
+
+			return re;
+		}
 }

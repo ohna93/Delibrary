@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -11,18 +12,28 @@ import com.example.demo.vo.PostVO;
 @Repository
 public class HomeDAO {
    
-   // È¨È­¸é »ç¼­ÃßÃµµµ¼­ ¸®½ºÆ® »Ì¾Æ¿À´Â  ¸Ş¼Òµå
+   // È¨È­ï¿½ï¿½ ï¿½ç¼­ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì¾Æ¿ï¿½ï¿½ï¿½  ï¿½Ş¼Òµï¿½
    public List<BookVO> getStaffRecommend() {
       return DBManager.getStaffRecommend();
    }
    
-   // È¨È­¸é ½ÅÀÛµµ¼­ ¸®½ºÆ® »Ì¾Æ¿À´Â ¸Ş¼Òµå
+   // È¨È­ï¿½ï¿½ ï¿½ï¿½ï¿½Ûµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì¾Æ¿ï¿½ï¿½ï¿½ ï¿½Ş¼Òµï¿½
    public List<BookVO> getNewRecommend() {
       return DBManager.getNewRecommend();
    }
    
-   // È¨È­¸é¿¡ °Ô½Ã±Û ¸®½ºÆ® »Ì¾Æ¿À´Â ¸Ş¼Òµå
+   // È¨È­ï¿½é¿¡ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì¾Æ¿ï¿½ï¿½ï¿½ ï¿½Ş¼Òµï¿½
    public List<PostVO> getHomePost(int group) {
       return DBManager.getHomePost(group);
+   }
+   
+   // ê´€ë¦¬ì í˜ì´ì§€ì—ì„œ ìˆ˜ì •í•  ë•Œ ì‚¬ìš©í•˜ëŠ” ë©”ì†Œë“œ
+   public void updateFromManager(Map map) {
+	   DBManager.updateFromManager(map);
+   }
+
+   // ê´€ë¦¬ì í˜ì´ì§€ì—ì„œ ì‚­ì œí•  ë•Œ ì‚¬ìš©í•˜ëŠ” ë©”ì†Œë“œ
+   public void deleteFromManager(Map map) {
+	   DBManager.deleteFromManager(map);
    }
 }

@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/postCss.css">
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -43,9 +44,9 @@
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
 								<li><a class="dropdown-item" href="#"> 대출/반납/연장</a></li>
 								<li><a class="dropdown-item" href="postList.do?group=10"> 공지사항 </a></li>
-								<li><a class="dropdown-item" href="#"> 자주묻는질문</a></li>
-								<li><a class="dropdown-item" href="#"> 묻고답하기 </a></li>
-								<li><a class="dropdown-item" href="#"> 오시는길 </a></li>
+								<li><a class="dropdown-item" href="faqViewpage.do"> 자주묻는질문</a></li>
+								<li><a class="dropdown-item" href="QnaList.do"> 묻고답하기 </a></li>
+								<li><a class="dropdown-item" href="addrViewpageAPI.do"> 오시는길 </a></li>
 							</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -62,31 +63,38 @@
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
 								<li><a class="dropdown-item" href="postList.do?group=20">창작물게시판</a></li>
 								<li><a class="dropdown-item" href="postList.do?group=30">중고장터</a></li>
-								<li><a class="dropdown-item" href="#">자유게시판</a></li>
+								<li><a class="dropdown-item" href="postList.do?group=60">자유게시판</a></li>
 							</ul>
 					</li>
 					<li class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">나의도서</a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
 								<li><a class="dropdown-item" href="#"> 나의도서정보</a></li>
-								<li><a class="dropdown-item" href="lentBooks.html">대출현황/이력</a></li>
+								<li><a class="dropdown-item" href="#">대출현황/이력</a></li>
 								<li><a class="dropdown-item" href="MyPage_Folder.do">내서재</a></li>
-								<li><a class="dropdown-item" href="#">개인정보수정</a></li>
+								<li><a class="dropdown-item" href="MyPage_">개인정보수정</a></li>
 							</ul>
 					</li>
 				</ul>
 				<ul id="app" class="navbar-nav ml-auto">
-					<li class="nav-item" v-bind:title="login">
-						<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a><p class="sr-only">로그인</p>
-					</li>
-					<li class="nav-item" v-bind:title="signup">
-						<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a><p class="sr-only">회원가입</p>
-					</li>
+					<c:if test="${empty cust_no }">
+						<li class="nav-item" v-bind:title="login">
+							<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a><p class="sr-only">로그인</p>
+						</li>
+						<li class="nav-item" v-bind:title="signup">
+							<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a><p class="sr-only">회원가입</p>
+						</li>
+					</c:if>
+					<c:if test="${not empty cust_no }">
+						<li class="nav-item" v-bind:title="logout">
+							<a href="logout.do?cust_no=${cust_no }" class="nav-link"><i class="fas fa-sign-out-alt"></i></a><p class="sr-only">로그아웃</p>
+						</li>
+					</c:if>
 					<li class="nav-item" v-bind:title="bookcart">
 						<a href="#" class="nav-link"><i class="fas fa-book"></i></a><p class="sr-only">북카트</p>
 					</li>
 					<li class="nav-item" v-bind:title="sitemap">
-						<a href="siteMap.do" class="nav-link"><i class="far fa-map"></i></a><p class="sr-only">사이트맵</p>
+						<a href="siteMap.do" class="nav-link"><i class="fas fa-map"></i></a><p class="sr-only">사이트맵</p>
 					</li>
 					<script>
 						var app = new Vue({
@@ -96,6 +104,7 @@
 								signup: '회원가입',
 								bookcart: '북카트',
 								sitemap: '사이트맵',
+								logout: '로그아웃'
 							}});
 					</script>
 				</ul>
@@ -156,22 +165,26 @@
 							<div class="col-md-6">
 								<span>&nbsp;</span>
 							</div>
-              <div class="col-md-2">
-                <a href="postUpdate.do?p_id=${post.p_id}&&cust_no=${post.cust_no}&&group=${group}" class="btn btn-success btn-block">
-                  <i class="fas fa-edit"></i> 수정
-                </a>
-              </div>
-              <div class="col-md-2">
-                <button id="btnDel" class="btn btn-outline-danger btn-block"  p_id="${post.p_id}" cust_no="${cust_no }" group="${group}">
-                  <i class="far fa-trash-alt"></i> 삭제
-                </button>
-              </div>
+							<c:if test="${not empty cust_no }">
+								<c:if test="${post.cust_no eq cust_no }">
+		              <div class="col-md-2">
+		                <a href="postUpdate.do?p_id=${post.p_id}&&cust_no=${post.cust_no}&&group=${group}" class="btn btn-success btn-block">
+		                  <i class="fas fa-edit"></i> 수정
+		                </a>
+		              </div>
+		              <div class="col-md-2">
+		                <button id="btnDel" class="btn btn-outline-danger btn-block"  p_id="${post.p_id}" cust_no="${cust_no }" group="${group}">
+		                  <i class="far fa-trash-alt"></i> 삭제
+		                </button>
+		              </div>
+								</c:if>
+							</c:if>
             </div>
           </div>
         </section>
 
 				<!-- 글상세 -->
-				<section id="details" class="pt-4">
+				<section id="details">
 			    <div class="container">
 			      <div class="row">
 			        <div class="col">
@@ -183,8 +196,8 @@
 										</p>
 			            </div>
 			            <div class="card-body">
-										<p class="card-text">${post.p_content}</p>
-										<c:if test="${not empty fname }">
+										<p class="card-text">${post.p_content}</p> 
+										<c:if test="${not empty post.fname }">
 											<a href="/img/${post.fname }"><img src="/img/${post.fname }" alt="${post.fname }" height="200"></a>
 										</c:if>
 									</div>
@@ -207,27 +220,30 @@
 		                <div class="form-group">
 											<textarea id="re_content" name="re_content" value="${re_content}" class="form-control" rows="3" placeholder="댓글을 입력하세요."></textarea>
 		                </div>
-										
 										<!-- 댓글목록보기 -->
-										<c:forEach var="r" items="${listReply }">
-			              <div>
-											<button id="btnDeleteReply" style="float:left" re_no="${r.re_no}" cust_no="${r.cust_no }">삭제</button>
-											<button id="btnUpdateReply" style="float:left" re_no="${r.re_no}" cust_no="${post.cust_no }">수정</button>
-											<p style="font-weight: bold; background-color: #eff3f8; padding: 5px;">${r.re_writer}</p>
-											<p style="font-size: 13px; color: #aaa;"><fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value = "${r.re_regdate }" /></p>
-											<p>${r.re_content }</p>
-			              </div>
-										
-										<!-- 
-										<table class="table table-hover table-sm">
-											<tbody>
-												<tr>
-													<td>작성자사진?</td>
-													<td>${re.re_content}</td>
-												</tr>
-											</tbody>
-										</table>
-										 -->
+			             <c:forEach var="r" items="${listReply }">
+				             <table width="100%">
+			                	<tr class="">
+			                		<td class="text-center pr-2" rowspan="3" width="10%"><img alt="" src="img/" width="50px" height="50px" class="rounded-circle" border="1"></td>
+			                		<th>${r.re_writer}</th>
+			                		<td width="20%">
+			                			<div class="text-right">
+			                				<c:if test="${not empty cust_no }">
+			                					<c:if test="${r.cust_no==cust_no }">
+													<button class="btn btn-outline-success btn-sm table-align-right block-inline btnUpdateReply" id="btnUpdateReply" re_no="${r.re_no}" cust_no="${post.cust_no }"><i class="fas fa-edit"></i></button>
+						                			<button class="btn btn-outline-danger btn-sm table-align-right block-inline btnDeleteReply" id="btnDeleteReply" re_no="${r.re_no}" cust_no="${r.cust_no }"><i class="far fa-trash-alt"></i></button>
+			                					</c:if>
+			                				</c:if>
+			                			</div>
+									</td>
+			                	</tr>
+			                	<tr>
+			                		<td colspan="2">${r.re_content }</td>
+			                	</tr>
+			                	<tr>
+			                		<td colspan="2"><small class="text-muted"><fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value = "${r.re_regdate }" /></small></td>
+			                	</tr>
+			                </table>
 			             </c:forEach>
 									</div>
 			          </div>
@@ -255,7 +271,7 @@
 		</div>
 	</footer>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 		$(function(){
 			//게시글 삭제 버튼 btnDel
 			$("#btnDel").click(function(){
@@ -283,7 +299,7 @@
 						},
 						error:function(){
 							alert("게시글 삭제에 실패하였습니다.");
-						}						
+						}
 					});
 				}
 			});
@@ -327,7 +343,7 @@
 			});
 
 			//댓글 삭제 btnDeleteReply
-			$("#btnDeleteReply").click(function(){
+			$(".btnDeleteReply").click(function(){
 				const re_no=this.getAttribute("re_no");
 				const cust_no=this.getAttribute("cust_no");
 

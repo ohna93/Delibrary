@@ -10,13 +10,11 @@
 	<typeAlias type="com.example.demo.vo.BookstoreVO" alias="bookstoreVO"/>
 	<typeAlias type="com.example.demo.vo.BookVO" alias="bookVO"/>
 	<typeAlias type="com.example.demo.vo.CategoryVO" alias="categoryVO"/>
-	<typeAlias type="com.example.demo.vo.Cust_manageVO" alias="cust_manageVO"/>
 	<typeAlias type="com.example.demo.vo.CustomerVO" alias="customerVO"/>
 	<typeAlias type="com.example.demo.vo.FilesVO" alias="filesVO"/>
 	<typeAlias type="com.example.demo.vo.My_libraryVO" alias="my_libararyVO"/>
   	<typeAlias type="com.example.demo.vo.PostVO" alias="postVO"/>
   	<typeAlias type="com.example.demo.vo.ReplyVO" alias="replyVO"/>
-  	<typeAlias type="com.example.demo.vo.StaffVO" alias="staffVO"/>
   	<typeAlias type="com.example.demo.vo.FolderVO" alias="folderVO"/>
     <typeAlias type="com.example.demo.vo.BorrowVO" alias="borrowVO"/>
   </typeAliases>

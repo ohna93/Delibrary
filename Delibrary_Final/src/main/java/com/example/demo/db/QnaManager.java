@@ -61,11 +61,11 @@ public class QnaManager {
 		return re;
 	}
 	//디테일
-	public static PostVO findById(HashMap map) {
+	public static PostVO findById(int p_id) {
 		// TODO Auto-generated method stub
 		PostVO p = null;
 		SqlSession session = sqlSessionFactory.openSession();
-		p = session.selectOne("qna.selectById",map);
+		p = session.selectOne("qna.selectById",p_id);
 		session.close();
 		return p;
 	}
@@ -104,5 +104,11 @@ public class QnaManager {
 		session.close();
 		return re;
 	}
+//////////////////////////////////////////////////////////////////////////////////////////////
+//	//QNA클릭했을 때 
+//	public static int qnaclick() {
+//		
+//		return 1;
+//	}
 }
 
