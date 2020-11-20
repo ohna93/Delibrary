@@ -26,7 +26,6 @@ import com.example.demo.vo.CustomerVO;
 import com.example.demo.vo.PostVO;
 
 @Controller
-@RestController
 public class MainController {
 	
 	@Autowired

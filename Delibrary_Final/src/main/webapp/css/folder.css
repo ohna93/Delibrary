@@ -1,7 +1,7 @@
 .folder {
     cursor: pointer;
     margin-right: -50%;
-    transform: translate(-25%, -25%);
+    transform: translate(0, 0);
     background-color: #FFD485;
     width: 70px;
     height: 50px;
@@ -72,12 +72,12 @@
 
 .grid-container {
 	display: grid;
-	justify-content: center;
-	grid-template-columns: 70px 70px 70px 70PX 70PX 70PX 70PX;
+	text-align: center;
+	grid-template-columns: 70px 70px 70px 70px 70px 70px 70px;
 	/*Make the grid smaller than the container*/
 	grid-gap: 35px;
-	padding: 80px;
-	margin-left: 10%;
+	padding: 5%;
+	
 }
 
 .grid-cont-font {
@@ -88,7 +88,6 @@
 
 
 #fol_card{
-	padding-left: 20%;
 	border: 1px solid white;
 }
 

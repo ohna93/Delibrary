@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.FolderVO;
+import com.example.demo.vo.PostVO;
 
 public class MyPageManager {
 
@@ -44,11 +45,66 @@ public static SqlSessionFactory sqlSessionFactory;
 	}
 	
 	// 폴더 속 파일 목록
-	public static FolderVO finbyFol_no(HashMap map) {
-		FolderVO f = null;
+	public static List<PostVO> finbyFol_no(HashMap map) {
+		List<PostVO> plist = null;
 		SqlSession session = sqlSessionFactory.openSession();
-		f = session.selectOne("mypage.selectByFolder", map);
+		plist = session.selectList("mypage.selectByFolder", map);
 		session.close();
-		return f;
+		return plist;
+	}
+	
+	// 나만의 게시판 메모 수정
+	public static int updateMemo(HashMap map) {
+		int re = -1;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		re = session.update("mypage.updateMemo", map);
+		session.close();
+		return re;
+	}
+	
+	// 마이페이지 전체 도서 개수
+	public static int file_cnt(int cust_no) {
+		int re = 0;
+		SqlSession session = sqlSessionFactory.openSession();
+		re = session.selectOne("mypage.selectFile_cnt", cust_no);
+		session.close();
+		return re;
+	}
+	
+	// 마이페이지 전체 도서 개수
+	public static int file_cnt_Infol(HashMap map) {
+		int re = 0;
+		SqlSession session = sqlSessionFactory.openSession();
+		re = session.selectOne("mypage.selectFile_cnt_Infol", map);
+		session.close();
+		return re;
+	}
+	
+	// 마이페이지 파일 삭제
+	public static int deleteMyPage_file(int p_id) {
+		int re =  -1;
+		SqlSession session=sqlSessionFactory.openSession(true);
+		re = session.delete("mypage.deleteMyPage_file", p_id);
+		session.close();
+		return re;
+	}
+
+	
+	// 마이페이지 폴더 삭제
+	public static int deleteMyPage_folder(int fol_no) {
+		int re =  -1;
+		SqlSession session=sqlSessionFactory.openSession(true);
+		re = session.delete("mypage.deleteMyPage_folder", fol_no);
+		session.close();
+		return re;
+	}
+	
+	//마이페이지 폴더 추가
+	public static int insertMypage_folder(HashMap map) {
+		int re = -1;
+		SqlSession session=sqlSessionFactory.openSession(true);
+		re = session.delete("mypage.insertMyPage_folder", map);
+		session.close();
+		return re;
 	}
 }

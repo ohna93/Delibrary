@@ -37,11 +37,17 @@ public class UpdateCustomerController {
 	public ModelAndView submit(HttpServletRequest request, CustomerVO c, MultipartFile uploadFile) {
 		String path = request.getRealPath("img");
 		String Email = request.getParameter("id")+"@"+request.getParameter("email");
-		
+
 		String password = request.getParameter("pw");
+		System.out.println("password:::::"+password);
 		String encPW = UserSha256.encrypt(password);
 		System.out.println("encPW:::::::"+encPW);
-		c.setPw(encPW);
+		
+		if(password.length() > 16) {
+			c.setPw(password);
+		}else {
+			c.setPw(encPW);
+		}
 		
 // ==== 현왕 주소 값 받아와서 DB로 넘기게끔 설정 ========================================================================================
 		String addr_ref = request.getParameter("addr_ref");
@@ -81,6 +87,9 @@ public class UpdateCustomerController {
 			try {
 				byte[] data = uploadFile.getBytes();
 				FileOutputStream fos = new FileOutputStream(path + "/" + fname);
+				System.out.println("path:::::::" + path);
+				System.out.println("fname:::::::" + fname);
+				System.out.println("fos:::::::" + fos);
 				fos.write(data);
 				fos.close();
 			}catch (Exception e) {
@@ -103,7 +112,7 @@ public class UpdateCustomerController {
 // ============================================ oldFname으로 변경 ==
 				File file = new File(path + "/" + oldFname);
 // ==============================================================
-				file.delete();
+//				file.delete();
 			}
 		}
 		return mav;

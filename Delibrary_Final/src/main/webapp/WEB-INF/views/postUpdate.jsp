@@ -30,9 +30,9 @@
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav ml-4">
 					<li class="nav-item dropdown">
-						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">도서관소개</a>
+						<a href="about.do" class="nav-link dropdown-toggle" data-toggle="dropdown">도서관소개</a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
-								<li><a class="dropdown-item" href="#"> 대출/반납/연장</a></li>
+								<li><a class="dropdown-item" href="about.do"> 대출/반납/연장</a></li>
 								<li><a class="dropdown-item" href="postList.do?group=10"> 공지사항 </a></li>
 								<li><a class="dropdown-item" href="faqViewpage.do"> 자주묻는질문</a></li>
 								<li><a class="dropdown-item" href="QnaList.do"> 묻고답하기 </a></li>
@@ -40,9 +40,9 @@
 							</ul>
 					</li>
 					<li class="nav-item dropdown">
-						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">도서정보</a>
+						<a href="SearchResult.do" class="nav-link dropdown-toggle" data-toggle="dropdown">도서정보</a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
-								<li><a class="dropdown-item" href="#">도서검색</a></li>
+								<li><a class="dropdown-item" href="SearchResult.do">도서 검색</a></li>
 								<li><a class="dropdown-item" href="#">사서추천도서</a></li>
 								<li><a class="dropdown-item" href="#">신착도서</a></li>
 								<li><a class="dropdown-item" href="#">인기도서</a></li>
@@ -53,55 +53,45 @@
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
 								<li><a class="dropdown-item" href="postList.do?group=20">창작물게시판</a></li>
 								<li><a class="dropdown-item" href="postList.do?group=30">중고장터</a></li>
-								<li><a class="dropdown-item" href="postList.do?group=60">자유게시판</a></li>
+								<li><a class="dropdown-item" href="Postlist.do?group=60">자유게시판</a></li>
 							</ul>
 					</li>
 					<li class="nav-item dropdown">
-						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">나의도서</a>
+						<a href="mypage_main.do?cust_no=${cust_no }" class="nav-link dropdown-toggle" data-toggle="dropdown">나의도서</a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
-								<li><a class="dropdown-item" href="#"> 나의도서정보</a></li>
-								<li><a class="dropdown-item" href="#">대출현황/이력</a></li>
-								<li><a class="dropdown-item" href="MyPage_Folder.do">내서재</a></li>
-								<li><a class="dropdown-item" href="#">개인정보수정</a></li>
+								<li><a class="dropdown-item" href="mypage_main.do?cust_no=${cust_no }"> 나의도서정보</a></li>
+								<li><a class="dropdown-item" href="lentBooks.html">대출현황/이력</a></li>
+								<li><a class="dropdown-item" href="MyPage_Folder.do?cust_no=${cust_no }&group=50">내서재</a></li>
+								<li><a class="dropdown-item" href="MyPage_Info.do?cust_no=${cust_no }">개인정보수정</a></li>
 							</ul>
 					</li>
 				</ul>
 				<ul id="app" class="navbar-nav ml-auto">
-					<c:if test="${empty cust_no }">
-						<li class="nav-item" v-bind:title="login">
-							<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a><p class="sr-only">로그인</p>
-						</li>
-						<li class="nav-item" v-bind:title="signup">
-							<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a><p class="sr-only">회원가입</p>
-						</li>
-					</c:if>
-					<c:if test="${not empty cust_no }">
-						<li class="nav-item" v-bind:title="logout">
-							<a href="logout.do?cust_no=${cust_no }" class="nav-link"><i class="fas fa-sign-out-alt"></i></a><p class="sr-only">로그아웃</p>
-						</li>
-					</c:if>
-					<li class="nav-item" v-bind:title="bookcart">
-						<a href="#" class="nav-link"><i class="fas fa-book"></i></a><p class="sr-only">북카트</p>
-					</li>
-					<li class="nav-item" v-bind:title="sitemap">
-						<a href="siteMap.do" class="nav-link"><i class="fas fa-map"></i></a><p class="sr-only">사이트맵</p>
-					</li>
-					<script>
-						var app = new Vue({
-							el: '#app',	
-							data: {
-								login: '로그인',
-								signup: '회원가입',
-								bookcart: '북카트',
-								sitemap: '사이트맵',
-								logout: '로그아웃'
-							}});
-					</script>
-				</ul>
+	               <c:if test="${empty cust_no }">
+	                  <li class="nav-item" v-bind:title="login">
+	                     <a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a><p class="sr-only">로그인</p>
+	                  </li>
+	                  <li class="nav-item" v-bind:title="signup">
+	                     <a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a><p class="sr-only">회원가입</p>
+	                  </li>
+	               </c:if>
+	               <c:if test="${not empty cust_no }">
+	                  <li class="nav-item p-1"><small class="text-light">${cust_name} 님</small></li>
+	                  <li class="nav-item" v-bind:title="logout">
+	                     <a href="logout.do?cust_no=${cust_no }" class="nav-link"><i class="fas fa-sign-out-alt"></i></a><p class="sr-only">로그아웃</p>
+	                  </li>
+	               </c:if>
+	               <li class="nav-item" v-bind:title="bookcart">
+	                  <a href="#" class="nav-link"><i class="fas fa-book"></i></a><p class="sr-only">북카트</p>
+	               </li>
+	               <li class="nav-item" v-bind:title="sitemap">
+	                  <a href="siteMap.do" class="nav-link"><i class="fas fa-map"></i></a><p class="sr-only">사이트맵</p>
+	               </li>
+	            </ul>
 			</div>
 		</div>
 	</nav>
-	  
+  
 	<!-- 커뮤니티 헤더 -->
 	<header id="page-header">
 		<div class="container">
