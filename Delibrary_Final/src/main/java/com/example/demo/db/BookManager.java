@@ -93,5 +93,12 @@ public static SqlSessionFactory sqlSessionFactory;
 		return list;
 	}
 
-
+	// 모든 도서 목록 출력
+	public static List<BookVO> findAll() {
+		List<BookVO> list = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		list = session.selectList("book.findAll");
+		session.close();
+		return list;
+	}
 }

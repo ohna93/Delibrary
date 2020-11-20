@@ -26,9 +26,9 @@
 		select * from customer where name=#{name} and m_phone=#{m_phone}
 	</select>
  
-  <!-- 회원정보 전체출력 [현왕] -->
+  <!-- 회원정보 전체출력 [현왕] order by 추가 [재성] -->
   <select id="selectAll" resultType="customerVO">
-    select * from customer
+    select * from customer order by cust_no
   </select>
   
   <!-- 회원정보 갖고오기 [현왕] -->

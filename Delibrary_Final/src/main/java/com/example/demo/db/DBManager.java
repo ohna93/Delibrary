@@ -1,6 +1,7 @@
 package com.example.demo.db;
 
 import java.io.InputStream;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,11 +25,11 @@ public class DBManager {
 			inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		} catch (Exception e) {
-			System.out.println("static ¿¹¿Ü¹ß»ı: "+e.getMessage());
+			System.out.println("static ï¿½ï¿½ï¿½Ü¹ß»ï¿½: "+e.getMessage());
 		}
 	}
 	
-	// È¨È­¸é »ç¼­ÃßÃµµµ¼­ »Ì¾Æ¿À´Â ¸Ş¼Òµå
+	// È¨È­ï¿½ï¿½ ï¿½ç¼­ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ ï¿½Ì¾Æ¿ï¿½ï¿½ï¿½ ï¿½Ş¼Òµï¿½
 	public static List<BookVO> getStaffRecommend() {
 		List<BookVO> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
@@ -37,7 +38,7 @@ public class DBManager {
 		return list;
 	}
 	
-	// È¨È­¸é ½ÅÀÛµµ¼­ »Ì¾Æ¿À´Â ¸Ş¼Òµå
+	// È¨È­ï¿½ï¿½ ï¿½ï¿½ï¿½Ûµï¿½ï¿½ï¿½ ï¿½Ì¾Æ¿ï¿½ï¿½ï¿½ ï¿½Ş¼Òµï¿½
 	public static List<BookVO> getNewRecommend() {
 		List<BookVO> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
@@ -46,7 +47,7 @@ public class DBManager {
 		return list;
 	}
 	
-	// È¨È­¸é °Ô½Ã±Û »Ì¾Æ¿À´Â ¸Ş¼Òµå
+	// È¨È­ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½Ì¾Æ¿ï¿½ï¿½ï¿½ ï¿½Ş¼Òµï¿½
 	public static List<PostVO> getHomePost(int group) {
 		List<PostVO> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
@@ -55,27 +56,74 @@ public class DBManager {
 		return list;
 	}
 	
-	// ·Î±×ÀÎ ½Ã¿¡ È¸¿øÁ¤º¸°¡ ÀÖ´ÂÁö È®ÀÎÇÏ´Â ¸Ş¼Òµå
+	// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ã¿ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ş¼Òµï¿½
 	public static CustomerVO getCustInfo(CustomerVO custVO) {
 		CustomerVO vo = null;
 		SqlSession session = sqlSessionFactory.openSession();
 		vo = session.selectOne("main.getCustInfo", custVO);
+		session.close();
 		return vo;
 	}
 	
-	// °Ô½ÃÆÇÀ¸·Î ÀÌµ¿
+	// ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	public static List<PostVO> getpostList(Map map) {
 		List<PostVO> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
 		list = session.selectList("main.getpostList", map);
+		session.close();
 		return list;
 	}
 	
-	// ÆäÀÌÂ¡ Ã³¸®¸¦ À§ÇØ ¸ğµç °³½Ã¹° °³¼ö¸¦ ¹Ş¾Æ¿À´Â ¸Ş¼Òµå
+	// ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¾Æ¿ï¿½ï¿½ï¿½ ï¿½Ş¼Òµï¿½
 	public static int getTotalCount(Map map) {
 		int re = -1;
 		SqlSession session = sqlSessionFactory.openSession();
 		re = session.selectOne("main.getTotalCount", map);
+		session.close();
 		return re;
+	}
+	
+	// ê´€ë¦¬ì í˜ì´ì§€ì—ì„œ ìˆ˜ì •í•  ë•Œ ì‚¬ìš©í•˜ëŠ” ë©”ì†Œë“œ
+	public static void updateFromManager(Map map) {
+		SqlSession session = sqlSessionFactory.openSession(true);
+		String i = (String) map.get("i");
+		if (i.equals("0")) {
+			session.update("main.update-cust", map);
+		}
+		
+		if (i.equals("1")) {
+			session.update("main.update-book", map);
+		}
+		
+		if (i.equals("2")) {
+			session.update("main.update-post", map);
+		}
+		
+		if (i.equals("3")) {
+			session.update("main.update-borrow", map);
+		}
+		session.close();
+	}
+
+	// ê´€ë¦¬ì í˜ì´ì§€ì—ì„œ ì‚­ì œí•  ë•Œ ì‚¬ìš©í•˜ëŠ” ë©”ì†Œë“œ
+	public static void deleteFromManager(Map map) {
+		SqlSession session = sqlSessionFactory.openSession(true);
+		String i = (String) map.get("i");
+		if (i.equals("0")) {
+			session.delete("main.delete-cust", map);
+		}
+		
+		if (i.equals("1")) {
+			session.delete("main.delete-book", map);
+		}
+		
+		if (i.equals("2")) {
+			session.delete("main.delete-post", map);
+		}
+		
+		if (i.equals("3")) {
+			session.delete("main.delete-borrow", map);
+		}
+		session.close();
 	}
 }

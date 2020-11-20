@@ -79,4 +79,9 @@ public class PostDAO {
    public List<PostVO> findAll_fol(HashMap map){
       return PostManager.findAll_fol(map);
    }
+   
+   // 관리자 게시판 전체글 가져오기[재성]
+ 	public List<PostVO> findAll_manager(){
+ 		return PostManager.findAll_manager();
+ 	}
 }

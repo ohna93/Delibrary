@@ -26,6 +26,13 @@
 <link rel="stylesheet" href="css/HomeCSS.css">
 <script type="text/javascript" src="/js/HomeJS.js"></script>
 
+<!-- 관리자 페이지 script, css -->
+<script type="text/javascript">
+	window.onload = function() {
+		
+	}
+</script>
+
 </head>
 <body>
 	<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light p-0">
@@ -74,17 +81,30 @@
 					</li>
 				</ul>
 				<ul id="app" class="navbar-nav ml-auto">
-					<li class="nav-item" v-bind:title="login">
-						<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a><p class="sr-only">로그인</p>
-					</li>
-					<li class="nav-item" v-bind:title="signup">
-						<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a><p class="sr-only">회원가입</p>
-					</li>
+        <ul id="app" class="navbar-nav ml-auto">
+					<c:if test="${cust_no == 1}">
+						<li class="nav-item" v-bind:title="mamagerpage">
+							<a href="ManagerPage.do" class="nav-link"><i class="fas fa-crown"></i></a><p class="sr-only">관리자페이지</p>
+						</li>
+					</c:if>
+					<c:if test="${cust_no == null}">
+						<li class="nav-item" v-bind:title="login">
+							<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a><p class="sr-only">로그인</p>
+						</li>
+						<li class="nav-item" v-bind:title="signup">
+							<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a><p class="sr-only">회원가입</p>
+						</li>
+					</c:if>
+					<c:if test="${cust_no != null}">
+						<li class="nav-item" v-bind:title="logout">
+							<a href="logout.do" class="nav-link"><i class="fas fa-sign-out-alt"></i></a><p class="sr-only">로그아웃</p>
+						</li>
+					</c:if>
 					<li class="nav-item" v-bind:title="bookcart">
-						<a href="#" class="nav-link"><i class="fas fa-book"></i></a><p class="sr-only">북카트</p>
+						<a href="sitemap.html" class="nav-link"><i class="fas fa-book"></i></a><p class="sr-only">북카트</p>
 					</li>
 					<li class="nav-item" v-bind:title="sitemap">
-						<a href="siteMap.do" class="nav-link"><i class="far fa-map"></i></a><p class="sr-only">사이트맵</p>
+						<a href="siteMap.do" class="nav-link"><i class="fas fa-map"></i></a><p class="sr-only">사이트맵</p>
 					</li>
 					<script>
 						var app = new Vue({
@@ -94,6 +114,8 @@
 								signup: '회원가입',
 								bookcart: '북카트',
 								sitemap: '사이트맵',
+								logout: '로그아웃',
+								mamagerpage: '관리자페이지'
 							}});
 					</script>
 				</ul>
@@ -513,15 +535,11 @@
 	</div>
   
 	<!-- FOOTER -->
-	<footer id="main-footer" class="text-center p-4">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<p>Copyright &copy;
-					<span id="year"></span> Glozzom</p>
-				</div>
-			</div>
-		</div>
-	</footer>
+	  <div id="page-content">
+	    나브바, 헤더 등등 생략
+	  </div>
+	  <footer id="main-footer" class="text-center p-4">
+	    생략...
+	  </footer>
 </body>
 </html>
