@@ -1,6 +1,10 @@
 /*
-¿¬ f8f9fa
-Áø 343a40
+ï¿½ï¿½ f8f9fa
+ï¿½ï¿½ 343a40
+
+
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ #75BD43
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ #107637
 */
 
 @media all and (min-width: 992px) {
@@ -30,6 +34,8 @@
 
 body {
   overflow-x: hidden;
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
 }
 
 .icons {
@@ -41,7 +47,7 @@ body {
 }
 
 .navbar .nav-link {
-  font-size: 14px;
+  font-size: 18px;
   text-transform: uppercase;
   padding-left: 1rem !important;
   padding-right: 1rem !important;
@@ -69,14 +75,17 @@ body {
   background-size: cover;
 }
 
+/* í™ˆí—¤ë”© */
 #home-heading {
   position: relative;
-  min-height: 250px;
-  /* background: url('../img/lights.jpg'); */
+  min-height: 600px;
+  background: url('../img/library6.png');
+  object-fit: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
   text-align: center;
   color: #fff;
+  padding-top: 200px;
 }
 
 .dark-overlay {
@@ -85,8 +94,9 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.6);
 }
+
 
 #video-play {
   position: relative;
@@ -132,15 +142,17 @@ body {
 }
 
 #main-footer {
-  background: #000;
+  background-color: #107637;
   color: #fff;
   flex-shrink: none;
+  height: 300px;
+  font-size: 14px;
 }
 
 /*  ------------------------------------------- */
 /*    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      */
-/*    !!!!!!!  °øÅëºÎºÐ Ãß°¡ css ÀÔ´Ï´Ù  !!!!!!!      */
-/*    !!!!!!!      Áö¿ìÁö ¸¶¼¼¿ä       !!!!!!!      */
+/*    !!!!!!!  ï¿½ï¿½ï¿½ï¿½Îºï¿½ ï¿½ß°ï¿½ css ï¿½Ô´Ï´ï¿½  !!!!!!!      */
+/*    !!!!!!!      ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½       !!!!!!!      */
 /*    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      */
 /*  ------------------------------------------- */
 
@@ -158,7 +170,7 @@ html, body{
 }
 .side-head {
   background: url('../img/side-head.jpg');
-	background: linear-gradient(to right, #85BCDE, #DE5959);
+  background: linear-gradient(to right, #0069A3, #009AF0);
   padding: 40px;
 }
 .sidebar a{
@@ -168,6 +180,7 @@ html, body{
 .searchbar {
   border-radius: 25px;
   padding: 5px 25px;
+  background: none;
 }
 
 .list-group .active{

@@ -1022,6 +1022,7 @@ $(function(){
       </div>
     </div>
   </section>
+  </div>
 
   <!-- FOOTER -->
   <footer id="main-footer" class="text-center p-4">

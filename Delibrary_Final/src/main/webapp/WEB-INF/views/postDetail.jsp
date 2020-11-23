@@ -177,7 +177,7 @@
           <div class="container">
             <div class="row">
               <div class="col-md-2">
-                <a href="postList.do?option=p_title&search=&group=${group}" class="btn btn-light btn-block">
+                <a href="postList.do?option=p_title&search=&group=${group}" class="btn btn-outline-info btn-block">
                   <i class="fas fa-arrow-left"></i> 목록
                 </a>
 							</div>

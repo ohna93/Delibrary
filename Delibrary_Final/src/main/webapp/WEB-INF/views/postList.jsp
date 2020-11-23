@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/postCss.css">
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
   <title>커뮤니티 - 딜리브러리</title>
@@ -21,7 +22,7 @@
 
 <body class="d-flex flex-column">
 	<div id="page-content">
-	<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark p-0">
+	<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light p-0">
 		<div class="container">
 			<a href="Home.do" class="navbar-brand"><img alt="딜리브러리" src="img/logo_bg_dark.jpg" height="20" class="pl-3 mb-1"></a>
 			<button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -168,7 +169,7 @@
 			<div class="col-md-9">
 				<div class="row py-4">
          	<div class="col pb-4">
-         	  <button class="btn btn-outline-primary" onclick="postInsert()">글쓰기</button>
+         	  <button class="btn btn-outline-info" onclick="postInsert()">글쓰기</button>
          	  <!-- 비로그인시 cust_no를 0으로 설정 -->
          	  <c:if test="${empty cust_no }">
 	         	  <c:set var="cust_no" value="0"></c:set>
@@ -194,7 +195,7 @@
 		        </form>
 					</div>
 					<table class="table table-hover ">
-						<thead class="thead-dark">
+						<thead class="thead">
 							<tr>
 								<th>&nbsp;</th>
 								<th>제목</th>

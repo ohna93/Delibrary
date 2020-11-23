@@ -31,8 +31,9 @@
 .sidebar {
   border: 1px solid gainsboro;
 }
+
 .side-head {
-  background: url('../img/side-head.jpg');
+  background: url('../img/bookHero.jpg');
   padding: 40px;
 }
 
