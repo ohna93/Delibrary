@@ -49,9 +49,9 @@
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav ml-4">
 					<li class="nav-item dropdown">
-						<a href="about.html" class="nav-link dropdown-toggle" data-toggle="dropdown">도서관소개</a>
+						<a href="howtoInfo.do" class="nav-link dropdown-toggle" data-toggle="dropdown">도서관소개</a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
-								<li><a class="dropdown-item" href="about.html"> 대출/반납/연장</a></li>
+								<li><a class="dropdown-item" href="howtoInfo.do"> 대출/반납/연장</a></li>
 								<li><a class="dropdown-item" href="#"> 공지사항 </a></li>
 								<li><a class="dropdown-item" href="#"> 자주묻는질문</a></li>
 								<li><a class="dropdown-item" href="#"> 묻고답하기 </a></li>
@@ -59,44 +59,60 @@
 							</ul>
 					</li>
 					<li class="nav-item dropdown">
-						<a href="books.html" class="nav-link dropdown-toggle" data-toggle="dropdown">도서정보</a>
+						<a href="SearchResult.do" class="nav-link dropdown-toggle" data-toggle="dropdown">도서정보</a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
-								<li><a class="dropdown-item" href="books.html">도서검색</a></li>
+								<li><a class="dropdown-item" href="SearchResult.do">도서검색</a></li>
 								<li><a class="dropdown-item" href="#">사서추천도서</a></li>
 								<li><a class="dropdown-item" href="#">신착도서</a></li>
-								<li><a class="dropdown-item" href="#">인기도서</a></li>
+								<li><a class="dropdown-item" href="#">이달의 인기도서</a></li>
 							</ul>
 					</li>
 					<li class="nav-item dropdown">
-						<a href="community.html" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>
+						<a href="postList.do?option=p_title&search=&group=20" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
-								<li><a class="dropdown-item" href="community.html">창작물게시판</a></li>
+								<li><a class="dropdown-item" href="postList.do?option=p_title&search=&group=20">창작물게시판</a></li>
 								<li><a class="dropdown-item" href="#">중고장터</a></li>
 								<li><a class="dropdown-item" href="#">자유게시판</a></li>
 							</ul>
 					</li>
 					<li class="nav-item dropdown">
-						<a href="mypage.html" class="nav-link dropdown-toggle" data-toggle="dropdown">나의도서</a>
+						<a href="mypage_main.do?cust_no=${cust_no }" class="nav-link dropdown-toggle mypage" data-toggle="dropdown">나의도서</a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
-								<li><a class="dropdown-item" href="mypage.html"> 나의도서정보</a></li>
-								<li><a class="dropdown-item" href="lentBooks.html">대출현황/이력</a></li>
-								<li><a class="dropdown-item" href="myfolder.html">내서재</a></li>
-								<li><a class="dropdown-item" href="#">개인정보수정</a></li>
+								<li><a class="dropdown-item mypage" href="mypage_main.do?cust_no=${cust_no }"> 나의도서정보</a></li>
+								<li><a class="dropdown-item mypage" href="borrowList.do">대출현황</a></li>
+								<li><a class="dropdown-item mypage" href="return_borrowList.do">대출/반납이력</a></li>
+								<li><a class="dropdown-item mypage" href="MyPage_Folder.do?cust_no=${cust_no }&group=50">내서재</a></li>
+								<li><a class="dropdown-item mypage" href="MyPage_Info.do?cust_no=${cust_no }">개인정보수정</a></li>
 							</ul>
 					</li>
 				</ul>
 				<ul id="app" class="navbar-nav ml-auto">
-					<li class="nav-item" v-bind:title="login">
-						<a href="sitemap.html" class="nav-link"><i class="fas fa-sign-in-alt"></i></a>
-					</li>
-					<li class="nav-item" v-bind:title="signup">
-						<a href="sitemap.html" class="nav-link"><i class="fas fa-user-plus"></i></a>
-					</li>
+					<c:if test="${cust_no == 1}">
+						<li class="nav-item" v-bind:title="mamagerpage">
+							<a href="ManagerPage.do" class="nav-link"><i class="fas fa-crown" style="color: #107637;"></i></a><p class="sr-only">관리자페이지</p>
+						</li>
+					</c:if>
+					<c:if test="${cust_no != 1 && cust_no != null }">
+						 <li class="nav-item p-1"><small class="text-dark">${cust_name} 님</small></li>
+					</c:if>
+					<c:if test="${cust_no == null}">
+						<li class="nav-item" v-bind:title="login">
+							<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a><p class="sr-only">로그인</p>
+						</li>
+						<li class="nav-item" v-bind:title="signup">
+							<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a><p class="sr-only">회원가입</p>
+						</li>
+					</c:if>
+					<c:if test="${cust_no != null}">
+						<li class="nav-item" v-bind:title="logout">
+							<a href="logout.do" class="nav-link"><i class="fas fa-sign-out-alt"></i></a><p class="sr-only">로그아웃</p>
+						</li>
+					</c:if>
 					<li class="nav-item" v-bind:title="bookcart">
-						<a href="sitemap.html" class="nav-link"><i class="fas fa-book"></i></a>
+						<a href="BookCart.do" class="nav-link mypage"><i class="fas fa-book"></i></a><p class="sr-only">북카트</p>
 					</li>
 					<li class="nav-item" v-bind:title="sitemap">
-						<a href="sitemap.html" class="nav-link"><i class="far fa-map"></i></a>
+						<a href="siteMap.do" class="nav-link"><i class="fas fa-map"></i></a><p class="sr-only">사이트맵</p>
 					</li>
 					<script>
 						var app = new Vue({
@@ -106,6 +122,8 @@
 								signup: '회원가입',
 								bookcart: '북카트',
 								sitemap: '사이트맵',
+								logout: '로그아웃',
+								mamagerpage: '관리자페이지'
 							}});
 					</script>
 				</ul>
@@ -161,7 +179,7 @@
 										<a class="nav-link" href="#">연체도서</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="#">대출/반납이력</a>
+										<a class="nav-link" href="">대출/반납이력</a>
 									</li>
 									<li class="nav-item">
 										<a class="nav-link" href="#">폴더:${pageStr } </a>
@@ -222,6 +240,23 @@
       infinite: true,
       slideToShow: 1,
       slideToScroll: 1
+    });
+
+    <!-- 미로그인시 글쓰기 버튼 누르면 로그인페이지로 이동 -->
+    $(function(){
+    	$(".mypage").click(function(event){
+    		if(${cust_no == null}){
+    			event.preventDefault();
+    			const loginOk = confirm("로그인 후 사용 가능합니다. 로그인하시겠습니까?");
+    			console.log(loginOk);
+    			if(loginOk){
+    				console.log("로그인하러갑니다.");
+    				window.location.href = "LoginPage.do";
+    			}
+    		}else{
+    			window.location.href="Home.do";
+    		}
+    	});
     });
   </script>
 </body>

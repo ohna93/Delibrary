@@ -13,8 +13,13 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
+<!-- 구글폰트 전체 기본적용 -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Noto+Serif+KR:wght@200;300&display=swap" rel="stylesheet">
+	<!-- 구글폰트 전체 기본적용 END -->
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/wang.css">
+<link rel="stylesheet" type="text/css" href="css/wang_hw.css">
 <link rel="icon" type="image/png" sizes="16x16"	href="favicon/favicon-16x16.png">
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -29,37 +34,6 @@
 	});
 }); 
 <%-- 이미지 수정 하는 코드 종료 --%>
-
-<%-- ======= 현왕 체크박스에 체크가 되있는지 확인하는 코드 ======= --%>
-$(function(){
-	/* $(document).find("input:checkbox").each(function(index){
-		if($(this).attr("name")=="genre"){
-			if($(this).is(":checked")){
-				$(this).parent().css("background-color","#DAE0E5");
-			}
-		};
-	}); */
-	/* $(document).ready(function(){
-		let select = 0;
-		let interestButton = ['#interest1','#interest2','#interest3','#interest4','#interest5','#interest6'];	
-		let interestCheck = ['#interest_check1','#interest_check2','#interest_check3','#interest_check4','#interest_check5','#interest_check6'];	
-		
-		for(let i=0; i < interestButton.length; i++){	
-			document.querySelector(interestButton[i]).addEventListener('click', function() {
-					document.querySelector(interestButton[i]).classList.toggle('active');
-					select += 1;
-					if(select % 2 != 0) {
-						document.querySelector(interestCheck[i]).setAttribute('checked', 'checked');
-						$(this).css("background-color","#DAE0E5");
-					} else {
-						document.querySelector(interestCheck[i]).removeAttribute('checked');
-						$(this).css("background-color","#F8F9FA");
-					}
-			})
-		}
-	}); */
-});
-<%-- ======= 현왕 체크박스에 체크가 되있는지 확인하는 코드 ======= --%>
 
 <%-- ============== 닉네임, 비밀번호 빈칸이면 alert띄우고 실행 x ========== --%>
 $(function(){
@@ -202,19 +176,19 @@ function sample6_execDaumPostcode() {
 </head>
 
 <body class="d-flex flex-column">
-  <div id="page-content">
-	<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark p-0">
-		<div class="container">
-			<a href="Home.do" class="navbar-brand"><img alt="딜리브러리" src="img/logo_bg_dark.jpg" height="20" class="pl-3 mb-1"></a>
-			<button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarCollapse">
+	<div id="page-content">
+		<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light p-0">
+			<div class="container">
+				<a href="Home.do" class="navbar-brand"><img alt="딜리브러리" src="img/logo_sm.png" height="20" class="pl-3 mb-1"></a>
+				<button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse noto-serif" id="navbarCollapse">
 				<ul class="navbar-nav ml-4">
 					<li class="nav-item dropdown">
-						<a href="about.do" class="nav-link dropdown-toggle" data-toggle="dropdown">도서관소개</a>
+						<a href="howtoInfo.do" class="nav-link dropdown-toggle" data-toggle="dropdown">도서관소개</a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
-								<li><a class="dropdown-item" href="about.do"> 대출/반납/연장</a></li>
+								<li><a class="dropdown-item" href="howtoInfo.do"> 대출/반납/연장</a></li>
 								<li><a class="dropdown-item" href="postList.do?group=10"> 공지사항 </a></li>
 								<li><a class="dropdown-item" href="faqViewpage.do"> 자주묻는질문</a></li>
 								<li><a class="dropdown-item" href="QnaList.do"> 묻고답하기 </a></li>
@@ -225,9 +199,9 @@ function sample6_execDaumPostcode() {
 						<a href="SearchResult.do" class="nav-link dropdown-toggle" data-toggle="dropdown">도서정보</a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
 								<li><a class="dropdown-item" href="SearchResult.do">도서 검색</a></li>
-								<li><a class="dropdown-item" href="#">사서추천도서</a></li>
-								<li><a class="dropdown-item" href="#">신착도서</a></li>
-								<li><a class="dropdown-item" href="#">인기도서</a></li>
+								<li><a class="dropdown-item" href="recommendedBooks.do">사서추천도서</a></li>
+								<li><a class="dropdown-item" href="Newbooks.do">신착도서</a></li>
+								<li><a class="dropdown-item" href="popularBook.do">이달의 인기도서</a></li>
 							</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -242,75 +216,87 @@ function sample6_execDaumPostcode() {
 						<a href="mypage_main.do?cust_no=${cust_no }" class="nav-link dropdown-toggle" data-toggle="dropdown">나의도서</a>
 							<ul class="dropdown-menu dropdown-menu-left fade-down">
 								<li><a class="dropdown-item" href="mypage_main.do?cust_no=${cust_no }"> 나의도서정보</a></li>
-								<li><a class="dropdown-item" href="lentBooks.html">대출현황/이력</a></li>
+								<li><a class="dropdown-item" href="borrowList.do">대출현황</a></li>
+								<li><a class="dropdown-item" href="return_borrowList.do">대출/반납이력</a></li>
 								<li><a class="dropdown-item" href="MyPage_Folder.do?cust_no=${cust_no }&group=50">내서재</a></li>
 								<li><a class="dropdown-item" href="MyPage_Info.do?cust_no=${cust_no }">개인정보수정</a></li>
 							</ul>
 					</li>
 				</ul>
 				<ul id="app" class="navbar-nav ml-auto">
-	               <c:if test="${empty cust_no }">
-	                  <li class="nav-item" v-bind:title="login">
-	                     <a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a><p class="sr-only">로그인</p>
-	                  </li>
-	                  <li class="nav-item" v-bind:title="signup">
-	                     <a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a><p class="sr-only">회원가입</p>
-	                  </li>
-	               </c:if>
-	               <c:if test="${not empty cust_no }">
-	                  <li class="nav-item p-1"><small class="text-light">${cust_name} 님</small></li>
-	                  <li class="nav-item" v-bind:title="logout">
-	                     <a href="logout.do?cust_no=${cust_no }" class="nav-link"><i class="fas fa-sign-out-alt"></i></a><p class="sr-only">로그아웃</p>
-	                  </li>
-	               </c:if>
-	               <li class="nav-item" v-bind:title="bookcart">
-	                  <a href="#" class="nav-link"><i class="fas fa-book"></i></a><p class="sr-only">북카트</p>
-	               </li>
-	               <li class="nav-item" v-bind:title="sitemap">
-	                  <a href="siteMap.do" class="nav-link"><i class="fas fa-map"></i></a><p class="sr-only">사이트맵</p>
-	               </li>
-	               <script type="text/javascript">
-	               var app = new Vue({
-	                     el: '#app',   
-	                     data: {
-	                        login: '로그인',
-	                        signup: '회원가입',
-	                        bookcart: '북카트',
-	                        sitemap: '사이트맵',
-	                        logout: '로그아웃'
-	                     }});
-	               </script>
-	            </ul>
+					<c:if test="${cust_no == 1}">
+						<li class="nav-item" v-bind:title="mamagerpage">
+							<a href="ManagerPage.do" class="nav-link"><i class="fas fa-crown" style="color: #107637;"></i></a><p class="sr-only">관리자페이지</p>
+						</li>
+					</c:if>
+					<c:if test="${cust_no != 1 && cust_no != null }">
+						 <li class="nav-item p-1"><small class="text-dark">${cust_name} 님</small></li>
+					</c:if>
+					<c:if test="${cust_no == null}">
+						<li class="nav-item" v-bind:title="login">
+							<a href="LoginPage.do" class="nav-link"><i class="fas fa-sign-in-alt"></i></a><p class="sr-only">로그인</p>
+						</li>
+						<li class="nav-item" v-bind:title="signup">
+							<a href="insertCustomer.do" class="nav-link"><i class="fas fa-user-plus"></i></a><p class="sr-only">회원가입</p>
+						</li>
+					</c:if>
+					<c:if test="${cust_no != null}">
+						<li class="nav-item" v-bind:title="logout">
+							<a href="logout.do" class="nav-link"><i class="fas fa-sign-out-alt"></i></a><p class="sr-only">로그아웃</p>
+						</li>
+					</c:if>
+					<li class="nav-item" v-bind:title="bookcart">
+						<a href="BookCart.do" class="nav-link"><i class="fas fa-book"></i></a><p class="sr-only">북카트</p>
+					</li>
+					<li class="nav-item" v-bind:title="sitemap">
+						<a href="siteMap.do" class="nav-link"><i class="fas fa-map"></i></a><p class="sr-only">사이트맵</p>
+					</li>
+					<script>
+						var app = new Vue({
+							el: '#app',	
+							data: {
+								login: '로그인',
+								signup: '회원가입',
+								bookcart: '북카트',
+								sitemap: '사이트맵',
+								logout: '로그아웃',
+								mamagerpage: '관리자페이지'
+							}});
+					</script>
+				</ul>
 			</div>
 		</div>
 	</nav>
 
 	<!-- PAGE HEADER -->
-	<header id="page-header">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 m-auto text-center">
-					<h1>나의도서</h1>
+	<header id="page-header" class="noto-serif">
+			<div class="page-header-overlay">
+				<div class="container pt-5">
+				  <div class="row">
+					<div class="col-md-6 m-auto text-center">
+					  <h2>개인정보수정</h2>
+					</div>
+				  </div>
 				</div>
 			</div>
-		</div>
-	</header>
+		</header>
 
 	<!-- MAIN SECTION -->
-	<!-- 사이드바 -->
 	<section id="contact" class="py-3">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-3">
+				<!-- 사이드바 -->
+				<div class="col-md-3 noto-serif">
 					<div class="sidebar">
 						<div class="side-head">
 							<h4 class="text-light">나의도서</h4>
 						</div>
 						<ul class="list-group list-group-flush mb-5">
-							<a href="mypage_main.do?cust_no=${cust_no }"><li class="list-group-item">나의도서정보</li></a>
-							<a href="#"><li class="list-group-item">대출현황/이력</li></a>
-							<a href="MyPage_Folder.do?cust_no=${cust_no }&group=50"><li class="list-group-item">내서재</li></a>
-							<a href="MyPage_Info.do?cust_no=${cust_no }"><li class="list-group-item active">개인정보수정</li></a>
+							<li class="list-group-item"><a href="mypage_main.do?cust_no=${cust_no }">나의도서정보</a></li>
+							<li class="list-group-item"><a href="borrowList.do">대출현황</a></li>
+							<li class="list-group-item"><a href="return_borrowList.do">대출/반납이력</a></li>
+							<li class="list-group-item"><a href="MyPage_Folder.do?cust_no=${cust_no }&group=50">내서재</a></li>
+							<li class="list-group-item active"><a href="MyPage_Info.do?cust_no=${cust_no }">개인정보수정</a></li>
 						</ul>
 					</div>
 				</div>
@@ -335,7 +321,7 @@ function sample6_execDaumPostcode() {
 								<div>
 								<input type="file" name="uploadFile" style="display: none;" id="upload_find">
 								<input type="hidden" name="fname" value="${c.fname}">
-								<img src="img/${c.fname}" width="300" height="300" id="upload_file">
+								<img src="img/${c.fname}" width="180" height="200" id="upload_file">
 								</div>
 								<small class="form-text text-muted"><span class="signup_required">*</span>  사진을 클릭하면 변경이 가능합니다.</small> 
 								<small class="form-text text-muted">딜리브러리에서 커뮤니티 활동시 사용할 프로필사진을 업로드 해주세요.<br> (업로드 가능 최대파일사이즈: 10MB) </small>
@@ -448,55 +434,53 @@ function sample6_execDaumPostcode() {
 							<hr>
 							<div class="interest_check">
 								<div class="interest_check"><!-- 관심장르 CHECKBOX START -->
-							<div class="form-group mt-4">
-								<label class="mb-1">도서 관심장르를 모두 선택해주세요.</label> <br>
-							
+							<div class="form-group mt-4" style="text-align: center;">
+							<b><label class="mb-1" style="text-align: left;">도서 관심장르를 모두 선택해주세요.</label></b><br>
 								<c:set var="interest" value="${c.interest }"/>
-				            <c:if test="${fn:contains(interest, '인문')}">
-				                  <input type="checkbox" name="genre" value="인문" CHECKED="checked">인문
+				            <c:if test="${fn:contains(interest, '1')}">
+				                  <input type="checkbox" name="genre" value="1" CHECKED="checked">인문
 				            </c:if>   
 				               &nbsp;
-				            <c:if test="${!fn:contains(interest, '인문')}">
-				                  <input type="checkbox" name="genre" value="인문">인문
+				            <c:if test="${!fn:contains(interest, '1')}">
+				                  <input type="checkbox" name="genre" value="1">인문
 				            </c:if>   
 				               &nbsp;
-				            <c:if test="${fn:contains(interest, '경영')}">
-				               <input type="checkbox" name="genre" value="경영" CHECKED="checked">경영       
+				            <c:if test="${fn:contains(interest, '2')}">
+				               <input type="checkbox" name="genre" value="2" CHECKED="checked">경영       
 				            </c:if>   
 				               &nbsp;
-				            <c:if test="${!fn:contains(interest, '경영')}">
-				               <input type="checkbox" name="genre" value="경영">경영       
+				            <c:if test="${!fn:contains(interest, '2')}">
+				               <input type="checkbox" name="genre" value="2">경영       
 				            </c:if>   
 				               &nbsp;
-				            <c:if test="${fn:contains(interest, '소설')}">
-				               <input type="checkbox" name="genre" value="소설" CHECKED="checked">소설  
+				            <c:if test="${fn:contains(interest, '3')}">
+				               <input type="checkbox" name="genre" value="3" CHECKED="checked">소설  
 				            </c:if>   
-				            <c:if test="${!fn:contains(interest, '소설')}">
-				               <input type="checkbox" name="genre" value="소설">소설       
+				            <c:if test="${!fn:contains(interest, '3')}">
+				               <input type="checkbox" name="genre" value="3">소설       
 				            </c:if>   
 				               <br>
-				            <c:if test="${fn:contains(interest, '역사')}">
-				               <input type="checkbox" name="genre" value="역사" CHECKED="checked">역사 
+				            <c:if test="${fn:contains(interest, '4')}">
+				               <input type="checkbox" name="genre" value="4" CHECKED="checked">역사 
+				            </c:if>   
+				            <c:if test="${!fn:contains(interest, '4')}">
+				               <input type="checkbox" name="genre" value="4">역사 
 				            </c:if>   
 				               &nbsp;
-				            <c:if test="${fn:contains(interest, '순수과학')}">
-				               <input type="checkbox" name="genre" value="순수과학" CHECKED="checked">순수과학
+				            <c:if test="${fn:contains(interest, '5')}">
+				               <input type="checkbox" name="genre" value="5" CHECKED="checked">순수과학
+				            </c:if>   
+				            <c:if test="${!fn:contains(interest, '5')}">
+				               <input type="checkbox" name="genre" value="5">순수과학
 				            </c:if>   
 				               &nbsp;
-				            <c:if test="${fn:contains(interest, '응용과학')}">
-				               <input type="checkbox" name="genre" value="응용과학" CHECKED="checked">응용과학
+				            <c:if test="${fn:contains(interest, '6')}">
+				               <input type="checkbox" name="genre" value="6" CHECKED="checked">응용과학
 				            </c:if>   
-				            <c:if test="${!fn:contains(interest, '역사')}">
-				               <input type="checkbox" name="genre" value="역사">역사 
-				            </c:if>   
-				               &nbsp;
-				            <c:if test="${!fn:contains(interest, '순수과학')}">
-				               <input type="checkbox" name="genre" value="순수과학">순수과학
-				            </c:if>   
-				               &nbsp;
-				            <c:if test="${!fn:contains(interest, '응용과학')}">
-				               <input type="checkbox" name="genre" value="응용과학">응용과학
+				            <c:if test="${!fn:contains(interest, '6')}">
+				               <input type="checkbox" name="genre" value="6">응용과학
 				            </c:if>
+				               &nbsp;
 							</div><!-- 관심장르 CHECKBOX END -->
 								</div>
 							</div>
@@ -510,14 +494,37 @@ function sample6_execDaumPostcode() {
 </div>
 
 	<!-- FOOTER -->
-	<footer id="main-footer" class="text-center p-4">
+  <footer id="main-footer" class="text-center p-4 noto-serif">
     <div class="container">
       <div class="row">
-        <div class="col">
+      	<div class="col-md-12 pb-2">
+	      	<!--  책 관련된 명언 랜덤으로 보여주기 -->
+      		<p id="footer-display"></p>
+    		</div>
+        <div class="col-md-12">
           <p>Copyright &copy;
             <span id="year"></span> Delibrary</p>
         </div>
       </div>
     </div>
   </footer>
+  
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+
+	<script>
+		// Get the current year for the copyright
+		$('#year').text(new Date().getFullYear());
+	
+		$(function(){
+			//푸터 명언
+			const footer_display = document.getElementById('footer-display');
+			const footer_quotes = ['좋은 책은 인류에게 불멸의 정신이다. — J. 밀턴', '내가 인생을 알게 된 것은 사람과 접촉해서가 아니라 책과 접하였기 때문이다. — A. 프 랜스', '목적이 없는 독서는 산보일 뿐이다. — B. 리튼', '사람은 책을 만들고, 책은 사람을 만든다. — 신용호','기회를 기다리는 것은 바보짓이다. 독서의 시간이라는 것은 지금 이 시간이지 결코 이 제부터가 아니다. 오늘 읽을 수 있는 책을 내일로 넘기지 말라. — H. 잭슨','책은 한 권 한 권이 하나의 세계다. — W. 워즈워스', '책을 한 권 읽으면 한 권의 이익이 있고, 책을 하루 읽으면 하루의 이익이 있다. — 괴문절'];
+			const footer_getQuote = Math.floor(Math.random() * footer_quotes.length);
+			footer_display.textContent =footer_quotes[footer_getQuote];
+		});
+	</script>
+  </body>
 </html>
