@@ -27,10 +27,10 @@ public static SqlSessionFactory sqlSessionFactory;
 	}
 	
 	// 마이페이지 폴더목록
-	public static List<FolderVO> getUserFolder(int cust_no){
+	public static List<FolderVO> getUserFolder(HashMap map){
 		List<FolderVO> flist = null;
 		SqlSession session = sqlSessionFactory.openSession();
-		flist = session.selectList("mypage.selectAllFolder", cust_no);
+		flist = session.selectList("mypage.selectAllFolder", map);
 		session.close();
 		return flist;
 	}
@@ -107,4 +107,13 @@ public static SqlSessionFactory sqlSessionFactory;
 		session.close();
 		return re;
 	}
+	
+	public static int getNextFol_no() {
+		int n = 0;
+		SqlSession session=sqlSessionFactory.openSession();
+		n = session.selectOne("mypage.getNextFolNo");
+		session.close();
+		return n;
+	}
+	
 }

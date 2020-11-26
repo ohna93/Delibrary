@@ -13,9 +13,15 @@ import com.example.demo.db.CustomerManager;
 import com.example.demo.vo.BookVO;
 import com.example.demo.vo.BorrowVO;
 import com.example.demo.vo.CustomerVO;
+import com.example.demo.vo.BorrowVO2;
 
 @Repository
 public class BorrowDAO {
+	
+
+
+
+	
 	
 	 public int insertBorrow(BorrowVO b) {
 		return BorrowManager.insertBorrow(b);
@@ -26,10 +32,18 @@ public class BorrowDAO {
 		return BorrowManager.getNextNo();
 	}
 	//북카트 목록 출력
-	public List<BorrowVO> selectBycust_No(HashMap map){
+	public List<BorrowVO2> selectBycust_No(HashMap map){
 		return BorrowManager.selectBycust_No(map);
 	}
-
+	
+	//대출현황 목록 출력[용택]
+	public List<BorrowVO2> selectBycust_No2(HashMap map){
+		return BorrowManager.selectBycust_No2(map);
+	}
+	//반납현황 출력[용택]
+	public List<BorrowVO2> selectBycust_No3(HashMap map) {
+		return BorrowManager.selectBycust_No3(map);
+	}
 
 	public int update(BorrowVO b) {
 		// TODO Auto-generated method stub
@@ -50,4 +64,19 @@ public class BorrowDAO {
 		return BorrowManager.findAll();
 
 	}
+
+
+	public int getTotalCount2(HashMap map) {
+		// TODO Auto-generated method stub
+		return BorrowManager.getTotalCount2(map);
+	}
+	
+	public int getTotalCount3(HashMap map) {
+		// TODO Auto-generated method stub
+		return BorrowManager.getTotalCount3(map);
+	}
+
+
+
+
 }

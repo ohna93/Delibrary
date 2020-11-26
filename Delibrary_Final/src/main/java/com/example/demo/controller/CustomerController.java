@@ -154,6 +154,7 @@ public class CustomerController {
       session.setAttribute("email", c.getEmail());
       
       if(re<0) {
+    	 mav.addObject("msg", "회원가입이 정상적으로 처리되지 않았습니다.");
          mav.setViewName("/error");
       }
       

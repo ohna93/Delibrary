@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.example.demo.vo.BookVO;
 import com.example.demo.vo.BorrowVO;
 import com.example.demo.vo.CustomerVO;
+import com.example.demo.vo.BorrowVO2;
 
 public class BorrowManager {
 	
@@ -49,12 +50,21 @@ public static SqlSessionFactory sqlSessionFactory;
 	//북카트 출력
 
 
-
-	public static List<BorrowVO> selectBycust_No(HashMap map) {
+	//북카트 출력
+	public static List<BorrowVO2> selectBycust_No(HashMap map) {
 		// TODO Auto-generated method stub
-		List<BorrowVO> list = null;
+		List<BorrowVO2> list = null;
 		SqlSession session=sqlSessionFactory.openSession();
 		list=session.selectList("borrow.selectBycust_No", map);
+		session.close();
+		return list;
+	}
+	//대출현황 출력
+	public static List<BorrowVO2> selectBycust_No2(HashMap map) {
+		// TODO Auto-generated method stub
+		List<BorrowVO2> list = null;
+		SqlSession session=sqlSessionFactory.openSession();
+		list=session.selectList("borrow.selectBycust_No2", map);
 		session.close();
 		return list;
 	}
@@ -94,6 +104,41 @@ public static SqlSessionFactory sqlSessionFactory;
 		SqlSession session = sqlSessionFactory.openSession();
 		list = session.selectList("borrow.findAll");
 		System.out.println("데이터 수 : " + list.size());
+		session.close();
+		return list;
+	}
+
+
+	public static int getTotalCount(int cust_no) {
+		int n = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+		n = session.selectOne("borrow.getTotalCount",cust_no);
+		session.close();
+		return n;
+	}
+	//대출 중 목록
+	public static int getTotalCount2(HashMap map) {
+		int n = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+		n = session.selectOne("borrow.getTotalCount2",map);
+		session.close();
+		return n;
+	}
+	//반납현황 중 목록
+	public static int getTotalCount3(HashMap map) {
+		int n = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+		n = session.selectOne("borrow.getTotalCount3",map);
+		session.close();
+		return n;
+	}
+
+	//반납이력 출력
+	public static List<BorrowVO2> selectBycust_No3(HashMap map) {
+		// TODO Auto-generated method stub
+		List<BorrowVO2> list = null;
+		SqlSession session=sqlSessionFactory.openSession();
+		list=session.selectList("borrow.selectBycust_No3", map);
 		session.close();
 		return list;
 	}

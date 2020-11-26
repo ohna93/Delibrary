@@ -12,8 +12,8 @@ import com.example.demo.vo.PostVO;
 @Repository
 public class MypageDAO {
 
-	public List<FolderVO> getUserFolder(int cust_no) {
-		return MyPageManager.getUserFolder(cust_no);
+	public List<FolderVO> getUserFolder(HashMap map) {
+		return MyPageManager.getUserFolder(map);
 	}
 	
 	public int folder_cnt(int cust_no) {
@@ -42,5 +42,13 @@ public class MypageDAO {
 
 	public int deleteMyPage_folder(int fol_no) {
 		return MyPageManager.deleteMyPage_folder(fol_no);
+	}
+	
+	public int insertMypage_folder(HashMap map) {
+		return MyPageManager.insertMypage_folder(map);
+	}
+	
+	public int getNextFol_no() {
+		return MyPageManager.getNextFol_no();
 	}
 }

@@ -30,7 +30,7 @@ import lombok.Setter;
 public class QnaController {
 	
 	public static int pageSIZE =  3;	//한 페이지에 보여줄 게시글의 수
-	public static int pageMAX =  5;		//페이징바에 한번에 보여줄 수
+	public static int pageMAX =  5;		//한 페이지에서 페이징바 수
 	public static int totalCount  = 0;	
 	public static int totalPage = 0;	
 	public static int updateHit = 0;
@@ -52,7 +52,10 @@ public class QnaController {
 	
 		//목록
 		@RequestMapping("/QnaList.do")
-		public void list(Model model, @RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM, String search, String option, HttpSession session) {
+		public void list(Model model, @RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM, String option, String search, HttpSession session) {
+			System.out.println("***pageNUM : "+	pageNUM);
+
+			
 			
 			System.out.println("search::::"+search);
 			System.out.println("option::::"+option);
@@ -70,40 +73,44 @@ public class QnaController {
 			totalCount = dao.getTotalCount(map);
 			totalPage = (int)Math.ceil( (double)totalCount/pageSIZE );
 			
-			// 페이지 버튼 숫자
+			//페이지 버튼 숫자
 			int startPage = (pageNUM-1)/pageMAX*pageMAX+1;
 			int endPage = startPage+pageMAX-1;
 			if(endPage>totalPage) {
 				endPage = totalPage;
 			}
 			
-			String pageStr="";
-			if(startPage>1) {
-				pageStr += "<a href='QnaList.do?pageNo="+(startPage-1)+"'> < </a>"+"  ";
-			}
-			for(int i=startPage;i<=endPage;i++) {
-				pageStr += "<a href='QnaList.do?pageNo="+i+"'>"+i+"</a>"+"  ";
-			}
-			if(totalPage>endPage) {
-				pageStr += "<a href='QnaList.do?pageNo="+(endPage+1)+"'> > </a>";
-			}
+//			map.put("startPage", startPage);
+//			map.put("endPage", endPage);
 			
-			// 페이지에 출력되는 레코드 번호
+			//페이지에 출려되는 레코드번호
 			int start = (pageNUM-1)*pageSIZE+1;
-			int end = start+pageSIZE-1;
-			if(end>totalCount) {
+			int end = start + pageSIZE-1; 
+			if (end > totalCount) {
 				end = totalCount;
 			}
-			
 			map.put("start", start);
 			map.put("end", end);
+			
+			
+			
+			System.out.println("***start : "+start);
+			System.out.println("***end : "+end);
+			System.out.println("***startPage : "+startPage);
+			System.out.println("***endPage : "+endPage);
+			System.out.println("***totalPage : "+totalPage);
+			
 		
+			
+			
 			model.addAttribute("list", dao.findAll(map));
-			model.addAttribute("start", start);
-			model.addAttribute("end", end);
 			model.addAttribute("totalCount", totalCount);
 			model.addAttribute("totalPage", totalPage);
-			model.addAttribute("pageStr", pageStr);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+//			model.addAttribute("start", start);
+//			model.addAttribute("end", end);
+			model.addAttribute("pageNUM", pageNUM);
 			
 			if(search != null) {
 				session.setAttribute("search", search);
@@ -113,6 +120,7 @@ public class QnaController {
 			//nav바에 ~님 하기위한 코드
 //			model.addAttribute("cust_name",c_dao.findByCust_No((int)session.getAttribute("cust_no")).getName());
 			
+		
 		}
 		
 	
@@ -252,9 +260,11 @@ public class QnaController {
 	    //게시글 삭제
 	    @RequestMapping(value = "QnaDelete.do", method = RequestMethod.POST)
 		@ResponseBody
-		public int delete(int p_id, int cust_no, HttpServletRequest request) {
+		public int delete(int p_id, int cust_no) {
 			int re=-1;
-
+				
+			System.out.println("::::::::::::"+p_id);
+			System.out.println("::::::::::::"+cust_no);
 			HashMap map=new HashMap();
 			map.put("p_id",p_id);
 			map.put("cust_no",cust_no);
@@ -263,4 +273,6 @@ public class QnaController {
 
 			return re;
 		}
+
+	
 }

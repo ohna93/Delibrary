@@ -154,13 +154,32 @@ public class InsertPostController {
 	@RequestMapping(value = "/updateborrow", 
 			produces = "application/json;charset=utf8")
 	@ResponseBody 
-	public String updateDept(BorrowVO b, HttpSession session, HttpServletRequest request) {
+	public String updateDept(HttpSession session, HttpServletRequest request) {
 		session = request.getSession(true);
+		int cust_no  =  (int) session.getAttribute("cust_no");
 		int bor_no = Integer.parseInt(request.getParameter("bor_no"));
-		System.out.println("수신된 데이터2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+ bor_no);
-		System.out.println("수신된 데이터"+ b);
+
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+
+		String return_ok = request.getParameter("return_ok");
+		String String_bor_date = request.getParameter("bor_date");
+		String String_return_date = request.getParameter("return_date");
+		java.sql.Date bor_date = java.sql.Date.valueOf(String_bor_date);
+		java.sql.Date return_date = java.sql.Date.valueOf(String_return_date);
 		
+
+		BorrowVO b = new BorrowVO();
+		b.setB_no(b_no);
+		b.setBor_date(bor_date);
+		b.setBor_no(bor_no);
+		b.setCust_no(cust_no);
+		b.setReturn_date(return_date);
+		b.setReturn_ok(return_ok);
 		int re =bbdao.update(b);		
+
+
+		
+		
 		Gson gson = new Gson();
 		return gson.toJson(new Message(re+""));
 		//그성공여부를 제이슨으로 반환하고 싶다 인트-->스트링 변환
@@ -175,92 +194,4 @@ public class InsertPostController {
 		Gson gson = new Gson();
 		return gson.toJson(new Message(re+""));
 	}
-
-
-	
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-	
-	@RequestMapping(value = "/insertMy_Library", 
-			produces = "application/json;charset=utf8")
-	@ResponseBody
-	public String insertMy_Library(HttpSession session, HttpServletRequest request) {
-		int ML_NO = dao.getNextNo();
-		int cust_no = Integer.parseInt(request.getParameter("CUST_NO"));
-		int fol_no = Integer.parseInt(request.getParameter("FOL_NO"));
-		String ML_TITLE = request.getParameter("ML_TITLE");
-		//?��?��?���? �??��?���?
-	    java.util.Calendar cal = java.util.Calendar.getInstance(); 
-		//?���??�� �??��?���?
-        java.sql.Date ML_REGDATE = new java.sql.Date(cal.getTimeInMillis());
-        //?��?��링을 sql.Date ?���??��
-		//java.sql.Date ML_REGDATE2 = java.sql.Date.valueOf(ML_REGDATE);
-		String ML_CONTENT = "?��?��?�� ?��?��?��?��?��";
-		String ML_FILE = "";
-		My_libraryVO m = new My_libraryVO();
-		m.setML_NO(ML_NO);
-		m.setCUST_NO(cust_no);
-		m.setML_TITLE(ML_TITLE);
-		m.setML_CONTENT(ML_CONTENT);
-		m.setML_REGDATE(ML_REGDATE);
-		m.setML_FILE(ML_FILE);	
-		m.setFol_no(fol_no);
-		System.out.println("?��?��?�� ?��?��?��:"+m);
-		int re =dao.insertMy_Library(m);		
-		Gson gson = new Gson();
-		return gson.toJson(new Message(re+""));
-	}
-	//?��?��?�� 출력
-	@RequestMapping(value = "/listMy_Library", 
-			produces = "application/json;charset=utf8")
-	@ResponseBody
-	public String listMy_Library(HttpSession session, HttpServletRequest request) {
-		Gson gson = new Gson();
-		int cust_no = Integer.parseInt(request.getParameter("cust_no"));
-		//System.out.println("?��?��?�� ?��?��?��:"+cust_no);	
-		return gson.toJson(dao.findByCust_No(cust_no));
-	}
-	*/
-	
-	
-
-	/*int cust_no = Integer.parseInt(request.getParameter("cust_no"));
-	int cust_no = 1;
-
-	int b_no = Integer.parseInt(request.getParameter("b_no"));
-
-	int bor_no = Integer.parseInt(request.getParameter("bor_no"));
-	String return_ok = request.getParameter("return_ok");
-	
-	String String_return_date = request.getParameter("return_date");
-
-	System.out.println("값전달@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" +String_return_date);
-
-	String String_BOR_DATE = request.getParameter("bor_date");
-	System.out.println("값전달@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" +String_BOR_DATE);
-
-	java.sql.Date BOR_DATE = java.sql.Date.valueOf(String_BOR_DATE);
-
-	
-
-	java.sql.Date return_date = java.sql.Date.valueOf(String_return_date);
-
-	BorrowVO b = new BorrowVO();
-	b.setCust_no(cust_no);
-	b.setB_no(b_no);
-	b.setBor_date(BOR_DATE);
-	b.setReturn_date(return_date);
-	b.setReturn_ok(return_ok);
-	b.setBor_no(bor_no);
-	*/
-
 }

@@ -51,3 +51,4 @@ $(function() {
 		location.href = "http://localhost:8088/detailBook.do?b_no=1&query=" + $(this).find('#book-title').text();
 	})
 });
+

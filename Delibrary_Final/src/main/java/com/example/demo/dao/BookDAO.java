@@ -18,7 +18,7 @@ public class BookDAO {
 	public BookVO findByNo(int b_no) {
 		return BookManager.findByNo(b_no);
 	}
-	//�뿩�ϸ� å��� ����
+	//북업데이트
 	public int update(int b_no) {
 		return BookManager.update(b_no);
 	}

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.db.PostManager;
 import com.example.demo.db.QnaManager;
 import com.example.demo.vo.PostVO;
 
@@ -35,9 +34,7 @@ public class QnaDAO {
 	public int updateHit(int p_id) {
 		return QnaManager.updateHit(p_id);
 	}	
-	
-	/////////////////////////////////////////////////////
-	
+		
 	//글쓰기
 	public int insert(HashMap map) {
 		return QnaManager.insert(map);

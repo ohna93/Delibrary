@@ -104,11 +104,6 @@ public class QnaManager {
 		session.close();
 		return re;
 	}
-//////////////////////////////////////////////////////////////////////////////////////////////
-//	//QNA클릭했을 때 
-//	public static int qnaclick() {
-//		
-//		return 1;
-//	}
+
 }
 

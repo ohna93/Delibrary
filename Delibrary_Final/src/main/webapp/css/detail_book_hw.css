@@ -1,7 +1,17 @@
+/*
+bg-light #f8f9fa
+bg-dark #343a40
+
+btn-success #28A745
+btn-secondary #6C757D
+
+스프링 연 #75BD43
+스프링 진 #107637
+*/
+
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,900);
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700);
 @import url("https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css");
-
 #btn_text{
 	margin-top: 10px;
 	display: inline-block;
@@ -116,7 +126,7 @@ a.button {
     margin-top: 2px;
     width: 100%;
     height: calc(100% - 10px);
-    border-bottom: 3px solid #17A2B8;
+    border-bottom: 3px solid black;
     transform: translate3d(-100%, 0, 0);
     transition: transform 0.3s; }
 

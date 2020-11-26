@@ -7,8 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	죄송합니다. 서비스중에 다음과 같은 문제가 발생하였습니다.
-	<hr>
-	${msg }
+
+너의 이메일은 
+${email } 이란다 
+
+<a href="LoginPage.do">로그인 ㄱ</a>
 </body>
 </html>

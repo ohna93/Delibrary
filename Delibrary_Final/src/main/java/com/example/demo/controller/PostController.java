@@ -26,11 +26,10 @@ import lombok.Setter;
 
 @Controller
 public class PostController {
-
-	public static int pageSIZE=5;
-	public static int totalCount =0;
-	public static int totalPage=1;
-	public static int pageMAX=5;
+	public static int pageSIZE=3;
+	public static int pageMAX =5;      //한 페이지에서 페이징바 수
+	public static int totalCount=0;   
+	public static int totalPage=0;
 	public static int updateHit=0;
 	public static int nextId;
 	public static int nextNo;
@@ -50,7 +49,11 @@ public class PostController {
 	//전체 게시글 목록
 	@RequestMapping("postList.do")
 	public void postList(Model model, int group, @RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM, String search, String option, HttpSession session, HttpServletRequest request) {
+		System.out.println("***pageNUM : "+	pageNUM);
 
+		System.out.println("search::::"+search);
+		System.out.println("option::::"+option);
+		
 		if(search==null&&session.getAttribute("search")!=null) {
 			search=(String)session.getAttribute("search");
 			option=(String)session.getAttribute("option");
@@ -65,25 +68,36 @@ public class PostController {
 				
 		totalCount = dao.getTotalCount(map);
 		totalPage = (int)Math.ceil( (double)totalCount/pageSIZE ) ;
-//		int start=(pageNUM-1)/pageMAX*pageMAX+1;
-//		//6, 7, 8, 9, 10
-//		int end=start+pageMAX-1;
-//		if(end>totalPage) {
-//			end=totalPage;
-//		}
 		
+		//페이지 버튼 숫자
+        int startPage = (pageNUM-1)/pageMAX*pageMAX+1;
+        int endPage = startPage+pageMAX-1;
+        if(endPage>totalPage) {
+           endPage = totalPage;
+        }
+
+		//페이지에 출력되는 레코드 번호
 		int start = (pageNUM-1)*pageSIZE + 1;
-		int end = start + pageSIZE-2;
+		int end = start + pageSIZE-1;
 		if(end > totalCount) {
 			end = totalCount;
 		}
+		map.put("start", start);
+        map.put("end", end);
+
+        System.out.println("***start : "+start);
+		System.out.println("***end : "+end);
+		System.out.println("***startPage : "+startPage);
+		System.out.println("***endPage : "+endPage);
+		System.out.println("***totalPage : "+totalPage);
 		
-		model.addAttribute("list", dao.findAll(map));
 		model.addAttribute("group", group);
-		model.addAttribute("start", start-1);
-		model.addAttribute("end", end);
+		model.addAttribute("list", dao.findAll(map));
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("pageNUM", pageNUM);
 		
 		//검색어 입력하면 세션에 실어준다.
 		if(search!=null && !search.equals("")) {
@@ -191,7 +205,7 @@ public class PostController {
 		ModelAndView mav=new ModelAndView("redirect:/postList.do?option=p_title&search=&group="+group);
 		int re=dao.insert(map);
 		if(re<=0) {
-			mav.addObject("msg", "게시글 작성 실패");
+			mav.addObject("msg", "게시글이 정상적으로 등록되지 않았습니다.");
 			mav.setViewName("error");
 		}
 		return mav;
@@ -249,7 +263,7 @@ public class PostController {
 		ModelAndView mav=new ModelAndView("redirect:/postDetail.do?p_id="+pvo.getP_id()+"&&group="+group);
 		int re = dao.update(pvo);
 		if(re<=0) {
-			mav.addObject("msg", "게시글 수정 실패");
+			mav.addObject("msg", "게시글이 정상적으로 수정되지 않았습니다.");
 			mav.setViewName("error");
   		}else {
 			if(fname != null && !fname.equals("") && !pvo.getFname().equals("")) {
