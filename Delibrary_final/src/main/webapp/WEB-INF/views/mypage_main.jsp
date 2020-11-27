@@ -208,19 +208,19 @@
                   </tr>
               </thead>
               <tbody class="tbody">
-                <tr>
 	                <c:if test="${totalCount_N==0 }">
 	                	<td colspan="4" style="text-align: center;">대출중인 도서가 없습니다.</td>
 	                </c:if>
            		<c:forEach var="b_N" items="${b_N}" varStatus="status" begin="0" end="2">
+                <tr>
                     <th scope="row" width="5%">${status.count }</th>
                    	<c:if test="${totalCount_N!=0 }">
 	                    <td width="60%">${b_N.b_title }</td>
 	                    <td>${b_N.bor_date }</td>
 	                    <td>${b_N.return_date }</td>
                    	</c:if>
-           		</c:forEach>
                 </tr>
+           		</c:forEach>
               </tbody>
             </table>
             <br>
