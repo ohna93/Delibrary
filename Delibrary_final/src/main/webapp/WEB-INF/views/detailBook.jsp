@@ -392,6 +392,7 @@ $(function(){
 			headers: {Authorization: "KakaoAK 0050577fad730d5470e0f11bcdf64cd6"}
 		})
 			.done(function(msg) {
+				
 				$('#b_image').attr("src", msg.documents[0].thumbnail);
 				$('#b_title').text("제목 " + msg.documents[0].title);
 				$('#b_writer').text("저자 " + msg.documents[0].authors);
@@ -483,7 +484,7 @@ $(function(){
 				 var b_no = eval(${b.b_no });
 				 var cust_no = eval(${cust_no });
 				 var data= {"cust_no":cust_no, }
-					if(count2 >=100){
+					if(count2 >=10){
 						alert("대여가능 도서권수를 초과하였습니다")
 					}else{
 						

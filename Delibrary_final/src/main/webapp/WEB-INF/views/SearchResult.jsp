@@ -42,6 +42,14 @@
 				headers: {Authorization: "KakaoAK 0050577fad730d5470e0f11bcdf64cd6"}
 			})
 				.done(function(msg) {
+					console.log('count : ' + msg.meta["pageable_count"]);
+
+					if(msg.meta["pageable_count"] === 0) {
+						let h3 = $('<h3></h3>').text('검색 결과가 없습니다.');
+						h3.attr("style","margin: 20% 0% 0% 35%;");
+						$('.searchResult-body').append(h3);
+					}
+					
 					if(pageNUM == 1){
 						booklist = msg;
 					}
@@ -197,9 +205,8 @@
 	}
 	
 	.searchResult-body {
-		margin-right: 150px;
 		float: left;
-		width: 60%;
+		width: 100%;
 	}
 	
 	.searchResult-options {

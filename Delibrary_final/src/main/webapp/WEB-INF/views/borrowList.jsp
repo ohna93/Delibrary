@@ -27,7 +27,8 @@
 <script type="text/javascript"	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript"	src="../jquery-ui-1.12.1/jquery-ui.min.js"></script>
 
-<script type="text/javascript">$(function(){
+<script type="text/javascript">
+$(function(){
 		
 		$(document).ready(function(){
 			  var zindex = 10;
@@ -98,6 +99,18 @@ $(function(){
 		}
 	});
 });
+
+/* $(function(){
+	var btn_return = $(this).parent().find(button);
+	$(btn_return).click(function(){
+		const check = confirm("반납하시겠습니까?");
+		if(check){
+			alert("완료되었습니다");
+		}else{
+			alert("취소되었습니다");
+		};
+	});
+}); */
 </script>
   
 </head>
@@ -231,14 +244,31 @@ $(function(){
 			<div class="col-md-9">
 			  <div class="p-4">
 				<section id="contact" class="py-3">
+				  <button type="button" id="btn_return">반납하기</button>
 					<div class="cards">
 									<c:if test="${empty b }">
 						<h3> 대여목록이 없습니다.</h3><br>
 						<h5><a href="popularBook.do"> 인기도서 페이지 목록으로 이동</a></h5><br>
 					</c:if>
 					
+
+
+					
 					<c:if test="${not empty b }">
+					<c:set var="now" value="<%=new java.util.Date()%>" />
+					<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="now_date"/>
 					<c:forEach var="b" items="${b }"> 
+					<input type="hidden" value="${b.return_date }" id="return_date_ok">
+					
+					
+					<fmt:parseDate value="${now_date}" var="strPlanDate" pattern="yyyy-MM-dd"/>
+					<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
+<%-- 					${now } --%>
+					<fmt:parseDate value="${b.return_date}" var="endPlanDate" pattern="yyyy-MM-dd"/>
+					<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+<%-- 					${endDate} --%>
+
+
 				  	<div class="card">
 					    <div class="card_image-holder">
 					      <img class="card_image" src="${b.b_image }" alt="wave" />
@@ -246,33 +276,26 @@ $(function(){
 					    </div>
 					    <div>
 				      	<div class="card-text">${b.b_writer }
+						<c:if test="${b.return_ok eq 'P' }">
+							<b class="btn btn-outline-warning btn-sm">반납 대기</b>
+						</c:if>
+						<c:if test="${b.return_ok != 'P' && now<=b.return_date }">
+							<b class="btn btn-outline-success btn-sm">대여 중</b>
+						</c:if>
 					      <p class="m-0">대여일 : ${b.bor_date }</p>
-						  <p>반납일 : ${b.return_date }</p>
+						  <p class="m-0">반납 예정일 : ${b.return_date }</p>
+						  <c:if test="${(endDate - strDate) < 0}">
+							  <p class="m-0" style="color: red;">연체일수 : ${(endDate - strDate)*-1 }일</p>
+						  </c:if>
+						  <c:if test="${(endDate - strDate) >= 0}">
+							  <p class="m-0">&nbsp;</p>
+						  </c:if>
 					    </div>
 					    </div>
 					    
 					  </div>
 					</c:forEach>
 					</c:if>
-   			<div class="container mt-5">
-            <ul class="pagination justify-content-center">
-                <c:if test="${startPage > 1}">
-                <li class="page-item"><a class="page-link" id="page-link" href="return_borrowList.do?pageNUM=${startPage-1 }">&laquo;</a></li>
-                </c:if>
-                <c:if test="${startPage == 1}">
-                <li class="page-item disabled"><a class="page-link" id="page-link" href="return_borrowList.do?pageNUM=${startPage-1 }">&laquo;</a></li>
-                </c:if>
-                 <c:forEach var="i" begin="${startPage }" end="${endPage }">
-                 <li class="page-item "><a class="page-link" id="page-link" href="return_borrowList.do?pageNUM=${i }">${i }</a></li>
-                 </c:forEach>
-                 <c:if test="${endPage < totalPage}"> 
-                <li class="page-item"><a class="page-link" id="page-link" href="return_borrowList.do?pageNUM=${endPage+1 }">&raquo;</a></li>
-                </c:if>
-                <c:if test="${endPage == totalPage}"> 
-                <li class="page-item disabled"><a class="page-link" id="page-link" href="return_borrowList.do?pageNUM=${endPage+1 }">&raquo;</a></li>
-                </c:if>
-              </ul>
-         </div>
  			</div>
 		</section>
 	</div>
@@ -302,6 +325,7 @@ $(function(){
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 	<script>
 		// Get the current year for the copyright
@@ -322,6 +346,22 @@ $(function(){
 			const footer_getQuote = Math.floor(Math.random() * footer_quotes.length);
 			footer_display.textContent =footer_quotes[footer_getQuote];
 		}
+		
+		const date=new Date();
+		const today = moment(date).format('YYYY-MM-DD');
+		const return_date = document.getElementById('return_date_ok').value;
+		console.log(today);
+		console.log(return_date);
+		if(today < return_date){
+			console.log("연체 안됨");
+		}else{
+			console.log("연체 중");
+		}
+			
 	</script>
 </body>
 </html>
+
+
+
+

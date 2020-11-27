@@ -63,8 +63,8 @@
 	a.return_date,
 	a.return_ok,
 	a.cust_no from borrow a, book b where a.b_no = b.b_no and cust_no = #{cust_no} and bor_date is not null
-   	and return_ok like 'N' AND return_date > sysdate 	
-   	order by bor_date desc)q) where n between #{start} and #{end}	 
+   	and (return_ok like 'N' or return_ok like 'P')
+   	order by bor_date desc)q)	 
   </select>
   <!-- 대출반납 list-->	 
   	 <select id="selectBycust_No3" resultType="borrowVO2">
@@ -105,8 +105,7 @@
   	<!-- 페이징처리 total 대출중인 대여목록[용택] -->
   	  
   	<select id ="getTotalCount2" resultType="java.lang.Integer">
-  		select count(*) from borrow where return_ok like 'N' and  
-   			return_date > sysdate and cust_no = #{cust_no}
+  		select count(*) from borrow where return_ok = 'N' and cust_no = #{cust_no}
   	</select>
   	
  	<!-- 페이징처리 total 대출한 대여목록[용택] -->

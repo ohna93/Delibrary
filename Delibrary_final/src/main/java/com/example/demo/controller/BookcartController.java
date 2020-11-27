@@ -56,55 +56,15 @@ public class BookcartController {
         System.out.println("***pageNUM : "+   pageNUM);
 
 		int cust_no  =  (int) session.getAttribute("cust_no");
-		//반납완료도서
-		String return_ok = "Y";
-
 		
 		HashMap map=new HashMap();
 		map.put("cust_no", cust_no);
-//		map.put("return_ok", return_ok);
 		
         totalCount = dao.getTotalCount2(map);
-        
 		totalPage = (int)Math.ceil( (double)totalCount/pageSIZE );
-        
-        //페이지 버튼 숫자
-        int startPage = (pageNUM-1)/pageMAX*pageMAX+1;
-        int endPage = startPage+pageMAX-1;
-        if(endPage>totalPage) {
-           endPage = totalPage;
-        }
-        
-//        map.put("startPage", startPage);
-//        map.put("endPage", endPage);
-        
-        //페이지에 출려되는 레코드번호
-        int start = (pageNUM-1)*pageSIZE+1;
-        int end = start + pageSIZE-1; 
-        if (end > totalCount) {
-           end = totalCount;
-        }
-        map.put("start", start);
-        map.put("end", end);
-        
-        
-        
-        System.out.println("***start : "+start);
-        System.out.println("***end : "+end);
-        System.out.println("***startPage : "+startPage);
-        System.out.println("***endPage : "+endPage);
-        System.out.println("***totalPage : "+totalPage);
-
 		
 		model.addAttribute("b", dao.selectBycust_No2(map));
-
-			model.addAttribute("totalCount", totalCount);
-	        model.addAttribute("totalPage", totalPage);
-	        model.addAttribute("startPage", startPage);
-	        model.addAttribute("endPage", endPage);
-//	        model.addAttribute("start", start);
-//	        model.addAttribute("end", end);
-	        model.addAttribute("pageNUM", pageNUM);
+		model.addAttribute("totalCount", totalCount);
 	}
 	
 	
