@@ -8,6 +8,10 @@
 	<insert id="insertCustomer" parameterType="customerVO">
 		insert into customer values(#{cust_no}, #{email}, #{pw}, #{addr}, #{addr2},  #{nickname}, #{interest}, #{name}, #{m_phone}, #{birthday},  #{fname}, #{manager})
 	</insert>
+	
+	<insert id="insert_library" parameterType="my_libraryVO">
+		insert into my_library values(#{ml_no}, #{cust_no})
+	</insert>
 
 	<select id="login" resultType="customerVO">
 		select * from customer where email=#{email} and pw=#{pw}

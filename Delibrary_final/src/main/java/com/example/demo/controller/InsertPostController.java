@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
@@ -98,7 +99,13 @@ public class InsertPostController {
       
       int b_no = bdao.getNextNo();
       String b_title = request.getParameter("b_title");
-      String b_publisher = "알수없음";
+      String[] b_publisher_list = {"은행나무","시공주니어","보물창고","웅진주니어","주니어김영사","좋은책어린이","팩토리나인"
+                            ,"지서연","흔들의자","더북컴퍼니","상상앤미디어","폭스코너","앨리스북클럽","흐름출판","델피노"
+                            ,"문학동네","문학수첩","에듀윌","심슨북스","지식노마드","더퀘스트","민음사","부크크(Bookk)"
+                            ,"전망","스토리존","창비"};
+      Random random = new Random();
+      int ran_num = random.nextInt(b_publisher_list.length);
+      String b_publisher = b_publisher_list[ran_num];
       String b_writer = request.getParameter("b_writer");
       String String_b_year = request.getParameter("b_year");
       //2015-12-07T00:00:00.000+09:00 나와서 분리 시켜서 db에 넣어야한다.
