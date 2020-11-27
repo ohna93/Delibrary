@@ -20,6 +20,7 @@ import com.example.demo.dao.CustomerDAO;
 import com.example.demo.dao.HomeDAO;
 import com.example.demo.service.UserSha256;
 import com.example.demo.vo.CustomerVO;
+import com.example.demo.vo.My_libraryVO;
 
 @Controller
 public class CustomerController {
@@ -153,6 +154,12 @@ public class CustomerController {
       
       session.setAttribute("email", c.getEmail());
       
+      //마이라이브러리 생성 
+      My_libraryVO ml = new My_libraryVO();
+      ml.setMl_no(c.getCust_no());
+      ml.setCust_no(c.getCust_no());
+      dao.insertMy_Library(ml);
+  
       if(re<0) {
     	 mav.addObject("msg", "회원가입이 정상적으로 처리되지 않았습니다.");
          mav.setViewName("/error");
@@ -160,6 +167,7 @@ public class CustomerController {
       
       return mav;
    }
+
    
    
 	//회원가입 환영
@@ -169,7 +177,6 @@ public class CustomerController {
 		System.out.println(email);
 	}
 	
-
    //로그인 FORM
    @RequestMapping(value="/LoginPage.do")
    public void logInForm() {

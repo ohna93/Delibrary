@@ -29,7 +29,7 @@
 
 	<!-- 대여시 대여 넘버 삽입 -->
 	<select id="getNextNo2" resultType="java.lang.Integer">
-		select nvl(max(b_no),0) from
+		select nvl(max(b_no),0)+1 from
 		book
 	</select>
 	

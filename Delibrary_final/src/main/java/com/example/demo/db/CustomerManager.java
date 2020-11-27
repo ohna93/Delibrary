@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.example.demo.vo.CustomerVO;
+import com.example.demo.vo.My_libraryVO;
 
 public class CustomerManager {
 	
@@ -31,6 +32,15 @@ public static SqlSessionFactory sqlSessionFactory;
 		int n = session.selectOne("customer.getNextNo");
 		c.setCust_no(n);
 		re = session.insert("customer.insertCustomer",c);
+		session.close();
+		return re;
+	}
+	
+	//회원가입 시 마이라이브러리 추가 
+	public static int insertMy_library(My_libraryVO ml) {
+		int re = -1;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		re = session.insert("customer.insert_library",ml);
 		session.close();
 		return re;
 	}
