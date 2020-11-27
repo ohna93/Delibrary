@@ -204,7 +204,14 @@
          <div class="col-md-9">
             <div class="row py-4">
             <div class="col pb-4">
-              <button class="btn btn-outline-success" onclick="postInsert()">글쓰기</button>
+               <!-- 공지사항 게시판 글쓰기버튼 관리자만 보임 -->
+               <c:if test="${group==10&&cust_no==1 }">
+                 <button class="btn btn-outline-success" onclick="postInsert()">글쓰기</button>
+                 </c:if>
+               <!-- 나머지 게시판은 전부 -->
+                 <c:if test="${group==20 ||group==30 ||group==60 }">
+                 <button class="btn btn-outline-success" onclick="postInsert()">글쓰기</button>
+                 </c:if>                     
               <!-- 비로그인시 cust_no를 0으로 설정 -->
               <c:if test="${empty cust_no }">
                  <c:set var="cust_no" value="0"></c:set>
