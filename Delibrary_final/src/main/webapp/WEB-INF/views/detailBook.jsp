@@ -471,7 +471,6 @@ $(function(){
       });
    //대여버튼
    $('#borrow').click(function(){
-
       $('#dialog-borrow').dialog({
       modal: true, 
       height:250,
@@ -479,36 +478,42 @@ $(function(){
       buttons: {
          
          "대여": function() {
-            insertBook();
-            
-            var count = eval(${b.b_count });
-            var count2 = eval(${sumbook });
-             var b_no = eval(${b.b_no });
-             var cust_no = eval(${cust_no });
-             var data= {"cust_no":cust_no, }
-               if(count2 >=10){
-                  alert("대여가능 도서권수를 초과하였습니다")
-               }else{
-                  
-                  var b_no =eval(${b.b_no });
-                  var cust_no =eval(${cust_no });
-                  
-                  $.ajax({
-                     url :"/insertBorrow",
-                     dataType:"Json",
-                     data:data,
-                        //"b_no="+b_no,
-                     //data: "cust_no="+${cust_no }}
-                     type: "POST",
-                     success:function(data){
-                        alert("대출완료")
-                     },
-                     error : function(){
-                        alert("에러")      
-                     }
-                     });   
-               }$( this ).dialog( "close" );
-            //대여 날짜를 선택                        
+             var days =${days }
+
+             if(days>0){
+                 alert("연체일수 " +days+"입니다.    연체가 불가능합니다.")
+               
+                 }else{
+                    var count = eval(${b.b_count });
+                     var count2 = eval(${sumbook });
+                      var b_no = eval(${b.b_no });
+                      var cust_no = eval(${cust_no });
+                      var data= {"cust_no":cust_no, }
+                        if(count2 >=10){
+                           alert("대여가능 도서권수를 초과하였습니다")
+                        }else{
+                            insertBook();
+                            
+                           var b_no =eval(${b.b_no });
+                           var cust_no =eval(${cust_no });
+                           
+                           $.ajax({
+                              url :"/insertBorrow",
+                              dataType:"Json",
+                              data:data,
+                                 //"b_no="+b_no,
+                              //data: "cust_no="+${cust_no }}
+                              type: "POST",
+                              success:function(data){
+                                 alert("대출완료")
+                              },
+                              error : function(){
+                                 alert("에러")      
+                              }
+                              });   
+                        }$( this ).dialog( "close" );
+                     
+                     }            
       },"취소": function() { alert("취소하셨습니다.") }
              },               
    });                  
@@ -720,7 +725,7 @@ $(function(){
                  <c:if test="${not empty cust_no }">     
                 <button id=borrow class="buttonadd"
                   style="float: left; margin-left: 50px;">
-                  <span>바로 대여</span>
+                  <span>북카트에 담기</span>
                 </button>
                 </c:if>
                 
@@ -786,7 +791,6 @@ $(function(){
   <script>
     // Get the current year for the copyright
     $('#year').text(new Date().getFullYear());
-
     window.onload=function(){
       //푸터 명언
       const footer_display = document.getElementById('footer-display');

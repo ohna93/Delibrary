@@ -23,8 +23,8 @@ public class CustomerDAO {
 	}
 	
 	//회원탈퇴
-	public void deleteCustomer(HashMap map) {
-		CustomerManager.deleteCustomer(map);
+	public int deleteCustomer(HashMap map) {
+		return CustomerManager.deleteCustomer(map);
 	}
 
 	//로그인

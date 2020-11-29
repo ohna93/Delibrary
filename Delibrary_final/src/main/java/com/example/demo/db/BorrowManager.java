@@ -26,7 +26,7 @@ public static SqlSessionFactory sqlSessionFactory;
 			inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		} catch (Exception e) {
-			System.out.println("static 예외발생: "+e.getMessage());
+			System.out.println("static �삁�쇅諛쒖깮: "+e.getMessage());
 		}
 	}
 	
@@ -47,10 +47,10 @@ public static SqlSessionFactory sqlSessionFactory;
 		session.close();
 		return n;
 	}
-	//북카트 출력
+	//遺곸뭅�듃 異쒕젰
 
 
-	//북카트 출력
+	//遺곸뭅�듃 異쒕젰
 	public static List<BorrowVO2> selectBycust_No(HashMap map) {
 		// TODO Auto-generated method stub
 		List<BorrowVO2> list = null;
@@ -59,7 +59,7 @@ public static SqlSessionFactory sqlSessionFactory;
 		session.close();
 		return list;
 	}
-	//대출현황 출력
+	//��異쒗쁽�솴 異쒕젰
 	public static List<BorrowVO2> selectBycust_No2(HashMap map) {
 		// TODO Auto-generated method stub
 		List<BorrowVO2> list = null;
@@ -80,6 +80,15 @@ public static SqlSessionFactory sqlSessionFactory;
 		return re;
 		
 	}
+	
+	//반납기능..
+	public static int update2(int bor_no) {
+		int re =  -1;
+		SqlSession session=sqlSessionFactory.openSession(true);
+		re = session.delete("borrow.updateBorrow2", bor_no);
+		session.close();
+		return re;
+	}
 
 
 	public static int delete(int bor_no) {
@@ -98,12 +107,12 @@ public static SqlSessionFactory sqlSessionFactory;
 		return n;
 	}
 	
-	// 모든 정보 가져오기[재성]
+	// 紐⑤뱺 �젙蹂� 媛��졇�삤湲�[�옱�꽦]
 	public static List<BorrowVO> findAll() {
 		List<BorrowVO> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
 		list = session.selectList("borrow.findAll");
-		System.out.println("데이터 수 : " + list.size());
+		System.out.println("�뜲�씠�꽣 �닔 : " + list.size());
 		session.close();
 		return list;
 	}
@@ -116,7 +125,7 @@ public static SqlSessionFactory sqlSessionFactory;
 		session.close();
 		return n;
 	}
-	//대출 중 목록
+	//��異� 以� 紐⑸줉
 	public static int getTotalCount2(HashMap map) {
 		int n = -1;
 		SqlSession session = sqlSessionFactory.openSession();
@@ -124,7 +133,7 @@ public static SqlSessionFactory sqlSessionFactory;
 		session.close();
 		return n;
 	}
-	//반납현황 중 목록
+	//諛섎궔�쁽�솴 以� 紐⑸줉
 	public static int getTotalCount3(HashMap map) {
 		int n = -1;
 		SqlSession session = sqlSessionFactory.openSession();
@@ -133,7 +142,7 @@ public static SqlSessionFactory sqlSessionFactory;
 		return n;
 	}
 
-	//반납이력 출력
+	//諛섎궔�씠�젰 異쒕젰
 	public static List<BorrowVO2> selectBycust_No3(HashMap map) {
 		// TODO Auto-generated method stub
 		List<BorrowVO2> list = null;
@@ -141,5 +150,21 @@ public static SqlSessionFactory sqlSessionFactory;
 		list=session.selectList("borrow.selectBycust_No3", map);
 		session.close();
 		return list;
+	}
+	//연체여부확인
+	public static int delay(int cust_no) {
+		int n = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+		n = session.selectOne("borrow.delay",cust_no);
+		session.close();
+		return n;
+	}
+	//연체일수 계산
+	public static int delay2(int cust_no) {
+		int n = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+		n = session.selectOne("borrow.delay2",cust_no);
+		session.close();
+		return n;
 	}
 }

@@ -12,17 +12,17 @@
 	</select>
 	
 	<select id="getHomePost" resultType="postVO">
-		select rownum, p_id, p_no, p_title from (select p_id, p_no, p_title from post where p_no like #{group}||'%') <![CDATA[where rownum <= 3]]>
+		select rownum, p_id, p_no, p_title from (select p_id, p_no, p_title from post where p_no like ''||#{group}||'%' order by p_no desc) <![CDATA[where rownum <= 3]]> 
 	</select>
 	 
 	<!-- 게시판 게시글 가져오기 -->
 	<select id="getListPost" resultType="postVO">
-		select * from post where p_no like #{group}||'%'
+		select * from post where p_no like ''||#{group}||'%' order by p_no desc;
 	</select>
 	
 	<!-- 페이징 처리를 위해 총 게시물 갯수 구해오기 -->
 	<select id="getTotalCount" resultType="Integer">
-		select count(*) from post where p_no like #{group}||'%'
+		select count(*) from post where p_no like ''||#{group}||'%'
 	</select>
 	
 	<!-- 관리자 페이지에서 수정할 때 사용(회원관리) -->

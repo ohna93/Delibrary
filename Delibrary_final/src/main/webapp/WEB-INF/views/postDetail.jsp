@@ -52,7 +52,7 @@
   <title>커뮤니티 - 딜리브러리</title>
 </head>
 
-<body class="d-flex flex-column">
+<body class="d-flex flex-column" onselectstart="return false">
    <div id="page-content">
    <nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light p-0">
       <div class="container">
@@ -291,11 +291,9 @@
                                <td width="20%">
                                   <div class="text-right">
                                      <c:if test="${not empty cust_no }">
-                                        <c:if test="${r.cust_no==cust_no}">
-                                                   <button class="btn btn-outline-success btn-sm table-align-right block-inline btnUpdateReply" id="btnUpdateReply" re_no="${r.re_no}" cust_no="${r.cust_no } p_id=${p_id}"><i class="fas fa-edit"></i></button>
-                                        </c:if>
                                         <c:if test="${r.cust_no==cust_no || cust_no==1}">
                                            <c:set var="setReplyCustNo" value="${r.cust_no }"></c:set> <!-- 관리자 로그인시 댓글쓴이 회원번호로 셋해줌 -->
+                                                   <button class="btn btn-outline-success btn-sm table-align-right block-inline btnUpdateReply" id="btnUpdateReply" re_no="${r.re_no}" cust_no="${setReplyCustNo }" re_content="${r.re_content }" p_id="${post.p_id}" group="${group }" edit_re = "y"><i class="fas fa-edit"></i></button>
                                            <button class="btn btn-outline-danger btn-sm table-align-right block-inline btnDeleteReply" re_no="${r.re_no}" cust_no="${setReplyCustNo }"><i class="far fa-trash-alt"></i></button>
                                         </c:if>
                                      </c:if>
@@ -303,7 +301,7 @@
                                        </td>
                             </tr>
                             <tr>
-                               <td colspan="2">${r.re_content }</td>
+                               <td colspan="2" id="card-body">${r.re_content }</td>
                             </tr>
                             <tr>
                                <td colspan="2"><small class="text-muted"><fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value = "${r.re_regdate }" /></small></td>
@@ -412,6 +410,11 @@
          //댓글 수정버튼 btnUpdateReply
          $("#btnUpdateReply").click(function(){
             const edit_re = this.getAttribute("edit_re");
+            const re_no = this.getAttribute("re_no");
+            const cust_no = this.getAttribute("cust_no");
+            const p_id = this.getAttribute("p_id");
+            const group = this.getAttribute("group");
+            const re_contentUp = $("#card-body textarea").val();
 
             if(edit_re == "y"){
                const re_content =  this.getAttribute("re_content");
@@ -421,10 +424,6 @@
                this.setAttribute("edit_re","n");
                
             }else{
-               const re_contentUp = $("#card-body textarea").val();
-               const re_no = this.getAttribute("re_no");
-               const cust_no = this.getAttribute("cust_no");
-               const p_id = this.getAttribute("p_id");
                console.log(re_contentUp);
                   $.ajax({
                      url:'replyUpdate.do',
@@ -436,8 +435,8 @@
                         },
                      success: function(re){
                            if(re>0){
-                              console.log(re);
-                              window.location="postDetail.do?p_id="+p_id;
+                              console.log(p_id);
+                              window.location="postDetail.do?p_id="+p_id+"&&group="+group;
                            }else{
                               alert("댓글 수정실패1");
                            }
@@ -495,7 +494,7 @@
      window.onload=function(){
       //푸터 명언
       const footer_display = document.getElementById('footer-display');
-      const footer_quotes = ['좋은 책은 인류에게 불멸의 정신이다. — J. 밀턴', '내가 인생을 알게 된 것은 사람과 접촉해서가 아니라 책과 접하였기 때문이다. — A. 프 랜스', '목적이 없는 독서는 산보일 뿐이다. — B. 리튼', '사람은 책을 만들고, 책은 사람을 만든다. — 신용호','기회를 기다리는 것은 바보짓이다. 독서의 시간이라는 것은 지금 이 시간이지 결코 이제부터가 아니다. 오늘 읽을 수 있는 책을 내일로 넘기지 말라. — H. 잭슨','책은 한 권 한 권이 하나의 세계다. — W. 워즈워스', '책을 한 권 읽으면 한 권의 이익이 있고, 책을 하루 읽으면 하루의 이익이 있다. — 괴문절'];
+      const footer_quotes = ['좋은 책은 인류에게 불멸의 정신이다. — J. 밀턴', '내가 인생을 알게 된 것은 사람과 접촉해서가 아니라 책과 접하였기 때문이다. — A. 프 랜스', '목적이 없는 독서는 산보일 뿐이다. — B. 리튼', '사람은 책을 만들고, 책은 사람을 만든다. — 신용호','기회를 기다리는 것은 바보짓이다. 독서의 시간이라는 것은 지금 이 시간이지 결코 이 제부터가 아니다. 오늘 읽을 수 있는 책을 내일로 넘기지 말라. — H. 잭슨','책은 한 권 한 권이 하나의 세계다. — W. 워즈워스', '책을 한 권 읽으면 한 권의 이익이 있고, 책을 하루 읽으면 하루의 이익이 있다. — 괴문절'];
       const footer_getQuote = Math.floor(Math.random() * footer_quotes.length);
       footer_display.textContent =footer_quotes[footer_getQuote];
    }

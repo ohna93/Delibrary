@@ -26,7 +26,7 @@ import lombok.Setter;
 
 @Controller
 public class PostController {
-	public static int pageSIZE=3;
+	public static int pageSIZE=5;
 	public static int pageMAX =5;      //한 페이지에서 페이징바 수
 	public static int totalCount=0;   
 	public static int totalPage=0;

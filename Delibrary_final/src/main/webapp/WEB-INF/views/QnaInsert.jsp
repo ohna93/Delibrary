@@ -166,7 +166,7 @@
 				 	<span>&nbsp;</span>
 			  </div>
               <div class="col-md-2">
-              		<button class="btn btn-success btn-block"><i class="fas fa-check"></i> 등록</button>
+              		<button class="btn btn-success btn-block" onclick="btnInsert()"><i class="fas fa-check"></i> 등록</button>
               </div>
             </div>
           </div>
@@ -189,7 +189,7 @@
                   <div class="card-body">
 						<div class="form-group">
 							<label for="title" class="noto-serif">제목</label>
-							<input type="text" class="form-control" name="p_title" value="${p_title }" placeholder="제목을 입력하세요.">
+							<input id="title_test" type="text" class="form-control" name="p_title" value="${p_title }" placeholder="제목을 입력하세요.">
 						</div>
                       <div class="form-group">
                         <label for="image" class="noto-serif">파일첨부 [문의할 내용의 필요한 사진을 등록해주세요.]</label>
@@ -255,6 +255,15 @@
 			const footer_getQuote = Math.floor(Math.random() * footer_quotes.length);
 			footer_display.textContent =footer_quotes[footer_getQuote];
 		}
+    <!-- 제목과내용이 null값이면 글등록이 안되도록.. -->    
+    function btnInsert(){
+          const p_title = document.getElementById('title_test').value
+		  if(p_title == null){
+		  	alert("제목을 입력하세요.")
+		  }else{
+		      window.location="QnaInsert.do?cust_no="+${cust_no};
+		  }
+    }
   </script>
 </body>
 

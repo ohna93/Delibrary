@@ -11,8 +11,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -192,21 +194,18 @@ public class CustomerController {
       return mav;
    }
    
-   //회원탈퇴
-   @RequestMapping(value="/optOutCustomer.do", method=RequestMethod.GET)
-   public void deleteCustomerForm() {
-      
-   }
    
    //회원탈퇴ok
-   @RequestMapping(value="/optOutCustomer.do", method=RequestMethod.POST)
-   public ModelAndView deleteCustomerOk(String email, String pw, HttpSession session) {
-      ModelAndView mav = new ModelAndView("redirect:/Home.do");
+   @RequestMapping(value="/optOutCustomer.do")
+   @ResponseBody
+   public int deleteCustomerOk(String email, String pw, HttpSession session) {
       HashMap map = new  HashMap();
+      pw = UserSha256.encrypt(pw);
       map.put("email",email);
       map.put("pw",pw);
-      dao.deleteCustomer(map);
-      return mav;   
+      int result = dao.deleteCustomer(map);
+      session.removeAttribute("cust_no");
+      return result;
    }
 
    // 회원정보 디테일 and 수정

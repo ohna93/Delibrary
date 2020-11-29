@@ -46,10 +46,11 @@ public static SqlSessionFactory sqlSessionFactory;
 	}
 	
 	//회원탈퇴
-	public static void deleteCustomer(HashMap map) {
+	public static int deleteCustomer(HashMap map) {
 		SqlSession session = sqlSessionFactory.openSession(true);
-		session.delete("customer.deleteCustomer",map);
+		int re = session.delete("customer.deleteCustomer",map);
 		session.close();
+		return re;
 	}
 	
 	//로그인정보

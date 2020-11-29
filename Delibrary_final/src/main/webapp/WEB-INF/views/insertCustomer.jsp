@@ -256,12 +256,12 @@
 				<div class="row">
 					<!-- 관심장르 CHECKBOX 1st ROW -->
 					<div class="d-inline-block w-50 p-1 form-check">
-						<input type="checkbox" value="인문" class="d-none form-check-input" id="interest_check1" name="genre"/>
+						<input type="checkbox" value="1" class="d-none form-check-input" id="interest_check1" name="genre"/>
 						<div class="btn btn-light w-100 btn-Customer" id="interest1">인문</div>
 						</label>
 					</div>
 			
-					<div class="d-inline-block w-50 p-1 form-check"><input type="checkbox" value="경영"
+					<div class="d-inline-block w-50 p-1 form-check"><input type="checkbox" value="2"
 							class="d-none form-check-input" id="interest_check2" name="genre"/>
 						<div class="btn btn-light w-100 btn-Customer" id="interest2">경영</div>
 						</label>
@@ -271,12 +271,12 @@
 				<div class="row">
 					<!-- 관심장르 CHECKBOX 2nd ROW -->
 					<div class="d-inline-block w-50 p-1 form-check"><label class="w-100 form-check-label"><input type="checkbox"
-								value="소설" class="d-none form-check-input" id="interest_check3" name="genre"/>
+								value="3" class="d-none form-check-input" id="interest_check3" name="genre"/>
 							<div class="btn btn-light w-100 btn-Customer" id="interest3">소설</div>
 						</label></div>
 			
 					<div class="d-inline-block w-50 p-1 form-check"><label class="w-100 form-check-label"><input type="checkbox"
-								value="역사" class="d-none form-check-input" id="interest_check4" name="genre"/>
+								value="4" class="d-none form-check-input" id="interest_check4" name="genre"/>
 							<div class="btn btn-light w-100 btn-Customer" id="interest4">역사</div>
 						</label></div>
 				</div><!-- 관심장르 CHECKBOX 2nd ROW END -->
@@ -284,11 +284,11 @@
 				<div class="row">
 					<!-- 관심장르 CHECKBOX 3rd ROW -->
 					<div class="d-inline-block w-50 p-1 form-check"><label class="w-100 form-check-label">
-							<input type="checkbox" value="순수과학" class="d-none form-check-input" id="interest_check5" name="genre"/>
+							<input type="checkbox" value="5" class="d-none form-check-input" id="interest_check5" name="genre"/>
 							<div class="btn btn-light w-100 btn-Customer" id="interest5">순수과학</div>
 						</label></div>
 					<div class="d-inline-block w-50 p-1 form-check"><label class="w-100 form-check-label">
-							<input type="checkbox" value="응용과학" class="d-none form-check-input" id="interest_check6" name="genre"/>
+							<input type="checkbox" value="6" class="d-none form-check-input" id="interest_check6" name="genre"/>
 							<div class="btn btn-light w-100 btn-Customer" id="interest6">응용과학</div>
 						</label></div>
 				 </div><!-- 관심장르 CHECKBOX 3rd ROW END -->
