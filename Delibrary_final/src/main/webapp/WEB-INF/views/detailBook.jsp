@@ -788,7 +788,7 @@ $(function(){
    <script type="text/javascript"   src="../jquery-ui-1.12.1/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
 
-  <script>
+  <script>\
     // Get the current year for the copyright
     $('#year').text(new Date().getFullYear());
     window.onload=function(){
