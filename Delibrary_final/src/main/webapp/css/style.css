@@ -5,8 +5,8 @@ bg-dark #343a40
 btn-success #28A745
 btn-secondary #6C757D
 
-스프링 연 #75BD43
-스프링 진 #107637
+�뒪�봽留� �뿰 #75BD43
+�뒪�봽留� 吏� #107637
 */
 .page-link{
    color: #343a40;
@@ -90,19 +90,19 @@ b{
 }
 
 .carousel-image-1 {
-  /* background: url('../img/image1.jpg'); */
+  background: url('../img//home/ad1.png');
   background-color: cadetblue;
   background-size: cover;
 }
 
 .carousel-image-2 {
-  /* background: url('../img/image2.jpg'); */
+  background: url('../img//home/ad2.PNG');
   background-color: darkgoldenrod;
   background-size: cover;
 }
 
 .carousel-image-3 {
-  /* background: url('../img/image3.jpg'); */
+  background: url('../img/home/ad3.PNG');
   background-color: darkseagreen;
   background-size: cover;
 }
@@ -189,8 +189,8 @@ b{
 
 /*  ------------------------------------------- */
 /*    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      */
-/*    !!!!!!!  공통부분 추가 css 입니다  !!!!!!!      */
-/*    !!!!!!!      지우지 마세요       !!!!!!!      */
+/*    !!!!!!!  怨듯넻遺�遺� 異붽� css �엯�땲�떎  !!!!!!!      */
+/*    !!!!!!!      吏��슦吏� 留덉꽭�슂       !!!!!!!      */
 /*    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      */
 /*  ------------------------------------------- */
 
@@ -275,7 +275,7 @@ html, body{
 	padding-bottom: 10px;
 }
 
-/* 유림 추가 홈헤딩 START */
+/* �쑀由� 異붽� �솃�뿤�뵫 START */
 
 #heroDesc,
 #heroDescKor {
@@ -292,9 +292,9 @@ html, body{
 	margin-top: -53px;
 	color: #DCDCDC;
 }
-/* 유림 추가 홈헤딩 END*/
+/* �쑀由� 異붽� �솃�뿤�뵫 END*/
 
-/* 유림 추가 사이트맵 START */
+/* �쑀由� 異붽� �궗�씠�듃留� START */
 .siteMapTitle {
 	text-align: center;
 	color: #107637;
@@ -312,10 +312,10 @@ html, body{
 .siteMapAnchor:hover {
 	color:#75BD43;
 }
-/* 유림 추가 사이트맵 END */
+/* �쑀由� 異붽� �궗�씠�듃留� END */
 
 
-/* 유림 추가 대출반납연장 START */
+/* �쑀由� 異붽� ��異쒕컲�궔�뿰�옣 START */
 .howtoText {
 	font-family: 'Noto Sans KR', sans-serif;
 }

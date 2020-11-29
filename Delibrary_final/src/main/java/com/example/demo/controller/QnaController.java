@@ -29,7 +29,7 @@ import lombok.Setter;
 @Controller
 public class QnaController {
 	
-	public static int pageSIZE =  3;	//한 페이지에 보여줄 게시글의 수
+	public static int pageSIZE =  5;	//한 페이지에 보여줄 게시글의 수
 	public static int pageMAX =  5;		//한 페이지에서 페이징바 수
 	public static int totalCount  = 0;	
 	public static int totalPage = 0;	

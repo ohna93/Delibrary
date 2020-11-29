@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.StringTokenizer;
 
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.Message;
@@ -201,4 +204,42 @@ public class InsertPostController {
       Gson gson = new Gson();
       return gson.toJson(new Message(re+""));
    }
+   
+   
+   
+	// 반납대기 참조 현황 마이페이지 폴더 삭제
+	@RequestMapping(value = "/update_borrow", method = RequestMethod.POST)
+	@ResponseBody
+	public int deleteMyPage_folder (@RequestParam(value = "fol_no_arr[]") List<Integer> fol_no_arr) {
+		int[] result = new int[fol_no_arr.size()];
+		
+		int re = -1;
+		for(int i=0; i<fol_no_arr.size(); i++) {
+			result[i] = bbdao.update2(fol_no_arr.get(i)); //{1,1,1,-1}
+		}
+		
+		root1:
+			for(int i=0; i<result.length; i++) {
+				
+				// 만약 한개라도 지워지지 않은 것이 있는 것을 판별
+				if(result[i] == -1) { //지워지지 않은게 있다는거잖아
+					re = -1; // 일단 다 안지워졌다고 보는거지
+					
+					root2:
+						for(int j=0; j<result.length; j++) {
+							if(result[j] == 1) { //다 안지워진건 아니네
+								re = -2; // 일부만 지워졌네  
+								break root1;
+							}
+						}
+					
+				} else { //모두 지워졌을 경우
+					re = 1;
+					break;
+				}
+			}
+		
+		return re;
+	}
+   
 }

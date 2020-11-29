@@ -31,16 +31,16 @@ public class BorrowDAO {
 	public int getNextNo() {
 		return BorrowManager.getNextNo();
 	}
-	//북카트 목록 출력
+	//遺곸뭅�듃 紐⑸줉 異쒕젰
 	public List<BorrowVO2> selectBycust_No(HashMap map){
 		return BorrowManager.selectBycust_No(map);
 	}
 	
-	//대출현황 목록 출력[용택]
+	//��異쒗쁽�솴 紐⑸줉 異쒕젰[�슜�깮]
 	public List<BorrowVO2> selectBycust_No2(HashMap map){
 		return BorrowManager.selectBycust_No2(map);
 	}
-	//반납현황 출력[용택]
+	//諛섎궔�쁽�솴 異쒕젰[�슜�깮]
 	public List<BorrowVO2> selectBycust_No3(HashMap map) {
 		return BorrowManager.selectBycust_No3(map);
 	}
@@ -49,7 +49,10 @@ public class BorrowDAO {
 		// TODO Auto-generated method stub
 		return BorrowManager.update(b);
 	}
-	//
+	
+	public int update2(int bor_no) {
+		return BorrowManager.update2(bor_no);
+	}
 
 
 	public int delete(int bor_no) {
@@ -59,7 +62,7 @@ public class BorrowDAO {
 	public int calB_no(int cust_no) {
 		return BorrowManager.calB_no(cust_no);
 	}
-	// 모든 정보 가져오기[재성]
+	// 紐⑤뱺 �젙蹂� 媛��졇�삤湲�[�옱�꽦]
 	public List<BorrowVO> findAll() {
 		return BorrowManager.findAll();
 
@@ -75,8 +78,14 @@ public class BorrowDAO {
 		// TODO Auto-generated method stub
 		return BorrowManager.getTotalCount3(map);
 	}
-
-
-
+	
+	public int delay(int cust_no) {
+		// TODO Auto-generated method stub
+		return BorrowManager.delay(cust_no);
+	}
+	public int delay2(int cust_no) {
+		// TODO Auto-generated method stub
+		return BorrowManager.delay2(cust_no);
+	}
 
 }

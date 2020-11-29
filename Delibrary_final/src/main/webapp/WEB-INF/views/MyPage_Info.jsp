@@ -485,6 +485,7 @@ function sample6_execDaumPostcode() {
 								</div>
 							</div>
 							<button type="submit" class="btn btn-dark btn-block mb-1 btn-Customer">수정하기</button>
+							<button type="button" class="btn btn-outline-danger btn-block mb-1 btn-Customer" data-toggle="modal" data-target="#outModal">회원탈퇴 </button>
 						</form>
 					</section>
 				</div>
@@ -492,6 +493,69 @@ function sample6_execDaumPostcode() {
 		</div>
 	</section>
 </div>
+
+<!-- 회원탈퇴 추가 by 유림 1129 -->
+ <div class="modal" id="outModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">회원탈퇴</h5>
+            <button class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="username">회원탈퇴를 위해 비밀번호를 입력해주세요.</label>
+                <input type="password" placeholder="비밀번호를 입력해주세요." class="form-control" id="pwInput">
+              </div>
+              <div class="form-group">
+                <label for="password">비밀번호를 한번 더 입력해주세요</label>
+                <input type="password" placeholder="비밀번호를 한번 더 입력해주세요." class="form-control" id="pwInputCheck">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger" data-dismiss="modal" id="outCustomer">회원탈퇴</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+	const pwInput = $('#pwInput').val();
+	const pwInputCheck = $('#pwInputCheck').val();
+	const email = $('#id').val() + '@' + $('#email').val();
+
+	if(pwInput != pwInputCheck) {
+		pwInput.addClass('is-invalid');
+	}
+
+	$('#outCustomer').click(function(){
+		$.ajax({
+			url:'/optOutCustomer.do',
+			type:'POST',
+			data: {
+				'email': email,
+				'pw': pwInput 
+			},success:function(result){
+				console.log(result);
+				if(result > 0){
+					alert('탈퇴가 완료되었습니다. 그동안 이용해 주셔서 감사드립니다.'); 
+					 window.location="/Home.do";
+				} else {
+					alert('탈퇴가 완료되었습니다. 그동안 이용해 주셔서 감사드립니다.');
+					window.location="/Home.do";
+				}
+			},
+		 	error: function(){
+		 		alert('탈퇴가 완료되었습니다. 그동안 이용해 주셔서 감사드립니다.');
+		 		window.location="/Home.do";
+			}
+		});	
+	});
+
+	
+  </script>
 
 	<!-- FOOTER -->
   <footer id="main-footer" class="text-center p-4 noto-serif">

@@ -36,7 +36,7 @@ public class BorrowController {
 		this.bookdao = bookdao;
 	}
 	
-	//책대여
+	//å�뿩
 	@RequestMapping(value = "/insertBorrow", 
 			produces = "application/json;charset=utf8")
 	@ResponseBody
