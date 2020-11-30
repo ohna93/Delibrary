@@ -365,7 +365,6 @@
 		대여번호 : <input type="text" class="update-input" name="bor_no">
 		대여일 : <input type="date" class="update-input" name="bor_date">
 		반납일 : <input type="date" class="update-input" name="return_date">
-		<br><br>
 		반납여부 : <select style="width: 100px;" class="update-input" name="return_ok">
 					<option value="Y">Y</option>
 					<option value="N">N</option>
@@ -402,13 +401,16 @@
 							<button type="button" class="delete-btn">삭제</button>
 						</td>
 						<c:if test="${bo.return_ok=='Y' }">
-							<td>반납 완료</td>
+							<td class="text-success" style="font-weight: bold;">반납 완료</td>
 						</c:if>
 						<c:if test="${bo.return_ok=='N' }">
-							<td>대여 중</td>
+							<td class="text-warning" style="font-weight: bold;">대여 중</td>
 						</c:if>
 						<c:if test="${bo.return_ok eq 'P' }">
-							<td>반납 대기</td>
+							<td class="text-danger" style="font-weight: bold;">반납 대기</td>
+						</c:if>
+						<c:if test="${bo.return_ok != 'P' && bo.return_ok != 'Y' && bo.return_ok != 'N' }">
+							<td class="text-danger" style="font-weight: bold;">&nbsp;</td>
 						</c:if>
 					</tr>
 				</c:forEach>

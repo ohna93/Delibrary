@@ -34,7 +34,7 @@ public class Mypage_main_Controller {
 	}
 	
 	@Autowired
-	BorrowDAO borrow_dao;
+	private BorrowDAO borrow_dao;
 	
 	public void setBorrow_dao(BorrowDAO borrow_dao) {
 		this.borrow_dao = borrow_dao;
@@ -81,7 +81,7 @@ public class Mypage_main_Controller {
 		HashMap map_ALL=new HashMap();
 		map_ALL.put("cust_no", cust_no);
 		
-		totalCount_N = borrow_dao.getTotalCount2(map_N);
+		totalCount_N = borrow_dao.getTotalCount_hw(map_N);
 		totalCount_ALL = borrow_dao.getTotalCount3(map_ALL);
 		totalPage_N = (int)Math.ceil( (double)totalCount_N/pageSIZE );
 		totalPage_ALL = (int)Math.ceil( (double)totalCount_ALL/pageSIZE );

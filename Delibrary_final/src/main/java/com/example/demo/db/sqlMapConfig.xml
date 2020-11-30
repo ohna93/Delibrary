@@ -12,7 +12,7 @@
 	<typeAlias type="com.example.demo.vo.CategoryVO" alias="categoryVO"/>
 	<typeAlias type="com.example.demo.vo.CustomerVO" alias="customerVO"/>
 	<typeAlias type="com.example.demo.vo.FilesVO" alias="filesVO"/>
-	<typeAlias type="com.example.demo.vo.My_libraryVO" alias="my_libararyVO"/>
+	<typeAlias type="com.example.demo.vo.My_libraryVO" alias="my_libraryVO"/>
   	<typeAlias type="com.example.demo.vo.PostVO" alias="postVO"/>
   	<typeAlias type="com.example.demo.vo.ReplyVO" alias="replyVO"/>
   	<typeAlias type="com.example.demo.vo.FolderVO" alias="folderVO"/>

@@ -485,6 +485,7 @@ function sample6_execDaumPostcode() {
 								</div>
 							</div>
 							<button type="submit" class="btn btn-dark btn-block mb-1 btn-Customer">수정하기</button>
+							<button type="button" class="btn btn-outline-danger btn-block mb-1 btn-Customer" data-toggle="modal" data-target="#outModal">회원탈퇴 </button>
 						</form>
 					</section>
 				</div>
@@ -492,6 +493,69 @@ function sample6_execDaumPostcode() {
 		</div>
 	</section>
 </div>
+
+<!-- 회원탈퇴 추가 by 유림 1129 -->
+ <div class="modal" id="outModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">회원탈퇴</h5>
+            <button class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="username">회원탈퇴를 위해 비밀번호를 입력해주세요.</label>
+                <input type="password" placeholder="비밀번호를 입력해주세요." class="form-control" id="pwInput">
+              </div>
+              <div class="form-group">
+                <label for="password">비밀번호를 한번 더 입력해주세요</label>
+                <input type="password" placeholder="비밀번호를 한번 더 입력해주세요." class="form-control" id="pwInputCheck">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger" data-dismiss="modal" id="outCustomer">회원탈퇴</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+	const pwInput = $('#pwInput').val();
+	const pwInputCheck = $('#pwInputCheck').val();
+	const email = $('#id').val() + '@' + $('#email').val();
+
+	if(pwInput != pwInputCheck) {
+		pwInput.addClass('is-invalid');
+	}
+
+	$('#outCustomer').click(function(){
+		$.ajax({
+			url:'/optOutCustomer.do',
+			type:'POST',
+			data: {
+				'email': email,
+				'pw': pwInput 
+			},success:function(result){
+				console.log(result);
+				if(result > 0){
+					alert('탈퇴가 완료되었습니다. 그동안 이용해 주셔서 감사드립니다.'); 
+					 window.location="/Home.do";
+				} else {
+					alert('탈퇴가 완료되었습니다. 그동안 이용해 주셔서 감사드립니다.');
+					window.location="/Home.do";
+				}
+			},
+		 	error: function(){
+		 		alert('탈퇴가 완료되었습니다. 그동안 이용해 주셔서 감사드립니다.');
+		 		window.location="/Home.do";
+			}
+		});	
+	});
+
+	
+  </script>
 
 	<!-- FOOTER -->
   <footer id="main-footer" class="text-center p-4 noto-serif">
@@ -521,7 +585,7 @@ function sample6_execDaumPostcode() {
 		$(function(){
 			//푸터 명언
 			const footer_display = document.getElementById('footer-display');
-			const footer_quotes = ['좋은 책은 인류에게 불멸의 정신이다. — J. 밀턴', '내가 인생을 알게 된 것은 사람과 접촉해서가 아니라 책과 접하였기 때문이다. — A. 프 랜스', '목적이 없는 독서는 산보일 뿐이다. — B. 리튼', '사람은 책을 만들고, 책은 사람을 만든다. — 신용호','기회를 기다리는 것은 바보짓이다. 독서의 시간이라는 것은 지금 이 시간이지 결코 이 제부터가 아니다. 오늘 읽을 수 있는 책을 내일로 넘기지 말라. — H. 잭슨','책은 한 권 한 권이 하나의 세계다. — W. 워즈워스', '책을 한 권 읽으면 한 권의 이익이 있고, 책을 하루 읽으면 하루의 이익이 있다. — 괴문절'];
+			const footer_quotes = ['좋은 책은 인류에게 불멸의 정신이다. — J. 밀턴', '내가 인생을 알게 된 것은 사람과 접촉해서가 아니라 책과 접하였기 때문이다. — A. 프 랜스', '목적이 없는 독서는 산보일 뿐이다. — B. 리튼', '사람은 책을 만들고, 책은 사람을 만든다. — 신용호','기회를 기다리는 것은 바보짓이다. 독서의 시간이라는 것은 지금 이 시간이지 결코 이제부터가 아니다. 오늘 읽을 수 있는 책을 내일로 넘기지 말라. — H. 잭슨','책은 한 권 한 권이 하나의 세계다. — W. 워즈워스', '책을 한 권 읽으면 한 권의 이익이 있고, 책을 하루 읽으면 하루의 이익이 있다. — 괴문절'];
 			const footer_getQuote = Math.floor(Math.random() * footer_quotes.length);
 			footer_display.textContent =footer_quotes[footer_getQuote];
 		});

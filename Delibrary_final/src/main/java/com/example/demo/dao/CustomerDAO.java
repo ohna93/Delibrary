@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.CustomerManager;
 import com.example.demo.vo.CustomerVO;
+import com.example.demo.vo.My_libraryVO;
 
 @Repository
 public class CustomerDAO {
@@ -16,9 +17,14 @@ public class CustomerDAO {
 		return CustomerManager.insertCustomer(c);
 	}
 	
+	//마이라이브러리
+	public int insertMy_Library(My_libraryVO ml) {
+		return CustomerManager.insertMy_library(ml);
+	}
+	
 	//회원탈퇴
-	public void deleteCustomer(HashMap map) {
-		CustomerManager.deleteCustomer(map);
+	public int deleteCustomer(HashMap map) {
+		return CustomerManager.deleteCustomer(map);
 	}
 
 	//로그인

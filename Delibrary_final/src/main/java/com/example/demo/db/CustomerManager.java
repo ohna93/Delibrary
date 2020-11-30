@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.example.demo.vo.CustomerVO;
+import com.example.demo.vo.My_libraryVO;
 
 public class CustomerManager {
 	
@@ -35,11 +36,21 @@ public static SqlSessionFactory sqlSessionFactory;
 		return re;
 	}
 	
-	//회원탈퇴
-	public static void deleteCustomer(HashMap map) {
+	//회원가입 시 마이라이브러리 추가 
+	public static int insertMy_library(My_libraryVO ml) {
+		int re = -1;
 		SqlSession session = sqlSessionFactory.openSession(true);
-		session.delete("customer.deleteCustomer",map);
+		re = session.insert("customer.insert_library",ml);
 		session.close();
+		return re;
+	}
+	
+	//회원탈퇴
+	public static int deleteCustomer(HashMap map) {
+		SqlSession session = sqlSessionFactory.openSession(true);
+		int re = session.delete("customer.deleteCustomer",map);
+		session.close();
+		return re;
 	}
 	
 	//로그인정보

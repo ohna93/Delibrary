@@ -115,7 +115,7 @@
 						</li>
 					</c:if>
 					<li class="nav-item" v-bind:title="bookcart">
-						<a href="BookCart.do" class="nav-link"><i class="fas fa-book mypage"></i></a><p class="sr-only">북카트</p>
+						<a href="BookCart.do" class="nav-link mypage"><i class="fas fa-book mypage"></i></a><p class="sr-only">북카트</p>
 					</li>
 					<li class="nav-item" v-bind:title="sitemap">
 						<a href="siteMap.do" class="nav-link"><i class="fas fa-map"></i></a><p class="sr-only">사이트맵</p>

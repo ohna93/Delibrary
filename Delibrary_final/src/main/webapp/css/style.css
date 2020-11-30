@@ -8,6 +8,10 @@ btn-secondary #6C757D
 스프링 연 #75BD43
 스프링 진 #107637
 */
+#phone_a{
+	cursor: pointer;
+}
+
 .page-link{
    color: #343a40;
 }
@@ -90,19 +94,19 @@ b{
 }
 
 .carousel-image-1 {
-  /* background: url('../img/image1.jpg'); */
+  background: url('../img//home/ad1.png');
   background-color: cadetblue;
   background-size: cover;
 }
 
 .carousel-image-2 {
-  /* background: url('../img/image2.jpg'); */
+  background: url('../img//home/ad2.png');
   background-color: darkgoldenrod;
   background-size: cover;
 }
 
 .carousel-image-3 {
-  /* background: url('../img/image3.jpg'); */
+  background: url('../img/home/ad3.png');
   background-color: darkseagreen;
   background-size: cover;
 }

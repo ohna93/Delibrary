@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/yurim.css">
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript">
 	<!-- 미로그인시 글쓰기 버튼 누르면 로그인페이지로 이동 -->
     $(function(){
@@ -256,12 +257,12 @@
 				<div class="row">
 					<!-- 관심장르 CHECKBOX 1st ROW -->
 					<div class="d-inline-block w-50 p-1 form-check">
-						<input type="checkbox" value="인문" class="d-none form-check-input" id="interest_check1" name="genre"/>
+						<input type="checkbox" value="1" class="d-none form-check-input" id="interest_check1" name="genre"/>
 						<div class="btn btn-light w-100 btn-Customer" id="interest1">인문</div>
 						</label>
 					</div>
 			
-					<div class="d-inline-block w-50 p-1 form-check"><input type="checkbox" value="경영"
+					<div class="d-inline-block w-50 p-1 form-check"><input type="checkbox" value="2"
 							class="d-none form-check-input" id="interest_check2" name="genre"/>
 						<div class="btn btn-light w-100 btn-Customer" id="interest2">경영</div>
 						</label>
@@ -271,12 +272,12 @@
 				<div class="row">
 					<!-- 관심장르 CHECKBOX 2nd ROW -->
 					<div class="d-inline-block w-50 p-1 form-check"><label class="w-100 form-check-label"><input type="checkbox"
-								value="소설" class="d-none form-check-input" id="interest_check3" name="genre"/>
+								value="3" class="d-none form-check-input" id="interest_check3" name="genre"/>
 							<div class="btn btn-light w-100 btn-Customer" id="interest3">소설</div>
 						</label></div>
 			
 					<div class="d-inline-block w-50 p-1 form-check"><label class="w-100 form-check-label"><input type="checkbox"
-								value="역사" class="d-none form-check-input" id="interest_check4" name="genre"/>
+								value="4" class="d-none form-check-input" id="interest_check4" name="genre"/>
 							<div class="btn btn-light w-100 btn-Customer" id="interest4">역사</div>
 						</label></div>
 				</div><!-- 관심장르 CHECKBOX 2nd ROW END -->
@@ -284,11 +285,11 @@
 				<div class="row">
 					<!-- 관심장르 CHECKBOX 3rd ROW -->
 					<div class="d-inline-block w-50 p-1 form-check"><label class="w-100 form-check-label">
-							<input type="checkbox" value="순수과학" class="d-none form-check-input" id="interest_check5" name="genre"/>
+							<input type="checkbox" value="5" class="d-none form-check-input" id="interest_check5" name="genre"/>
 							<div class="btn btn-light w-100 btn-Customer" id="interest5">순수과학</div>
 						</label></div>
 					<div class="d-inline-block w-50 p-1 form-check"><label class="w-100 form-check-label">
-							<input type="checkbox" value="응용과학" class="d-none form-check-input" id="interest_check6" name="genre"/>
+							<input type="checkbox" value="6" class="d-none form-check-input" id="interest_check6" name="genre"/>
 							<div class="btn btn-light w-100 btn-Customer" id="interest6">응용과학</div>
 						</label></div>
 				 </div><!-- 관심장르 CHECKBOX 3rd ROW END -->
@@ -528,7 +529,7 @@
 	  $(function(){
 			//푸터 명언
 			const footer_display = document.getElementById('footer-display');
-			const footer_quotes = ['좋은 책은 인류에게 불멸의 정신이다. — J. 밀턴', '내가 인생을 알게 된 것은 사람과 접촉해서가 아니라 책과 접하였기 때문이다. — A. 프 랜스', '목적이 없는 독서는 산보일 뿐이다. — B. 리튼', '사람은 책을 만들고, 책은 사람을 만든다. — 신용호','기회를 기다리는 것은 바보짓이다. 독서의 시간이라는 것은 지금 이 시간이지 결코 이 제부터가 아니다. 오늘 읽을 수 있는 책을 내일로 넘기지 말라. — H. 잭슨','책은 한 권 한 권이 하나의 세계다. — W. 워즈워스', '책을 한 권 읽으면 한 권의 이익이 있고, 책을 하루 읽으면 하루의 이익이 있다. — 괴문절'];
+			const footer_quotes = ['좋은 책은 인류에게 불멸의 정신이다. — J. 밀턴', '내가 인생을 알게 된 것은 사람과 접촉해서가 아니라 책과 접하였기 때문이다. — A. 프 랜스', '목적이 없는 독서는 산보일 뿐이다. — B. 리튼', '사람은 책을 만들고, 책은 사람을 만든다. — 신용호','기회를 기다리는 것은 바보짓이다. 독서의 시간이라는 것은 지금 이 시간이지 결코 이제부터가 아니다. 오늘 읽을 수 있는 책을 내일로 넘기지 말라. — H. 잭슨','책은 한 권 한 권이 하나의 세계다. — W. 워즈워스', '책을 한 권 읽으면 한 권의 이익이 있고, 책을 하루 읽으면 하루의 이익이 있다. — 괴문절'];
 			const footer_getQuote = Math.floor(Math.random() * footer_quotes.length);
 			footer_display.textContent =footer_quotes[footer_getQuote];
 	  });
