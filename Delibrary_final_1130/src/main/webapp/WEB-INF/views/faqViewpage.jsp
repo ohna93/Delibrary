@@ -113,7 +113,7 @@
                   </li>
                </c:if>
                <li class="nav-item" v-bind:title="bookcart">
-                  <a href="BookCart.do" class="nav-link"><i class="fas fa-book"></i></a><p class="sr-only">북카트</p>
+                  <a href="BookCart.do" class="nav-link mypage"><i class="fas fa-book"></i></a><p class="sr-only">북카트</p>
                </li>
                <li class="nav-item" v-bind:title="sitemap">
                   <a href="siteMap.do" class="nav-link"><i class="fas fa-map"></i></a><p class="sr-only">사이트맵</p>
@@ -270,7 +270,22 @@
          footer_display.textContent =footer_quotes[footer_getQuote];
       }
 
-      
+      <!-- 미로그인시 글쓰기 버튼 누르면 로그인페이지로 이동 -->
+       $(function(){
+          $(".mypage").click(function(event){
+             if(${cust_no == null}){
+                event.preventDefault();
+                const loginOk = confirm("로그인 후 사용 가능합니다. 로그인하시겠습니까?");
+                console.log(loginOk);
+                if(loginOk){
+                   console.log("로그인하러갑니다.");
+                   window.location.href = "LoginPage.do";
+                }
+             }else{
+                window.location.href="Home.do";
+             }
+          });
+       });
 
       //faq에서 ctrl+f 찾기 기능
        var TRange=null;
