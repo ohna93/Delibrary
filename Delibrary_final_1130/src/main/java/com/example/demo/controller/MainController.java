@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -86,7 +85,6 @@ public class MainController {
 	
 	// 관리자 페이지에서 수정확인 버튼을 누르면 수정 작업을 수행하는 메소드
 	@RequestMapping("/updatefrommanager.do")
-	@ResponseBody
 	public void updateFromManager(String i, HttpServletRequest request) {
 		
 		Map map = new HashMap();
@@ -145,7 +143,6 @@ public class MainController {
 
 	// 관리자 페이지에서 삭제 버튼을 누르면 수정 작업을 수행하는 메소드
 	@RequestMapping("/deletefrommanager.do")
-	@ResponseBody
 	public void deleteFromManager(String i, String pk) {
 		
 		Map map = new HashMap();
