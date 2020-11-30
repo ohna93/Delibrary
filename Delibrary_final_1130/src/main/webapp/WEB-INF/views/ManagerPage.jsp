@@ -279,6 +279,7 @@
 
 	<div class="manage-area text-center">
 		회원번호 : <input type="text" class="update-input" name="cust_no">
+		회원명 : <input type="text" class="update-input" name="name">
 		관리자구분 : <input type="text" class="update-input" name="manager">
 		<button class="update-ok">수정확인</button>
 		<button class="delete-ok">삭제확인</button>
@@ -286,12 +287,14 @@
 			<table class="manage-table">
 				<tr>
 					<th>회원번호</th>
+					<th>회원명</th>
 					<th>관리자구분</th>
 					<th>작업</th>
 				</tr>
 				<c:forEach items="${clist}" var="c">
 					<tr>
 						<td>${c.cust_no }</td>
+						<td>${c.name }</td>
 						<td>${c.manager }</td>
 						<td>
 							<button type="button" class="update-btn">수정</button>
@@ -304,7 +307,8 @@
 	</div>
 		
 	<div class="manage-area text-center">
-		도서번호 : <input type="text" value="22" class="update-input" name="b_no">
+		도서번호 : <input type="text" value="22" class="update-input" name="b_no" readonly="readonly">
+		도서명 : <input type="text" value="22" class="update-input" name="b_title" readonly="readonly">
 		재고 : <input type="text" value="22" class="update-input" name="b_count">
 		카테고리 번호 : <input type="text" value="22" class="update-input" name="c_no">
 		<button class="update-ok">수정확인</button>
@@ -373,6 +377,7 @@
 					<option value="P">P</option>
 				</select>
 		대여회원번호 : <input type="text" class="update-input" name="cust_no">
+		회원명 : <input type="text" class="update-input" name="name" readonly="readonly">
 		책번호 : <input type="text" class="update-input" name="b_no">
 		<br><br>
 		<button class="update-ok">수정확인</button>
