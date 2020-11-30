@@ -22,6 +22,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 	 <script type="text/javascript">
+	 
 	  <!-- 미로그인시 글쓰기 버튼 누르면 로그인페이지로 이동 -->
 	  $(function(){
 	  	$(".mypage").click(function(event){
@@ -142,9 +143,11 @@
 				<div class="col-md-12 text-center my-5">
 	        <h5 class="noto-serif">죄송합니다. 서비스중에 문제가 발생하였습니다.</h5>
 	        <hr>
-	        <p>${msg }</p>
+	        
+	        <img alt="error" src="../img/sorry.gif" width="300">
+	      
 	      </div>
-	      <div class="col-md-6 p-5">
+	      <div class="col-md-6 p-2">
 	      	<div class="row">
 		        <div class="col">
 		          <h6>도서관소개</h6>
@@ -165,7 +168,7 @@
 		        </div>
 	        </div>
         </div>
-        <div class="col-md-6 p-5">
+        <div class="col-md-6 p-2">
 	        <div class="row">
 		        <div class="col">
 	            <h6>커뮤니티</h6>
@@ -240,5 +243,9 @@
       </div>
     </div>
   </footer>
+  <script type="text/javascript">
+	  //Get the current year for the copyright
+	  $('#year').text(new Date().getFullYear());
+  </script>
 </body>
 </html>
