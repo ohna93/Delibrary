@@ -49,7 +49,7 @@ public class DetailBookController {
       HttpSession session = request.getSession(true);
       
       if (session.getAttribute("cust_no")==null) {
-         model.addAttribute("d","濡쒓렇 씤  썑 뿉  궗 슜 븯 떎  닔  엳 뒿 땲 떎");
+          model.addAttribute("days",0);
 
       }else {
          HashMap map = new HashMap();
