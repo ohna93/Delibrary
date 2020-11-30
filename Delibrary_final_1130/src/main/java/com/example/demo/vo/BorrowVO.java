@@ -21,9 +21,15 @@ public class BorrowVO {
 	private String return_ok;
 	private int cust_no;
 	private int b_no;
-
+	private String name;
 	
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public int getBor_no() {
 		return bor_no;
 	}

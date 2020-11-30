@@ -313,6 +313,7 @@
 			<table class="manage-table">
 				<tr>
 					<th>도서번호</th>
+					<th>도서명</th>
 					<th>재고</th>
 					<th>카테고리 번호</th>
 					<th>작업</th>
@@ -320,6 +321,7 @@
 				<c:forEach items="${blist}" var="b">
 					<tr>
 						<td>${b.b_no }</td>
+						<td class="text-left">${b.b_title }</td>
 						<td>${b.b_count }</td>
 						<td>${b.c_no }</td>
 						<td>
@@ -384,6 +386,7 @@
 					<th>반납일</th>
 					<th>반납여부</th>
 					<th>대여회원번호</th>
+					<th>회원명</th>
 					<th>책번호</th>
 					<th>작업</th>
 					<th>상태</th>
@@ -395,6 +398,7 @@
 						<td>${bo.return_date }</td>
 						<td>${bo.return_ok }</td>
 						<td>${bo.cust_no }</td>
+						<td>${bo.name }</td>
 						<td>${bo.b_no }</td>
 						<td>
 							<button type="button" class="update-btn">수정</button>
