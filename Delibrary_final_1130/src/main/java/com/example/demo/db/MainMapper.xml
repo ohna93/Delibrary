@@ -32,7 +32,7 @@
 	
 	<!-- 관리자 페이지에서 수정할 때 사용(도서관리) -->
 	<update id="update-book">
-		update book set b_no = #{b_no}, b_count = #{b_count}, c_no = #{c_no} where b_no = #{b_no}
+		update book set b_no = #{b_no}, b_title=#{b_title}, b_count = #{b_count}, c_no = #{c_no} where b_no = #{b_no}
 	</update>
 	
 	<!-- 관리자 페이지에서 수정할 때 사용(게시글관리) -->
