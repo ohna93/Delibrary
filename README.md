@@ -1,4 +1,3 @@
-# teamgit
 # [Delibrary]
 
 11/1 ~ 12/1  
