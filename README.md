@@ -1,5 +1,5 @@
 # [Delibrary]
-
+ggggggggg
 11/1 ~ 12/1  
 팀명       :  탈주금지   
 프로젝트명    :  Delibrary  
