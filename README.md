@@ -13,8 +13,8 @@
 ✔️모든 페이지는 부트스트랩을 적용해 반응형으로 만들어주었다.
  ![홈화면](img/homefull.png)
 ✔️ 홈화면을 새로고침 할때마다 랜덤으로 도서관 도서에 관련된 헤드라인 글귀, 도서관 이미지, 이미지에 맞는 장소가
-나오도록 구현하였다.
- ![홈화면검색창디자인](img/01.home.gif)
+나오도록 구현하였다.    
+ ![홈화면검색창디자인](img/01.home.gif)  
   ⚫홈헤딩 이미지 랜덤출력 구현예시
  ```javascript 
          const home_heading = document.getElementById('home-heading');
@@ -23,18 +23,18 @@
          const getImage = Math.floor(Math.random() * images.length);
          
          home_heading.style.background = "url('../img/" + images[getImage] + "')";
-  ```
+  ```  
 ✔️ 캐러셀 : 홈화면에서 캐러셀을 이용해서 도서목록과 광고목록을 보여주도록 하였다.
- ![홈화면검색창디자인](img/carousel.gif)
-✔️ 푸터도 자바스크립트를 이용해서 페이지를 새로고침 할때마다 도서관련 명언문구를 랜덤으로 지정해주었다.
- ![홈화면 푸터](img/footer.gif)
-
-2️⃣ 도서관소개 페이지
- ![도서관소개](img/info.gif)
-
-3️⃣ 도서정보 페이지  
+ ![홈화면검색창디자인](img/carousel.gif)  
+✔️ 푸터도 자바스크립트를 이용해서 페이지를 새로고침 할때마다 도서관련 명언문구를 랜덤으로 지정해주었다.  
+ ![홈화면 푸터](img/footer.gif)  
+  
+2️⃣ 도서관소개 페이지    
+ ![도서관소개](img/info.gif)  
+  
+3️⃣ 도서정보 페이지    
 ✔️DB에서 가장 빌린 도서가 많은 순으로 12개의 도서의 정보를 인기도서 페이지에 출력.  
- ![인기도서목록](img/10.pop.gif)
+ ![인기도서목록](img/10.pop.gif)  
 
   ⚫인기도서 목록을 뽑아오기 위한 DB Select 문
   ```xml
@@ -44,17 +44,15 @@
 		where rownum<=12 ]]>
 	</select>
 ```
-4️⃣ 게시판
-
-&emsp;[▼ QnaController 파일](C:\Delibrary_final_1130\src\main\java\com\example\demo\controller\QnaController)  
-&emsp;[PostController 소스코드](https://github.com/inhalin/Delibrary/blob/main/Delibrary_Final/src/main/java/com/example/demo/controller/PostController.java)
+4️⃣ 게시판  
+&emsp;[PostController 소스코드](https://github.com/inhalin/Delibrary/blob/main/Delibrary_Final/src/main/java/com/example/demo/controller/PostController.java)  
 
 
 ✔️ Read : 게시판의 전체 목록을 보여주고 전체 게시글수 확인이 가능하다. 현재 페이지에 배경색을 주어 몇번째 페이지에 있는지 알 수 있다. 
 
 ![read, pagination](img/pagination.gif)
 
-✔️ Insert : 로그인을 하지 않고 `글쓰기`를 클릭 할 경우 로그인 페이지로 이동시킨다. 글 작성시에는 말머리를 선택하고 제목, 내용을 쓰고 파일첨부가 가능하다.
+✔️ Insert : 로그인을 하지 않고 **글쓰기**를 클릭 할 경우 로그인 페이지로 이동시킨다. 글 작성시에는 말머리를 선택하고 제목, 내용을 쓰고 파일첨부가 가능하다.
 
 
 > 비로그인 상태에서 글쓰기 시도할 경우  
@@ -67,15 +65,15 @@
 
  ![update a post](img/postUpdate.gif)
 
-✔️ Delete : 글 삭제 또한 본인과 관리자만 가능하다. `삭제`버튼을 클릭할 경우 경고창을 띄워 확인시킨 후 삭제를 진행 또는 취소할 수 있다.
+✔️ Delete : 글 삭제 또한 본인과 관리자만 가능하다. **삭제**버튼을 클릭할 경우 경고창을 띄워 확인시킨 후 삭제를 진행 또는 취소할 수 있다.
  
 ![delete a post](img/postDelete.gif)
 
 ✔️ 게시판 댓글
 
-- Insert : 댓글입력란에 내용을 입력하지 않은 상태에서 `등록` 버튼을 클릭할 경우 경고창을 띄운다.
+- Insert : 댓글입력란에 내용을 입력하지 않은 상태에서 **등록** 버튼을 클릭할 경우 경고창을 띄운다.
 
-- Update, Delete : 댓글 수정 및삭제는 본인과 관리자만 가능하다. `삭제` 버튼을 클릭할 경우 경고창을 띄워 확인시킨 후 삭제를 진행 또는 취소할 수 있다.
+- Update, Delete : 댓글 수정 및삭제는 본인과 관리자만 가능하다. **삭제** 버튼을 클릭할 경우 경고창을 띄워 확인시킨 후 삭제를 진행 또는 취소할 수 있다.
 
 > 댓글 등록  
 > ![insert a reply](img/replyInsert.gif)
