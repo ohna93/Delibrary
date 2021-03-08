@@ -1,28 +1,92 @@
-# [Delibrary]
-ggggggggg
-11/1 ~ 12/1  
-팀명       :  탈주금지   
-프로젝트명    :  Delibrary  
-소개      :   코로나 시대에 맞이하여 도서관 이용이 여의치 않음에 따라 웹을 통해 집에서 도서를 직접 대여를 하여 무료로 배달을 해 주는 서비스를 고안 하였습니다.  
-국민의 지적함양수준과 평균독서량에 높이는데 기여해주는 취지로 Deliver+Library '딜리브러리' 사이트를 개설하게 되었습니다.  
-사용기술      :   MyBatis, ORACLE, AJAX, Java, SpringBoot, Vue.js, Sass, GitHub 등등,,  
-서비스 URL    :   http://192.168.0.2:8088/Home.do  
-    
-딜리브러리는 배달이라는 의미의 딜리버와 도서관인 라이브러리를 합친 이름으로 코로나 시대에 도서관을 이용하는데 불편함을 겪는 문제를 해결하고 평균독서량을 높이는데 기여할 수 있도록 집으로 도서를 배달받을 수 있는 도서대여 서비스를 제공해줍니다.  
-  
-벤치마킹한 사이트는 크게 두군데 입니다.  
-먼저 광명시 도서관에서 홈페이지 디자인과 사이트 레이아웃을 참고해서 도서목록 리스트와 게시판 등 뷰페이지 디자인을 완성하였고  
-책나래 서비스는 오프라인으로 도서관 사용이 어려운 장애인들을 위해 국가에서 제공하는 도서관 우편 서비스입니다.   
-이런 배송을 통한 도서 대여 서비스를 원하는 사람들에게 제공할 수 있겠다고 생각했습니다.  
-  
-개발환경과 사용기술은 이클립스에서 자바와 스프링 부트, 마이바티스를 기본으로 사용하고  
-디비는 오라클, 뷰페이지는 자바스크립트와 제이쿼리, 부트스트랩, 사스, 뷰js 등을 사용하고  
-코드공유와 형상관리를 위해 깃과 깃허브를 사용했습니다.  
-  
-차별점을 두고 사용한 기술들로는  
-먼저 카카오 API를 이용해서 원하는 도서의 상세소개와 저자, 출판사 등의 내용을 확인할수 있는 도서정보 검색 서비스를 구축했습니다.   
-또 공용DB를 이용해서 팀원 누구든 데이터를 수정하거나 삭제한 경우 실시간으로 디비에 반영이 되어 작업 효율을 개선했습니다.  
-비밀번호 암호화의 경우 저희팀은 시큐리티 대신 SHA-256을 사용하였고 내서재에서는 시각적 완성도를 높이기 위해 사스를 이용한 효과를 주었습니다.  
-전체페이지에 부트스트랩을 적용해서 화면 해상도에 따라 페이지 내의 요소들 자동으로 조절되는 반응형 뷰페이지를 구현했습니다.  
+# [Delibrary📚]
 
-  
+- 프로젝트명 : 딜리브러리 - 도서관 웹 어플리케이션 프로젝트
+- 팀명 : 탈주금지
+- 참여인원 : 6명
+- 개발기간 : 2020.10.1 ~ 2020.11.30
+- 내용 : SpringMVC패턴을 활용한 온라인 도서관 대여 서비스 제공하는 웹사이트 제작
+- 개발환경 : MyBatis, Oracle, Spring Boot 4, Bootstrap 4,  JSP & Servlet, Javascript, Vue.js, jQuery
+- 담당업무 : QNA게시판 게시글 및 댓글 CRUD, 페이징처리, 검색기능 등
+<hr>  
+
+1️⃣ 홈화면   
+✔️모든 페이지는 부트스트랩을 적용해 반응형으로 만들어주었다.
+ ![홈화면](img/homefull.png)
+✔️ 홈화면을 새로고침 할때마다 랜덤으로 도서관 도서에 관련된 헤드라인 글귀, 도서관 이미지, 이미지에 맞는 장소가
+나오도록 구현하였다.
+ ![홈화면검색창디자인](img/01.home.gif)
+  ⚫홈헤딩 이미지 랜덤출력 구현예시
+ ```javascript 
+         const home_heading = document.getElementById('home-heading');
+      
+         const images = ['library1.png','library2.png','library3.png','library4.png','library5.png','library6.png','library7.png','library8.jpg'];
+         const getImage = Math.floor(Math.random() * images.length);
+         
+         home_heading.style.background = "url('../img/" + images[getImage] + "')";
+  ```
+✔️ 캐러셀 : 홈화면에서 캐러셀을 이용해서 도서목록과 광고목록을 보여주도록 하였다.
+ ![홈화면검색창디자인](img/carousel.gif)
+✔️ 푸터도 자바스크립트를 이용해서 페이지를 새로고침 할때마다 도서관련 명언문구를 랜덤으로 지정해주었다.
+ ![홈화면 푸터](img/footer.gif)
+
+2️⃣ 도서관소개 페이지
+ ![도서관소개](img/info.gif)
+
+3️⃣ 도서정보 페이지  
+✔️DB에서 가장 빌린 도서가 많은 순으로 12개의 도서의 정보를 인기도서 페이지에 출력.  
+ ![인기도서목록](img/10.pop.gif)
+
+  ⚫인기도서 목록을 뽑아오기 위한 DB Select 문
+  ```xml
+	<select id="getPopBook" resultType="bookVO">
+		<![CDATA[select * from(select b_title, b_writer,b_image,count(bor_no) from book, 
+		borrow where book.b_no = borrow.b_no group by b_title, b_writer, b_image order by count(bor_no) desc) 
+		where rownum<=12 ]]>
+	</select>
+```
+4️⃣ 게시판
+
+&emsp;[▼ QnaController 파일](C:\Delibrary_final_1130\src\main\java\com\example\demo\controller\QnaController)  
+&emsp;[PostController 소스코드](https://github.com/inhalin/Delibrary/blob/main/Delibrary_Final/src/main/java/com/example/demo/controller/PostController.java)
+
+
+✔️ Read : 게시판의 전체 목록을 보여주고 전체 게시글수 확인이 가능하다. 현재 페이지에 배경색을 주어 몇번째 페이지에 있는지 알 수 있다. 
+
+![read, pagination](img/pagination.gif)
+
+✔️ Insert : 로그인을 하지 않고 `글쓰기`를 클릭 할 경우 로그인 페이지로 이동시킨다. 글 작성시에는 말머리를 선택하고 제목, 내용을 쓰고 파일첨부가 가능하다.
+
+
+> 비로그인 상태에서 글쓰기 시도할 경우  
+> ![redirect to login](img/alert_login.gif)
+>
+> 로그인 된 상태에서 글쓰기  
+> ![insert a post](img/postInsert.gif)
+
+✔️ Update : 글 수정은 본인과 관리자만 가능하다. 말머리, 제목, 내용, 첨부파일 전부 수정 가능하다.
+
+ ![update a post](img/postUpdate.gif)
+
+✔️ Delete : 글 삭제 또한 본인과 관리자만 가능하다. `삭제`버튼을 클릭할 경우 경고창을 띄워 확인시킨 후 삭제를 진행 또는 취소할 수 있다.
+ 
+![delete a post](img/postDelete.gif)
+
+✔️ 게시판 댓글
+
+- Insert : 댓글입력란에 내용을 입력하지 않은 상태에서 `등록` 버튼을 클릭할 경우 경고창을 띄운다.
+
+- Update, Delete : 댓글 수정 및삭제는 본인과 관리자만 가능하다. `삭제` 버튼을 클릭할 경우 경고창을 띄워 확인시킨 후 삭제를 진행 또는 취소할 수 있다.
+
+> 댓글 등록  
+> ![insert a reply](img/replyInsert.gif)
+>
+> 댓글 수정 및 삭제  
+> ![update/delete a post](img/replyUpDel.gif)
+
+
+✔️ 검색기능
+
+- 제목, 작성자, 내용에 따라 검색이 가능하고, 검색으로 세션에 저장해 검색결과가 여러페이지일 경우에 페이지를 넘겨도 검색한 내용이 남아있어서 정상적으로 페이징 처리가 가능하게 해주었다.
+
+> 검색조건에 따른 결과 
+> ![search](img/QNAsearch.gif)
