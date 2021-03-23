@@ -55,7 +55,6 @@
 ```
   
 4️⃣ 게시판  
-&emsp;[PostController 소스코드](https://github.com/inhalin/Delibrary/blob/main/Delibrary_Final/src/main/java/com/example/demo/controller/PostController.java)  
 &emsp;[PostController 소스코드](https://github.com/ohna93/Delibrary/blob/master/Delibrary_final_1130/src/main/java/com/example/demo/controller/PostController.java)  
 &emsp;[QnaController 소스코드](https://github.com/ohna93/Delibrary/blob/master/Delibrary_final_1130/src/main/java/com/example/demo/controller/QnaController.java)  
 
