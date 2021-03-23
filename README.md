@@ -6,7 +6,7 @@
 - 개발기간 : 2020.10.1 ~ 2020.11.30
 - 내용 : SpringMVC패턴을 활용한 온라인 도서관 대여 서비스 제공하는 웹사이트 제작
 - 개발환경 : MyBatis, Oracle, Spring Boot 4, Bootstrap 4,  JSP & Servlet, Javascript, Vue.js, jQuery
-- 담당업무 : QNA게시판 게시글 및 댓글 CRUD, 페이징처리, 검색기능 등
+- 담당업무 : QNA게시판 게시글 및 댓글 CRUD, 페이징처리, 검색기능, 인기도서페이지, 신착도서페이지, 오시는길페이지 등
 <hr>  
 
 1️⃣ 홈화면   
@@ -45,7 +45,7 @@
 	</select>
 ```
 4️⃣ 게시판  
-&emsp;[PostController 소스코드](https://github.com/inhalin/Delibrary/blob/main/Delibrary_Final/src/main/java/com/example/demo/controller/PostController.java)  
+&emsp;[PostController 소스코드](https://github.com/ohna93/Delibrary/blob/main/Delibrary_final1130/src/main/java/com/example/demo/controller/QnaController.java)  
 
 
 ✔️ Read : 게시판의 전체 목록을 보여주고 전체 게시글수 확인이 가능하다. 현재 페이지에 배경색을 주어 몇번째 페이지에 있는지 알 수 있다. 
