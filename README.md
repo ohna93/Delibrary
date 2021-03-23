@@ -6,7 +6,7 @@
 - 개발기간 : 2020.10.1 ~ 2020.11.30
 - 내용 : SpringMVC패턴을 활용한 온라인 도서관 대여 서비스 제공하는 웹사이트 제작
 - 개발환경 : MyBatis, Oracle, Spring Boot 4, Bootstrap 4,  JSP & Servlet, Javascript, Vue.js, jQuery
-- 담당업무 : QNA게시판 게시글 및 댓글 CRUD, 페이징처리, 검색기능, 인기도서페이지, 신착도서페이지, 오시는길페이지 등
+- 담당업무 : QNA게시판 게시글 및 댓글 CRUD, 페이징처리, 검색기능, 인기도서페이지, 신착도서페이지, faq, 오시는길페이지 등
 <hr>  
 
 1️⃣ 홈화면   
@@ -38,14 +38,23 @@
 
   ⚫인기도서 목록을 뽑아오기 위한 DB Select 문
   ```xml
+	<!-- 이달의 인기도서 목록 -->
 	<select id="getPopBook" resultType="bookVO">
 		<![CDATA[select * from(select b_title, b_writer,b_image,count(bor_no) from book, 
 		borrow where book.b_no = borrow.b_no group by b_title, b_writer, b_image order by count(bor_no) desc) 
 		where rownum<=12 ]]>
 	</select>
 ```
+  ⚫신착도서 목록을 뽑아오기 위한 DB Select 문
+  ```xml
+	<!-- 신착도서 목록  -->
+	<select id="selectAllNew" resultType="bookVO">
+		<![CDATA[ select * from (select * from book order by b_year desc) where rownum <=12 ]]>
+	</select>  
+```
+  
 4️⃣ 게시판  
-&emsp;[PostController 소스코드](https://github.com/ohna93/Delibrary/blob/main/Delibrary_final1130/src/main/java/com/example/demo/controller/QnaController.java)  
+&emsp;[PostController 소스코드](https://github.com/inhalin/Delibrary/blob/main/Delibrary_Final/src/main/java/com/example/demo/controller/PostController.java)
 
 
 ✔️ Read : 게시판의 전체 목록을 보여주고 전체 게시글수 확인이 가능하다. 현재 페이지에 배경색을 주어 몇번째 페이지에 있는지 알 수 있다. 
@@ -88,3 +97,12 @@
 
 > 검색조건에 따른 결과 
 > ![search](img/QNAsearch.gif)
+
+✔️ 자주묻는질문 페이지
+서브메뉴바나 내비게이션바로 활용하는 아코디언 효과를 자주묻는질문 게시판에 사용하였습니다.
+자주묻는 질문의 내용과 답변은 미리 간단하게 페이지에 입력해놓고 각각의 라벨에 input type을 radio로 두고 숨긴다음 클릭했을때 트랜지션을 주어 한 개의 질문을 클릭할때마다 답변부분이 열리도록 css효과를 나타내었습니다.
+
+✔️ 오시는길 페이지
+오시는길은 비트캠프 신촌센터 주소를 기준으로 사용하였습니다.
+다른 HTML페이지를 현재 페이지에 포함시키는 중첩된 브라우저로 iframe요소를 이용하였습니다.
+src에 삽입할 페이지주소를 삽입하여 오시는길 웹 페이지 안에 구글맵 페이지를 불러왔습니다.
